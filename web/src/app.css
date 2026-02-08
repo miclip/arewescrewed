@@ -44,9 +44,25 @@ svg text {
 	fill: var(--color-text-muted) !important;
 }
 
+/* Shrink axis tick labels on small screens to prevent overlap */
+@media (max-width: 640px) {
+	svg .tick text {
+		font-size: 10px !important;
+	}
+}
+
 svg .tick line,
 svg .domain {
 	stroke: var(--color-bg-input) !important;
+}
+
+/* Hide scrollbar for tab bar on mobile */
+.scrollbar-hide::-webkit-scrollbar {
+	display: none;
+}
+.scrollbar-hide {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
 }
 
 /* Area fill controlled via --chart-area-fill CSS variable on parent container */

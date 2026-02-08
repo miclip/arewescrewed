@@ -63,7 +63,7 @@
 				<span class="text-red font-semibold">Doesn't reach target in this timeframe.</span>
 			{/if}
 		</p>
-		<div class="h-56" style="--chart-area-fill: rgba(74, 222, 128, 0.1);">
+		<div class="h-48 md:h-56" style="--chart-area-fill: rgba(74, 222, 128, 0.1);">
 			<Chart
 				data={incomeData}
 				x="year"
@@ -73,11 +73,11 @@
 				yScale={scaleLinear()}
 				yDomain={[0, maxIncome]}
 				yNice
-				padding={{ left: 52, bottom: 28, top: 8, right: 8 }}
+				padding={{ left: 44, bottom: 24, top: 8, right: 4 }}
 			>
 				<Svg>
 					<Axis placement="left" format={(v) => formatCompact(v)} />
-					<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+					<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 
 					<!-- Income target line -->
 					<Spline
@@ -94,7 +94,7 @@
 				</Svg>
 			</Chart>
 		</div>
-		<div class="flex gap-4 text-xs text-text-muted justify-center">
+		<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 			<span class="flex items-center gap-1">
 				<span class="w-3 h-0.5 bg-green inline-block"></span> Portfolio income (4% SWR)
 			</span>

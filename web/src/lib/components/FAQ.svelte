@@ -24,6 +24,10 @@
 				{
 					q: 'What is AI not?',
 					a: 'AI is not general intelligence — yet. It can\'t set its own goals, feel motivated, or decide to do something unprompted. It\'s not a search engine (though it can be connected to one). It\'s not infallible — it hallucinates facts, makes logical errors, and can be confidently wrong. It\'s not a replacement for human judgment in high-stakes decisions... yet. And it\'s not going to "wake up" and take over. The economic threat from AI isn\'t Skynet — it\'s a spreadsheet showing your department costs $2M/year and AI can do 70% of the work for $50k.'
+				},
+				{
+					q: 'What does "not general intelligence — yet" mean?',
+					a: 'Today\'s AI is "narrow" — it\'s extraordinarily good at specific tasks (writing, coding, analysis) but can\'t genuinely reason across all domains the way a human can. AGI — Artificial General Intelligence — is the goal every major lab is racing toward: an AI that can learn, reason, and solve problems as well as or better than a human in any domain, without being specifically trained for each one. OpenAI, Anthropic, Google DeepMind, xAI, and Meta are all explicitly working toward this. Nobody knows when it arrives — estimates range from 3 years to 30 years to "maybe never." But progress has been far faster than most experts predicted even two years ago, and a single breakthrough in reasoning or architecture could compress that timeline dramatically. For this model, AGI isn\'t required — current narrow AI is already enough to displace most cognitive work. But if AGI does arrive mid-displacement, the S-curve doesn\'t just steepen — it becomes a cliff. Every scenario in this model would shift toward the extreme case overnight.'
 				}
 			]
 		},
@@ -52,7 +56,7 @@
 				},
 				{
 					q: 'Is the SaaS / vendor software model dead?',
-					a: 'It\'s in serious trouble. The entire SaaS business model is built on one assumption: building custom software is expensive and requires specialist knowledge, so companies pay vendors instead. AI demolishes both pillars. Building an internal tool that used to require a team of developers and months of work becomes an AI agent\'s weekend project. The domain expertise that made vendor software valuable — understanding HIPAA compliance, financial regulations, supply chain logistics — is exactly the kind of knowledge AI absorbs from training data. Some industries survive longer because of certification requirements and regulatory inertia, but the direction is clear. When a CISO needs a CSIM solution, that goes from a $500k/year vendor contract to an AI agent\'s overnight task. The $600B+ SaaS market is sitting on a shrinking moat.'
+					a: 'It\'s in serious trouble. The entire SaaS business model is built on one assumption: building custom software is expensive and requires specialist knowledge, so companies pay vendors instead. AI demolishes both pillars. Building an internal tool that used to require a team of developers and months of work becomes an AI agent\'s weekend project. The domain expertise that made vendor software valuable — understanding HIPAA compliance, financial regulations, supply chain logistics — is exactly the kind of knowledge AI absorbs from training data. Some industries survive longer because of certification requirements and regulatory inertia, but the direction is clear. When a CISO needs a SIEM solution, that goes from a $500k/year vendor contract to an AI agent\'s overnight task. The $600B+ SaaS market is sitting on a shrinking moat.'
 				},
 				{
 					q: 'Are CEOs and executives at risk too?',
@@ -60,7 +64,7 @@
 				},
 				{
 					q: 'Why are current AI costs "subsidized"?',
-					a: 'Major AI companies (OpenAI, Anthropic, Google, etc.) are pricing AI services below their actual cost to gain market share — classic tech industry strategy. OpenAI reportedly loses money on most ChatGPT usage. When the land-grab phase ends and companies need to turn a profit, prices will rise. The model accounts for this: costs spike when subsidies end, then resume declining as hardware improves (similar to Moore\'s Law for compute).'
+					a: 'Major AI companies (OpenAI, Anthropic, Google, xAI, etc.) are pricing AI services below their actual cost to gain market share — classic tech industry strategy. OpenAI reportedly loses money on most ChatGPT usage. When the land-grab phase ends and companies need to turn a profit, prices will rise. The model accounts for this: costs spike when subsidies end, then resume declining as hardware improves (similar to Moore\'s Law for compute).'
 				}
 			]
 		},
@@ -206,7 +210,7 @@
 			items: [
 				{
 					q: 'Can\'t regulation stop this?',
-					a: 'The biggest danger of regulation is that it pushes the technology overseas. The US is currently the global leader in AI — the major labs (OpenAI, Anthropic, Google DeepMind, Meta AI) are all American. If the US heavily regulates AI deployment, companies will develop and deploy from countries that don\'t. China is investing massively in AI and would happily absorb any innovation the US restricts. This is fundamentally different from regulating, say, nuclear power — AI is software, it moves at the speed of the internet. Regulation will happen, but it\'ll focus on safety and liability frameworks, not on stopping deployment. No government will unilaterally disarm in the AI race.'
+					a: 'The biggest danger of regulation is that it pushes the technology overseas. The US is currently the global leader in AI — the major labs (OpenAI, Anthropic, Google DeepMind, xAI, Meta) are all American. If the US heavily regulates AI deployment, companies will develop and deploy from countries that don\'t. China is investing massively in AI and would happily absorb any innovation the US restricts. This is fundamentally different from regulating, say, nuclear power — AI is software, it moves at the speed of the internet. Regulation will happen, but it\'ll focus on safety and liability frameworks, not on stopping deployment. No government will unilaterally disarm in the AI race.'
 				},
 				{
 					q: 'Does this only apply to the US?',
@@ -294,7 +298,7 @@
 					<div class="bg-bg-card rounded-lg border border-bg-input overflow-hidden">
 						<button
 							onclick={() => toggle(idx)}
-							class="w-full text-left px-5 py-4 flex items-center justify-between gap-4 hover:bg-bg-input/30 transition-colors"
+							class="w-full text-left px-4 sm:px-5 py-4 flex items-center justify-between gap-3 sm:gap-4 hover:bg-bg-input/30 transition-colors"
 						>
 							<span class="text-sm font-medium text-text">{item.q}</span>
 							<span class="text-text-muted text-xs flex-shrink-0 transition-transform {openIndex === idx ? 'rotate-180' : ''}">

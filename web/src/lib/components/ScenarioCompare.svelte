@@ -31,7 +31,7 @@
 		<h3 class="text-sm font-semibold text-text-muted uppercase tracking-wide">
 			Scenario Comparison
 		</h3>
-		<div class="h-64">
+		<div class="h-48 md:h-64">
 			<Chart
 				data={years}
 				x="year"
@@ -41,11 +41,11 @@
 				yScale={scaleLinear()}
 				yDomain={[0, maxValue]}
 				yNice
-				padding={{ left: 52, bottom: 28, top: 8, right: 8 }}
+				padding={{ left: 44, bottom: 24, top: 8, right: 4 }}
 			>
 				<Svg>
 					<Axis placement="left" format={(v) => formatCompact(v)} />
-					<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+					<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 
 					<!-- Same accumulation line for all (they diverge due to different growth rates) -->
 					{#each outcomes as outcome, i}
@@ -66,7 +66,7 @@
 				</Svg>
 			</Chart>
 		</div>
-		<div class="flex flex-wrap gap-3 text-xs text-text-muted justify-center">
+		<div class="flex flex-wrap gap-2 sm:gap-3 text-xs text-text-muted justify-center">
 			{#each PRESET_ORDER as name, i}
 				{@const outcome = outcomes[i]}
 				<span class="flex items-center gap-1">

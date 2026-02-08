@@ -81,7 +81,7 @@
 
 	<!-- Company snapshot -->
 	{#if start && end}
-		<div class="bg-bg-card rounded-xl border border-bg-input p-5">
+		<div class="bg-bg-card rounded-xl border border-bg-input p-3 sm:p-5">
 			<div class="flex items-baseline gap-3 mb-4">
 				<h3 class="text-xl font-bold">{company.name}</h3>
 				<span class="text-text-muted text-sm">{company.sector}</span>
@@ -141,11 +141,11 @@
 						yScale={scaleLinear()}
 						yDomain={[0, maxHc]}
 						yNice
-						padding={{ left: 52, bottom: 24, top: 4, right: 4 }}
+						padding={{ left: 44, bottom: 24, top: 4, right: 4 }}
 					>
 						<Svg>
 							<Axis placement="left" format={(v) => formatCompactNum(v)} />
-							<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+							<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 							<Spline data={originalHcData} x="year" y="value" stroke="rgba(56, 189, 248, 0.4)" strokeWidth={1} />
 							<Area />
 							<Spline stroke="#fb923c" strokeWidth={2} />
@@ -167,11 +167,11 @@
 						yScale={scaleLinear()}
 						yDomain={[0, maxProfit]}
 						yNice
-						padding={{ left: 52, bottom: 24, top: 4, right: 4 }}
+						padding={{ left: 44, bottom: 24, top: 4, right: 4 }}
 					>
 						<Svg>
 							<Axis placement="left" format={(v) => `$${v.toFixed(0)}B`} />
-							<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+							<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 							<Spline data={baselineProfitData} x="year" y="value" stroke="rgba(248, 113, 113, 0.5)" strokeWidth={1} />
 							<Area />
 							<Spline stroke="#38bdf8" strokeWidth={2} />
@@ -197,11 +197,11 @@
 						yScale={scaleLinear()}
 						yDomain={[0, maxRev]}
 						yNice
-						padding={{ left: 56, bottom: 24, top: 4, right: 4 }}
+						padding={{ left: 48, bottom: 24, top: 4, right: 4 }}
 					>
 						<Svg>
 							<Axis placement="left" format={(v) => `$${v.toFixed(0)}B`} />
-							<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+							<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 							<Area />
 							<Spline stroke="#4ade80" strokeWidth={2} />
 							<Spline data={dystopiaRevenueData} x="year" y="value" stroke="#f87171" strokeWidth={2} />

@@ -206,13 +206,13 @@
 
 		<!-- Stat cards -->
 		<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-			<div class="bg-bg-card rounded-lg p-5 border border-bg-input">
+			<div class="bg-bg-card rounded-lg p-3 sm:p-5 border border-bg-input">
 				<div class="text-xs font-medium text-text-muted uppercase tracking-wide mb-2">
 					Revenue Shortfall at Year 15
 				</div>
 				<span class="text-2xl font-bold text-red">{formatCompact(revenueShortfallYr15)}/yr</span>
 			</div>
-			<div class="bg-bg-card rounded-lg p-5 border border-bg-input">
+			<div class="bg-bg-card rounded-lg p-3 sm:p-5 border border-bg-input">
 				<div class="text-xs font-medium text-text-muted uppercase tracking-wide mb-2">
 					National Debt at Year 30
 				</div>
@@ -222,7 +222,7 @@
 					)}</span
 				>
 			</div>
-			<div class="bg-bg-card rounded-lg p-5 border border-bg-input">
+			<div class="bg-bg-card rounded-lg p-3 sm:p-5 border border-bg-input">
 				<div class="text-xs font-medium text-text-muted uppercase tracking-wide mb-2">
 					Debt-to-GDP at Year 30
 				</div>
@@ -323,13 +323,13 @@
 					<button
 						aria-label="Toggle equalize capital gains tax"
 						onclick={() => updateParam('equalizeCapGainsTax', !equalizeToggle)}
-						class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors {equalizeToggle
+						class="relative inline-flex h-8 w-14 md:h-6 md:w-11 items-center rounded-full transition-colors {equalizeToggle
 							? 'bg-accent'
 							: 'bg-bg-input'}"
 					>
 						<span
-							class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform {equalizeToggle
-								? 'translate-x-6'
+							class="inline-block h-5 w-5 md:h-4 md:w-4 transform rounded-full bg-white transition-transform {equalizeToggle
+								? 'translate-x-8 md:translate-x-6'
 								: 'translate-x-1'}"
 						></span>
 					</button>
@@ -345,7 +345,7 @@
 			<h3 class="text-sm font-semibold text-text-muted uppercase tracking-wide">
 				Tax Revenue Breakdown
 			</h3>
-			<div class="h-72" style="--chart-area-fill: transparent;">
+			<div class="h-48 md:h-72" style="--chart-area-fill: transparent;">
 				{#key chartKey}
 					<Chart
 						data={revTotalData}
@@ -356,11 +356,11 @@
 						yScale={scaleLinear()}
 						yDomain={[0, maxRevenue]}
 						yNice
-						padding={{ left: 52, bottom: 28, top: 8, right: 8 }}
+						padding={{ left: 44, bottom: 24, top: 8, right: 4 }}
 					>
 						<Svg>
 							<Axis placement="left" format={(v) => '$' + v.toFixed(1) + 'T'} />
-							<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+							<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 
 							<!-- Baseline reference -->
 							<Spline
@@ -419,7 +419,7 @@
 					</Chart>
 				{/key}
 			</div>
-			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
+			<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 				<span class="flex items-center gap-1">
 					<span class="w-3 h-0.5 bg-yellow inline-block"></span> Total revenue
 				</span>
@@ -446,7 +446,7 @@
 			<h3 class="text-sm font-semibold text-text-muted uppercase tracking-wide">
 				Annual Deficit
 			</h3>
-			<div class="h-64" style="--chart-area-fill: rgba(248, 113, 113, 0.15);">
+			<div class="h-48 md:h-64" style="--chart-area-fill: rgba(248, 113, 113, 0.15);">
 				{#key chartKey}
 					<Chart
 						data={deficitData}
@@ -457,11 +457,11 @@
 						yScale={scaleLinear()}
 						yDomain={[0, maxDeficit]}
 						yNice
-						padding={{ left: 52, bottom: 28, top: 8, right: 8 }}
+						padding={{ left: 44, bottom: 24, top: 8, right: 4 }}
 					>
 						<Svg>
 							<Axis placement="left" format={(v) => '$' + v.toFixed(1) + 'T'} />
-							<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+							<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 
 							<!-- Baseline deficit (dashed) -->
 							<Spline
@@ -478,7 +478,7 @@
 					</Chart>
 				{/key}
 			</div>
-			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
+			<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 				<span class="flex items-center gap-1">
 					<span class="w-3 h-0.5 bg-red inline-block"></span> Annual deficit (AI displacement)
 				</span>
@@ -493,7 +493,7 @@
 			<h3 class="text-sm font-semibold text-text-muted uppercase tracking-wide">
 				National Debt
 			</h3>
-			<div class="h-64" style="--chart-area-fill: rgba(251, 191, 36, 0.15);">
+			<div class="h-48 md:h-64" style="--chart-area-fill: rgba(251, 191, 36, 0.15);">
 				{#key chartKey}
 					<Chart
 						data={debtData}
@@ -504,11 +504,11 @@
 						yScale={scaleLinear()}
 						yDomain={[0, maxDebt]}
 						yNice
-						padding={{ left: 56, bottom: 28, top: 8, right: 8 }}
+						padding={{ left: 48, bottom: 24, top: 8, right: 4 }}
 					>
 						<Svg>
 							<Axis placement="left" format={(v) => '$' + v.toFixed(0) + 'T'} />
-							<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+							<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 
 							<!-- Baseline debt trajectory (gray) -->
 							<Spline
@@ -525,7 +525,7 @@
 					</Chart>
 				{/key}
 			</div>
-			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
+			<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 				<span class="flex items-center gap-1">
 					<span class="w-3 h-0.5 bg-yellow inline-block"></span> National debt (AI displacement)
 				</span>
@@ -540,7 +540,7 @@
 			<h3 class="text-sm font-semibold text-text-muted uppercase tracking-wide">
 				Debt-to-GDP Ratio
 			</h3>
-			<div class="h-64" style="--chart-area-fill: rgba(251, 146, 60, 0.15);">
+			<div class="h-48 md:h-64" style="--chart-area-fill: rgba(251, 146, 60, 0.15);">
 				{#key chartKey}
 					<Chart
 						data={debtToGDPData}
@@ -551,11 +551,11 @@
 						yScale={scaleLinear()}
 						yDomain={[0, maxDebtToGDP]}
 						yNice
-						padding={{ left: 48, bottom: 28, top: 8, right: 8 }}
+						padding={{ left: 44, bottom: 24, top: 8, right: 4 }}
 					>
 						<Svg>
 							<Axis placement="left" format={(v) => v + '%'} />
-							<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+							<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 
 							<!-- 100% reference -->
 							<Spline
@@ -581,7 +581,7 @@
 					</Chart>
 				{/key}
 			</div>
-			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
+			<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 				<span class="flex items-center gap-1">
 					<span class="w-3 h-0.5 bg-orange inline-block"></span> Debt-to-GDP
 				</span>
@@ -595,7 +595,7 @@
 		</div>
 
 		<!-- Insight callout -->
-		<div class="bg-bg-card rounded-lg p-5 border border-accent/30">
+		<div class="bg-bg-card rounded-lg p-3 sm:p-5 border border-accent/30">
 			<p class="text-text leading-relaxed">
 				Even if capital gains were taxed at income tax rates, the
 				<span class="font-bold text-orange">payroll tax hole</span> of

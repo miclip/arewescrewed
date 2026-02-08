@@ -48,58 +48,79 @@
 
 	<!-- Tab navigation -->
 	<div class="max-w-7xl mx-auto px-4">
-		<div class="flex gap-1 border-b border-bg-input mb-6">
+		<div role="tablist" class="flex gap-1 border-b border-bg-input mb-6 overflow-x-auto scrollbar-hide">
 			<button
+				role="tab"
+				aria-selected={activeTab === 'corporate'}
+				aria-controls="panel-corporate"
 				onclick={() => (activeTab = 'corporate')}
-				class="px-5 py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'corporate'
+				class="whitespace-nowrap flex-shrink-0 px-3 py-2.5 md:px-5 md:py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'corporate'
 					? 'border-accent text-accent'
 					: 'border-transparent text-text-muted hover:text-text'}"
 			>
 				Explained — An Amazon Example
 			</button>
 			<button
+				role="tab"
+				aria-selected={activeTab === 'personal'}
+				aria-controls="panel-personal"
 				onclick={() => (activeTab = 'personal')}
-				class="px-5 py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'personal'
+				class="whitespace-nowrap flex-shrink-0 px-3 py-2.5 md:px-5 md:py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'personal'
 					? 'border-accent text-accent'
 					: 'border-transparent text-text-muted hover:text-text'}"
 			>
 				Your Outlook
 			</button>
 			<button
+				role="tab"
+				aria-selected={activeTab === 'explore'}
+				aria-controls="panel-explore"
 				onclick={() => (activeTab = 'explore')}
-				class="px-5 py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'explore'
+				class="whitespace-nowrap flex-shrink-0 px-3 py-2.5 md:px-5 md:py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'explore'
 					? 'border-accent text-accent'
 					: 'border-transparent text-text-muted hover:text-text'}"
 			>
 				Explore Companies
 			</button>
 			<button
+				role="tab"
+				aria-selected={activeTab === 'fiscal'}
+				aria-controls="panel-fiscal"
 				onclick={() => (activeTab = 'fiscal')}
-				class="px-5 py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'fiscal'
+				class="whitespace-nowrap flex-shrink-0 px-3 py-2.5 md:px-5 md:py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'fiscal'
 					? 'border-accent text-accent'
 					: 'border-transparent text-text-muted hover:text-text'}"
 			>
 				Taxation & Debt
 			</button>
 			<button
+				role="tab"
+				aria-selected={activeTab === 'baby'}
+				aria-controls="panel-baby"
 				onclick={() => (activeTab = 'baby')}
-				class="px-5 py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'baby'
+				class="whitespace-nowrap flex-shrink-0 px-3 py-2.5 md:px-5 md:py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'baby'
 					? 'border-accent text-accent'
 					: 'border-transparent text-text-muted hover:text-text'}"
 			>
 				Baby Born Today
 			</button>
 			<button
+				role="tab"
+				aria-selected={activeTab === 'assumptions'}
+				aria-controls="panel-assumptions"
 				onclick={() => (activeTab = 'assumptions')}
-				class="px-5 py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'assumptions'
+				class="whitespace-nowrap flex-shrink-0 px-3 py-2.5 md:px-5 md:py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'assumptions'
 					? 'border-accent text-accent'
 					: 'border-transparent text-text-muted hover:text-text'}"
 			>
 				Assumptions
 			</button>
 			<button
+				role="tab"
+				aria-selected={activeTab === 'faq'}
+				aria-controls="panel-faq"
 				onclick={() => (activeTab = 'faq')}
-				class="px-5 py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'faq'
+				class="whitespace-nowrap flex-shrink-0 px-3 py-2.5 md:px-5 md:py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'faq'
 					? 'border-accent text-accent'
 					: 'border-transparent text-text-muted hover:text-text'}"
 			>
@@ -110,55 +131,63 @@
 
 	<main class="max-w-7xl mx-auto px-4 pb-12">
 		{#if activeTab === 'personal'}
-			<!-- Key metrics bar -->
-			<KeyMetrics />
+			<div id="panel-personal" role="tabpanel">
+				<!-- Key metrics bar -->
+				<KeyMetrics />
 
-			<!-- Side-by-side layout -->
-			<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-8">
-				<!-- Left: inputs -->
-				<div class="lg:col-span-4 space-y-6">
-					<PersonalInputs />
-					<Verdict />
-				</div>
+				<!-- Side-by-side layout -->
+				<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-8">
+					<!-- Left: inputs -->
+					<div class="lg:col-span-4 space-y-6">
+						<PersonalInputs />
+						<Verdict />
+					</div>
 
-				<!-- Right: charts -->
-				<div class="lg:col-span-8 space-y-8">
-					<PersonalTimeline />
-					<IncomeReplacement />
-					<PortfolioGrowth />
-					<ScenarioCompare />
-					<GapAnalysis />
+					<!-- Right: charts -->
+					<div class="lg:col-span-8 space-y-8">
+						<PersonalTimeline />
+						<IncomeReplacement />
+						<PortfolioGrowth />
+						<ScenarioCompare />
+						<GapAnalysis />
+					</div>
 				</div>
 			</div>
 		{:else if activeTab === 'explore'}
-			<!-- Company explorer -->
-			<div class="max-w-5xl mx-auto">
-				<CompanyExplorer />
+			<div id="panel-explore" role="tabpanel">
+				<div class="max-w-5xl mx-auto">
+					<CompanyExplorer />
+				</div>
 			</div>
 		{:else if activeTab === 'baby'}
-			<!-- Baby Born Today -->
-			<div class="max-w-5xl mx-auto">
-				<BabyBornToday />
+			<div id="panel-baby" role="tabpanel">
+				<div class="max-w-5xl mx-auto">
+					<BabyBornToday />
+				</div>
 			</div>
 		{:else if activeTab === 'fiscal'}
-			<!-- Taxation & Debt -->
-			<div class="max-w-5xl mx-auto">
-				<FiscalImpact />
+			<div id="panel-fiscal" role="tabpanel">
+				<div class="max-w-5xl mx-auto">
+					<FiscalImpact />
+				</div>
 			</div>
 		{:else if activeTab === 'faq'}
-			<!-- FAQ -->
-			<div class="max-w-3xl mx-auto">
-				<FAQ />
+			<div id="panel-faq" role="tabpanel">
+				<div class="max-w-3xl mx-auto">
+					<FAQ />
+				</div>
 			</div>
 		{:else if activeTab === 'assumptions'}
-			<!-- Assumptions -->
-			<div class="max-w-3xl mx-auto space-y-6">
-				<AdvancedControls />
+			<div id="panel-assumptions" role="tabpanel">
+				<div class="max-w-3xl mx-auto space-y-6">
+					<AdvancedControls />
+				</div>
 			</div>
 		{:else}
-			<!-- Corporate deep-dive -->
-			<div class="max-w-5xl mx-auto">
-				<CorporateView />
+			<div id="panel-corporate" role="tabpanel">
+				<div class="max-w-5xl mx-auto">
+					<CorporateView />
+				</div>
 			</div>
 		{/if}
 	</main>

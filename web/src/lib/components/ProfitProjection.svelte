@@ -38,7 +38,7 @@
 		<p class="text-xs text-text-muted">
 			How AI labor savings explode Amazon's bottom line. Base profit grows with revenue; AI savings stack on top.
 		</p>
-		<div class="h-56" style="--chart-area-fill: rgba(56, 189, 248, 0.15);">
+		<div class="h-48 md:h-56" style="--chart-area-fill: rgba(56, 189, 248, 0.15);">
 			<Chart
 				data={profitData}
 				x="year"
@@ -48,11 +48,11 @@
 				yScale={scaleLinear()}
 				yDomain={[0, maxProfit]}
 				yNice
-				padding={{ left: 56, bottom: 28, top: 8, right: 8 }}
+				padding={{ left: 48, bottom: 24, top: 8, right: 4 }}
 			>
 				<Svg>
 					<Axis placement="left" format={(v) => `$${v.toFixed(0)}B`} />
-					<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+					<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 
 					<!-- New profit with AI savings (fill + line) -->
 					<Area />
@@ -69,7 +69,7 @@
 				</Svg>
 			</Chart>
 		</div>
-		<div class="flex gap-4 text-xs text-text-muted justify-center">
+		<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 			<span class="flex items-center gap-1">
 				<span class="w-3 h-0.5 bg-accent inline-block"></span> With AI savings
 			</span>

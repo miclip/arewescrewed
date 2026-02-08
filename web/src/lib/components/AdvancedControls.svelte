@@ -36,7 +36,7 @@
 		{ key: 'rampYears', label: 'Ramp years', min: 3, max: 30, step: 1, format: (v) => `${v} yrs`, group: 'AI Adoption', explanation: 'How many years to reach full labor reduction. Uses an S-curve: slow start, rapid middle, slow finish. Shorter = faster disruption.' },
 		{ key: 'aiCostPerWorkerYear', label: 'AI cost / worker / year', min: 10000, max: 120000, step: 5000, format: (v) => `$${(v / 1000).toFixed(0)}k`, group: 'AI Adoption', explanation: 'Annual cost of AI compute to replace one human worker today. This is a subsidized price — real costs are higher. Declines each year by the AI cost decline rate.' },
 		{ key: 'aiCostDeclineRate', label: 'AI cost decline rate', min: 0.05, max: 0.40, step: 0.05, format: (v) => `${Math.round(v * 100)}%/yr`, group: 'AI Adoption', explanation: 'How fast AI costs drop each year (like Moore\'s Law). At 20%, a $60k AI worker costs $6k in 10 years.' },
-		{ key: 'aiSubsidyYears', label: 'AI subsidy period', min: 0, max: 8, step: 1, format: (v) => v === 0 ? 'None' : `${v} yrs`, group: 'AI Adoption', explanation: 'Current AI pricing is below true cost — companies like OpenAI and Anthropic are subsidizing to grab market share. When subsidies end, costs spike before hardware improvements catch up.' },
+		{ key: 'aiSubsidyYears', label: 'AI subsidy period', min: 0, max: 8, step: 1, format: (v) => v === 0 ? 'None' : `${v} yrs`, group: 'AI Adoption', explanation: 'Current AI pricing is below true cost — companies like OpenAI, Anthropic, and xAI are subsidizing to grab market share. When subsidies end, costs spike before hardware improvements catch up.' },
 		{ key: 'aiCostCorrectionPct', label: 'Post-subsidy cost jump', min: 1.0, max: 4.0, step: 0.25, format: (v) => `${v.toFixed(1)}x`, group: 'AI Adoption', explanation: 'How much AI costs increase when subsidies end. 2x means costs double to reflect true hardware/power/cooling costs. After the correction, the normal decline rate resumes.' },
 		{ key: 'marginRetentionPct', label: 'Margin retention', min: 0.1, max: 1.0, step: 0.05, format: (v) => `${Math.round(v * 100)}%`, group: 'Economics', explanation: 'How much of the labor savings companies keep as profit vs. pass to consumers as lower prices. 50% = split evenly.' },
 		{ key: 'dividendPayoutRatio', label: 'Dividend payout ratio', min: 0.1, max: 0.8, step: 0.05, format: (v) => `${Math.round(v * 100)}%`, group: 'Economics', explanation: 'What fraction of new AI-driven profits companies pay out as dividends. Remainder is reinvested or used for buybacks.' },
@@ -65,7 +65,7 @@
 									{slider.label}
 									<button
 										onclick={() => toggleTooltip(slider.key)}
-										class="inline-flex items-center justify-center w-4 h-4 rounded-full border border-text-muted/40 text-text-muted/60 hover:border-accent hover:text-accent transition-colors text-[10px] leading-none"
+										class="inline-flex items-center justify-center w-6 h-6 md:w-4 md:h-4 rounded-full border border-text-muted/40 text-text-muted/60 hover:border-accent hover:text-accent transition-colors text-[10px] leading-none"
 										aria-label="Explain {slider.label}"
 									>?</button>
 								</span>

@@ -145,7 +145,7 @@
 		</div>
 
 		<!-- Gift amount slider -->
-		<div class="bg-bg-card rounded-lg p-5 space-y-3">
+		<div class="bg-bg-card rounded-lg p-3 sm:p-5 space-y-3">
 			<div class="flex justify-between items-center">
 				<label for="gift-slider" class="text-sm font-medium text-text-muted">
 					Birth Grant Amount
@@ -171,7 +171,7 @@
 		</div>
 
 		<!-- "Gift needed" callout -->
-		<div class="bg-bg-card rounded-lg p-5 border border-bg-input space-y-2">
+		<div class="bg-bg-card rounded-lg p-3 sm:p-5 border border-bg-input space-y-2">
 			<div class="text-xs font-medium text-text-muted uppercase tracking-wide">
 				What grant provides $75k/yr at age 21?
 			</div>
@@ -199,7 +199,7 @@
 
 		<!-- Key stat cards -->
 		<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-			<div class="bg-bg-card rounded-lg p-5 border border-bg-input">
+			<div class="bg-bg-card rounded-lg p-3 sm:p-5 border border-bg-input">
 				<div class="text-xs font-medium text-text-muted uppercase tracking-wide mb-2">
 					At Age 21 (Unlock)
 				</div>
@@ -212,7 +212,7 @@
 					<span class="text-xs text-text-muted">passive income (4% withdrawal)</span>
 				</div>
 			</div>
-			<div class="bg-bg-card rounded-lg p-5 border border-bg-input">
+			<div class="bg-bg-card rounded-lg p-3 sm:p-5 border border-bg-input">
 				<div class="text-xs font-medium text-text-muted uppercase tracking-wide mb-2">
 					At Age 30
 				</div>
@@ -232,7 +232,7 @@
 			<h3 class="text-sm font-semibold text-text-muted uppercase tracking-wide">
 				Portfolio Value Over Time
 			</h3>
-			<div class="h-72" style="--chart-area-fill: rgba(56, 189, 248, 0.15);">
+			<div class="h-48 md:h-72" style="--chart-area-fill: rgba(56, 189, 248, 0.15);">
 				{#key chartKey}
 				<Chart
 					data={valueData}
@@ -243,11 +243,11 @@
 					yScale={scaleLinear()}
 					yDomain={[0, maxValue]}
 					yNice
-					padding={{ left: 56, bottom: 28, top: 8, right: 8 }}
+					padding={{ left: 48, bottom: 24, top: 8, right: 4 }}
 				>
 					<Svg>
 						<Axis placement="left" format={(v) => formatCompact(v)} />
-						<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+						<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 
 						<!-- $1.875M target line (green) -->
 						<Spline
@@ -274,7 +274,7 @@
 				</Chart>
 				{/key}
 			</div>
-			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
+			<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 				<span class="flex items-center gap-1">
 					<span class="w-3 h-0.5 bg-accent inline-block"></span> Portfolio value
 				</span>
@@ -292,7 +292,7 @@
 			<h3 class="text-sm font-semibold text-text-muted uppercase tracking-wide">
 				Annual Income at 4% SWR
 			</h3>
-			<div class="h-64" style="--chart-area-fill: rgba(74, 222, 128, 0.15);">
+			<div class="h-48 md:h-64" style="--chart-area-fill: rgba(74, 222, 128, 0.15);">
 				{#key chartKey}
 				<Chart
 					data={incomeData}
@@ -303,11 +303,11 @@
 					yScale={scaleLinear()}
 					yDomain={[0, maxIncome]}
 					yNice
-					padding={{ left: 52, bottom: 28, top: 8, right: 8 }}
+					padding={{ left: 44, bottom: 24, top: 8, right: 4 }}
 				>
 					<Svg>
 						<Axis placement="left" format={(v) => formatCompact(v)} />
-						<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+						<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 
 						<!-- $75k target line (red, nominal) -->
 						<Spline
@@ -343,7 +343,7 @@
 				</Chart>
 				{/key}
 			</div>
-			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
+			<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 				<span class="flex items-center gap-1">
 					<span class="w-3 h-0.5 bg-green inline-block"></span> Annual income (4% SWR)
 				</span>
@@ -368,7 +368,7 @@
 				As AI automates supply chains — shipping, manufacturing, agriculture — the cost of everything drops.
 				This is what $75k of today's lifestyle costs over time.
 			</p>
-			<div class="h-56" style="--chart-area-fill: rgba(251, 146, 60, 0.15);">
+			<div class="h-48 md:h-56" style="--chart-area-fill: rgba(251, 146, 60, 0.15);">
 				{#key chartKey}
 				<Chart
 					data={costData}
@@ -379,11 +379,11 @@
 					yScale={scaleLinear()}
 					yDomain={[0, 110]}
 					yNice
-					padding={{ left: 44, bottom: 28, top: 8, right: 8 }}
+					padding={{ left: 44, bottom: 24, top: 8, right: 4 }}
 				>
 					<Svg>
 						<Axis placement="left" format={(v) => v + '%'} />
-						<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+						<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 
 						<!-- Unlock year vertical (yellow) -->
 						<Spline
@@ -401,7 +401,7 @@
 				</Chart>
 				{/key}
 			</div>
-			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
+			<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 				<span class="flex items-center gap-1">
 					<span class="w-3 h-0.5 bg-orange inline-block"></span> Cost of living
 				</span>
