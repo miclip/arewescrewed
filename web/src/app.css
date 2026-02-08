@@ -57,8 +57,13 @@ svg .domain {
 }
 
 /* Hide scrollbar for tab bar on mobile */
-.scrollbar-hide::-webkit-scrollbar { display: none; }
-.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-hide::-webkit-scrollbar {
+	display: none;
+}
+.scrollbar-hide {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
 
 /* Area fill controlled via --chart-area-fill CSS variable on parent container */
 svg .path-area {

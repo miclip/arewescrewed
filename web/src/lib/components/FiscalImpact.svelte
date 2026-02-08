@@ -329,7 +329,7 @@
 					>
 						<span
 							class="inline-block h-5 w-5 md:h-4 md:w-4 transform rounded-full bg-white transition-transform {equalizeToggle
-								? 'translate-x-7 md:translate-x-6'
+								? 'translate-x-8 md:translate-x-6'
 								: 'translate-x-1'}"
 						></span>
 					</button>
