@@ -151,7 +151,9 @@ export function computeFiscalProjection(
 			0
 		);
 		const profitRatio = totalBaseProfit > 0 ? totalNewProfit / totalBaseProfit : 1.0;
-		const corporateTaxRevenue = fiscalParams.baselineCorporateTaxRevenue * Math.max(0, profitRatio);
+		// Scale by profit growth AND any rate change from the 21% baseline
+		const rateMultiplier = fiscalParams.corporateTaxRate / 0.21;
+		const corporateTaxRevenue = fiscalParams.baselineCorporateTaxRevenue * Math.max(0, profitRatio) * rateMultiplier;
 
 		// --- Income tax: remaining workers still pay income tax ---
 		const incomeTaxRevenue = fiscalParams.baselineIncomeTaxRevenue * remainingWorkerFraction;
