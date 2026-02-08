@@ -1,0 +1,25 @@
+[project]
+name = "wearenotscrewed"
+version = "0.1.0"
+description = "Economic modeling: what happens when AI replaces human labor and humans become investors"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "requests>=2.31",
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ipython>=8.0",
+]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]

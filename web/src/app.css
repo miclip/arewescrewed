@@ -1,0 +1,56 @@
+@import 'tailwindcss';
+
+/* Scan layerchart components so its Tailwind classes (fill-none, stroke-surface-content, etc.) get generated */
+@source "../node_modules/layerchart/dist/**/*.svelte";
+
+@theme {
+	--color-bg: #0f172a;
+	--color-bg-card: #1e293b;
+	--color-bg-input: #334155;
+	--color-text: #f1f5f9;
+	--color-text-muted: #94a3b8;
+	--color-accent: #38bdf8;
+	--color-accent-hover: #7dd3fc;
+	--color-green: #4ade80;
+	--color-yellow: #fbbf24;
+	--color-red: #f87171;
+	--color-orange: #fb923c;
+	--color-conservative: #38bdf8;
+	--color-moderate: #4ade80;
+	--color-aggressive: #fbbf24;
+	--color-extreme: #f87171;
+	/* LayerChart theme variables — prevents black fallback */
+	--color-surface-content: #94a3b8;
+	--color-surface-100: #0f172a;
+	--color-surface-200: #1e293b;
+	--color-surface-300: #334155;
+	--font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+	--font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+html {
+	background-color: var(--color-bg);
+	color: var(--color-text);
+	font-family: var(--font-sans);
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+}
+
+/* Force white text on all chart axis labels and ticks */
+svg text {
+	fill: var(--color-text-muted) !important;
+}
+
+svg .tick line,
+svg .domain {
+	stroke: var(--color-bg-input) !important;
+}
+
+/* Area fill controlled via --chart-area-fill CSS variable on parent container */
+svg .path-area {
+	fill: var(--chart-area-fill, transparent) !important;
+	stroke: none !important;
+}
