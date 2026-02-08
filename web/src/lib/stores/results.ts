@@ -1,9 +1,11 @@
 import { derived } from 'svelte/store';
 import { personalInputs } from './personal';
 import { babyInputs } from './baby';
+import { fiscalParams } from './fiscal';
 import { scenarioParams, activePreset } from './scenario';
 import { computePersonalOutcome, computeAllScenarios } from '$lib/model/personal-engine';
 import { computeBabyOutcome } from '$lib/model/baby-engine';
+import { computeFiscalProjection } from '$lib/model/fiscal-engine';
 import { buildEqualWeightPortfolio, runPortfolioScenario } from '$lib/model/portfolio-engine';
 import { runScenario } from '$lib/model/scenario-engine';
 import { PORTFOLIO_COMPANIES } from '$lib/model/companies';
@@ -69,5 +71,17 @@ export const babyOutcome = derived(
 	[babyInputs, scenarioParams, portfolioResult],
 	([$baby, $params, $portfolio]) => {
 		return computeBabyOutcome($baby, $params, $portfolio);
+	}
+);
+
+/** Fiscal impact projection for current scenario */
+export const fiscalResult = derived(
+	[scenarioParams, activePreset, fiscalParams],
+	([$params, $preset, $fiscal]) => {
+		const companies = PORTFOLIO_COMPANIES;
+		const companyProjections = companies.map((c) => runScenario($params, c));
+		const allocations = buildEqualWeightPortfolio(companies, 1_000_000);
+		const portfolio = runPortfolioScenario($params, PRESETS[$preset].label, allocations);
+		return computeFiscalProjection(companyProjections, companies, $params, portfolio, $fiscal);
 	}
 );
