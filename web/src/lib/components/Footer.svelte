@@ -34,7 +34,7 @@
 				</li>
 				<li>
 					<strong class="text-text-muted">Share prices:</strong>
-					Approximate market prices as of January 2025. Capital gains model assumes constant P/E ratio (price tracks earnings growth).
+					Approximate market prices as of early 2026. Capital gains model assumes constant P/E ratio (price tracks earnings growth).
 				</li>
 			</ul>
 		</div>
@@ -50,8 +50,16 @@
 			</ul>
 		</div>
 
+		<div class="bg-bg-card rounded-lg border border-bg-input p-3 text-xs text-text-muted text-center">
+			This is a work in progress — we're actively exploring the model and challenging assumptions.
+			Found an issue or have a better assumption?
+			<a href="https://github.com/miclip/arewescrewed/issues" class="text-accent hover:text-accent-hover">Open an issue on GitHub</a>.
+		</div>
+
 		<p class="text-xs text-center">
 			Built with SvelteKit, LayerChart, too many spreadsheets and AI. No humans were harmed in the making of this website.
+			<br />
+			<a href="https://github.com/miclip/arewescrewed" class="text-accent hover:text-accent-hover">View source on GitHub</a>
 		</p>
 	</div>
 </footer>

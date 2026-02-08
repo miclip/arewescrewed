@@ -5,13 +5,14 @@
 	import { PRESETS, PRESET_ORDER, type PresetName } from '$lib/model/presets';
 	import { runScenario } from '$lib/model/scenario-engine';
 	import { formatCompact, formatCompactNum, formatPct, formatNumber } from '$lib/model/format';
-	import { scenarioParams, activePreset } from '$lib/stores/scenario';
+	import { scenarioParams, activePreset, isCustomized } from '$lib/stores/scenario';
 	import type { CompanyProfile, ScenarioParams, YearProjection } from '$lib/model/types';
 
 	let selectedTicker = $state('AMZN');
 
 	let params = $state<ScenarioParams>(PRESETS.moderate.params);
 	let selectedPreset = $state<PresetName>('moderate');
+	let customized = $state(false);
 
 	$effect(() => {
 		const unsub = scenarioParams.subscribe((v) => { params = v; });
@@ -19,6 +20,10 @@
 	});
 	$effect(() => {
 		const unsub = activePreset.subscribe((v) => { selectedPreset = v; });
+		return unsub;
+	});
+	$effect(() => {
+		const unsub = isCustomized.subscribe((v) => { customized = v; });
 		return unsub;
 	});
 
@@ -69,7 +74,7 @@
 			</select>
 		</div>
 		<div class="text-xs text-text-muted">
-			Scenario: <span class="font-medium" style="color: {presetColors[selectedPreset]}">{PRESETS[selectedPreset].label}</span>
+			Scenario: <span class="font-medium" style="color: {presetColors[selectedPreset]}">{PRESETS[selectedPreset].label}{customized ? ' (Custom)' : ''}</span>
 			<span class="text-text-muted/60">— change in Assumptions tab</span>
 		</div>
 	</div>

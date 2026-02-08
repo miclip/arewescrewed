@@ -17,9 +17,12 @@ export const personalOutcome = derived(
 );
 
 /** Personal outcomes for ALL 4 preset scenarios (comparison view) */
-export const allScenariosOutcome = derived(personalInputs, ($personal) => {
-	return computeAllScenarios($personal);
-});
+export const allScenariosOutcome = derived(
+	[personalInputs, scenarioParams, activePreset],
+	([$personal, $params, $preset]) => {
+		return computeAllScenarios($personal, $params, $preset);
+	}
+);
 
 /** Portfolio result for the current scenario (corporate model for charts) */
 export const portfolioResult = derived(

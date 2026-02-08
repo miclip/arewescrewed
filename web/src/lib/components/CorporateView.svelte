@@ -3,11 +3,19 @@
 	import { scenarioParams, activePreset } from '$lib/stores/scenario';
 	import { PRESETS, type PresetName } from '$lib/model/presets';
 	import { formatCompact, formatPct, formatNumber, formatCurrency } from '$lib/model/format';
+	import { PORTFOLIO_COMPANIES } from '$lib/model/companies';
 	import ProfitProjection from './ProfitProjection.svelte';
 	import TwoFutures from './TwoFutures.svelte';
 	import PortfolioIncome from './PortfolioIncome.svelte';
 	import WorkforceChart from './WorkforceChart.svelte';
-	import type { YearProjection, PortfolioResult as PortfolioResultType } from '$lib/model/types';
+	import type { YearProjection, ScenarioParams, PortfolioResult as PortfolioResultType } from '$lib/model/types';
+
+	const amazon = PORTFOLIO_COMPANIES.find((c) => c.ticker === 'AMZN')!;
+	let currentParams = $state<ScenarioParams | null>(null);
+	$effect(() => {
+		const unsub = scenarioParams.subscribe((v) => { currentParams = v; });
+		return unsub;
+	});
 
 	let projections = $state<YearProjection[]>([]);
 	let portfolio = $state<PortfolioResultType | null>(null);
@@ -113,7 +121,7 @@
 	<div class="space-y-3">
 		<h2 class="text-2xl font-bold">The Amazon Example</h2>
 		<p class="text-text-muted leading-relaxed">
-			Amazon has 1.56 million employees, $185B in labor costs, and $717B in revenue.
+			Amazon has {formatNumber(amazon.headcount)} employees, {formatCompact(amazon.estimatedLaborCost)} in labor costs, and {formatCompact(amazon.revenue)} in revenue.
 			What happens when AI starts replacing that workforce?
 		</p>
 	</div>
@@ -167,8 +175,8 @@
 				</p>
 				<p>
 					<strong class="text-text">Demand Feedback:</strong> Here's the key insight — if displaced workers
-					have no income, consumer spending collapses. The model tracks this: displaced workers cut ~90% of spending.
-					Without the investor model, demand craters to an essentials floor of 20% — just food, shelter, and utilities.
+					have no income, consumer spending collapses. The model tracks this: displaced workers cut ~{currentParams ? Math.round(currentParams.wageShareOfSpending * 100) : 90}% of spending.
+					Without the investor model, demand craters to an essentials floor of {currentParams ? Math.round(currentParams.essentialsFloor * 100) : 20}% — just food, shelter, and utilities.
 					<em>With</em> investor adoption, dividend/capital gains income partially replaces wages.
 				</p>
 				<p>

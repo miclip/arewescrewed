@@ -43,17 +43,19 @@ export function computePersonalOutcome(
 		const year = params.baseYear + yearIdx;
 		accumulationPath.push({ year, value: currentValue });
 
-		// Growth rate: use portfolio's total return rate for this year
-		const yearResult = portfolioResult.yearlyResults[yearIdx];
-		// Portfolio return = (value at year / initial) - 1, annualized for this year
+		// Growth rate: use portfolio's year-over-year value change
 		let growthRate: number;
 		if (yearIdx === 0) {
-			growthRate = 0.08; // Assume 8% first year
+			// Use year 0→1 return from portfolio model
+			const yr0 = portfolioResult.yearlyResults[0]?.portfolioValue;
+			const yr1 = portfolioResult.yearlyResults[1]?.portfolioValue;
+			growthRate = yr0 && yr0 > 0 && yr1 ? (yr1 / yr0) - 1 : 0;
 		} else {
 			const prevValue = portfolioResult.yearlyResults[yearIdx - 1].portfolioValue;
+			const currValue = portfolioResult.yearlyResults[yearIdx].portfolioValue;
 			growthRate = prevValue > 0
-				? (yearResult.portfolioValue / prevValue) - 1
-				: 0.08;
+				? (currValue / prevValue) - 1
+				: 0;
 		}
 
 		// Compound growth + new savings
@@ -72,10 +74,15 @@ export function computePersonalOutcome(
 	// Calculate monthly savings needed to close gap (if negative)
 	let monthlyNeededToClose = 0;
 	if (gap < 0 && displacementIdx > 0) {
+		// Compute average annual return from portfolio model
+		const yr0Val = portfolioResult.yearlyResults[0]?.portfolioValue ?? 0;
+		const yrNVal = portfolioResult.yearlyResults[displacementIdx]?.portfolioValue ?? yr0Val;
+		const avgReturn = yr0Val > 0 && displacementIdx > 0
+			? Math.pow(yrNVal / yr0Val, 1 / displacementIdx) - 1
+			: 0.06;
 		// Simple FV of annuity: gap = PMT * ((1+r)^n - 1) / r
-		// Solve for PMT
 		const yearsToDisplacement = displacementIdx;
-		const r = 0.08; // Approximate annual return
+		const r = Math.max(0.01, avgReturn);
 		const fvFactor = (Math.pow(1 + r, yearsToDisplacement) - 1) / r;
 		monthlyNeededToClose = fvFactor > 0 ? Math.abs(gap) / fvFactor / 12 : 0;
 	}
@@ -110,13 +117,29 @@ export function computePersonalOutcome(
 
 /**
  * Compute personal outcome for all 4 preset scenarios.
+ * If customParams + activePresetName provided, user's customizations
+ * (the diff from their active preset) are applied to all 4 scenarios.
  */
 export function computeAllScenarios(
-	personal: PersonalInputs
+	personal: PersonalInputs,
+	customParams?: ScenarioParams,
+	activePresetName?: PresetName
 ): PersonalOutcome[] {
 	return PRESET_ORDER.map((name) => {
 		const preset = PRESETS[name];
-		return computePersonalOutcome(personal, preset.params, preset.label);
+		let params = { ...preset.params };
+
+		// Apply user's slider customizations to all scenarios
+		if (customParams && activePresetName) {
+			const activeBase = PRESETS[activePresetName].params;
+			for (const key of Object.keys(activeBase) as (keyof ScenarioParams)[]) {
+				if (customParams[key] !== activeBase[key]) {
+					(params as any)[key] = customParams[key];
+				}
+			}
+		}
+
+		return computePersonalOutcome(personal, params, preset.label);
 	});
 }
 
