@@ -2,7 +2,7 @@
 
 An economic model exploring what happens when AI replaces human labor — and whether humans can sustain themselves as investors in AI-powered companies.
 
-**Live site:** [miclip.github.io/arewescrewed](https://miclip.github.io/arewescrewed/)
+**Live site:** [arewescrewed.ai](https://arewescrewed.ai)
 
 ## The Thesis
 
