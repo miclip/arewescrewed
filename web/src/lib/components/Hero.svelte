@@ -80,6 +80,6 @@
 				<svg viewBox="0 0 24 24" class="w-5 h-5 md:w-4 md:h-4 fill-none stroke-current" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
 			{/if}
 		</button>
-		<span class="text-xs text-text-muted uppercase tracking-wide">Misery loves company.</span>
+		<span class="text-xs text-text-muted uppercase tracking-wide">...or the hope.</span>
 	</div>
 </section>
