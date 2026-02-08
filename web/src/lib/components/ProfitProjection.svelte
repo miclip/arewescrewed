@@ -52,7 +52,7 @@
 			>
 				<Svg>
 					<Axis placement="left" format={(v) => `$${v.toFixed(0)}B`} />
-					<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+					<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 
 					<!-- New profit with AI savings (fill + line) -->
 					<Area />

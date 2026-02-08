@@ -145,7 +145,7 @@
 					>
 						<Svg>
 							<Axis placement="left" format={(v) => formatCompactNum(v)} />
-							<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+							<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 							<Spline data={originalHcData} x="year" y="value" stroke="rgba(56, 189, 248, 0.4)" strokeWidth={1} />
 							<Area />
 							<Spline stroke="#fb923c" strokeWidth={2} />
@@ -171,7 +171,7 @@
 					>
 						<Svg>
 							<Axis placement="left" format={(v) => `$${v.toFixed(0)}B`} />
-							<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+							<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 							<Spline data={baselineProfitData} x="year" y="value" stroke="rgba(248, 113, 113, 0.5)" strokeWidth={1} />
 							<Area />
 							<Spline stroke="#38bdf8" strokeWidth={2} />
@@ -201,7 +201,7 @@
 					>
 						<Svg>
 							<Axis placement="left" format={(v) => `$${v.toFixed(0)}B`} />
-							<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+							<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 							<Area />
 							<Spline stroke="#4ade80" strokeWidth={2} />
 							<Spline data={dystopiaRevenueData} x="year" y="value" stroke="#f87171" strokeWidth={2} />

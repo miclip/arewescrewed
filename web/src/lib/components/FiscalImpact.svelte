@@ -360,7 +360,7 @@
 					>
 						<Svg>
 							<Axis placement="left" format={(v) => '$' + v.toFixed(1) + 'T'} />
-							<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+							<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 
 							<!-- Baseline reference -->
 							<Spline
@@ -461,7 +461,7 @@
 					>
 						<Svg>
 							<Axis placement="left" format={(v) => '$' + v.toFixed(1) + 'T'} />
-							<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+							<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 
 							<!-- Baseline deficit (dashed) -->
 							<Spline
@@ -508,7 +508,7 @@
 					>
 						<Svg>
 							<Axis placement="left" format={(v) => '$' + v.toFixed(0) + 'T'} />
-							<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+							<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 
 							<!-- Baseline debt trajectory (gray) -->
 							<Spline
@@ -555,7 +555,7 @@
 					>
 						<Svg>
 							<Axis placement="left" format={(v) => v + '%'} />
-							<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+							<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 
 							<!-- 100% reference -->
 							<Spline

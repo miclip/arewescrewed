@@ -247,7 +247,7 @@
 				>
 					<Svg>
 						<Axis placement="left" format={(v) => formatCompact(v)} />
-						<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+						<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 
 						<!-- $1.875M target line (green) -->
 						<Spline
@@ -307,7 +307,7 @@
 				>
 					<Svg>
 						<Axis placement="left" format={(v) => formatCompact(v)} />
-						<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+						<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 
 						<!-- $75k target line (red, nominal) -->
 						<Spline
@@ -383,7 +383,7 @@
 				>
 					<Svg>
 						<Axis placement="left" format={(v) => v + '%'} />
-						<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+						<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 
 						<!-- Unlock year vertical (yellow) -->
 						<Spline

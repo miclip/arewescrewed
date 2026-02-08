@@ -45,7 +45,7 @@
 			>
 				<Svg>
 					<Axis placement="left" format={(v) => formatCompactNum(v)} />
-					<Axis placement="bottom" format={(v) => String(Math.round(v))} />
+					<Axis placement="bottom" ticks={5} format={(v) => String(Math.round(v))} />
 
 					<!-- Original headcount (dashed line) -->
 					<Spline
