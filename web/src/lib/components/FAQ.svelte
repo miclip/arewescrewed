@@ -86,15 +86,6 @@
 			]
 		},
 		{
-			category: 'The Bottom Line',
-			items: [
-				{
-					q: 'Bruh, I still don\'t get it. Am I screwed?',
-					a: 'Yes.'
-				}
-			]
-		},
-		{
 			category: 'Taking Action',
 			items: [
 				{
@@ -108,6 +99,15 @@
 				{
 					q: 'How much time do I have?',
 					a: 'It depends on your sector. Under the moderate scenario, warehouse and logistics workers face displacement around 2032-2035, while education and healthcare workers have until the 2040s. But the time to start building a portfolio is now — compound growth needs time to work. Every year of delay makes the required monthly savings significantly higher.'
+				}
+			]
+		},
+		{
+			category: 'The Bottom Line',
+			items: [
+				{
+					q: 'Bruh, I still don\'t get it. Am I screwed?',
+					a: 'Yes.'
 				}
 			]
 		}
