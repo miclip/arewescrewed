@@ -4,6 +4,7 @@
 	import { babyOutcome } from '$lib/stores/results';
 	import { babyInputs } from '$lib/stores/baby';
 	import { formatCompact } from '$lib/model/format';
+	import { BASE_INCOME_TARGET } from '$lib/model/baby-engine';
 	import type { BabyOutcome } from '$lib/model/baby-engine';
 
 	let outcome = $state<BabyOutcome | null>(null);
@@ -57,15 +58,15 @@
 	// Income chart data
 	let incomeData = $derived(outcome?.growthPath.map((p) => ({ year: p.year, age: p.age, value: p.income })) ?? []);
 	let maxIncome = $derived(
-		Math.max(75_000, ...incomeData.map((d) => d.value)) * 1.1
+		Math.max(BASE_INCOME_TARGET, ...incomeData.map((d) => d.value)) * 1.1
 	);
 
-	// $75k income target line
+	// Income target line
 	let incomeTargetData = $derived(
 		incomeData.length > 0
 			? [
-					{ year: incomeData[0].year, value: 75_000 },
-					{ year: incomeData[incomeData.length - 1].year, value: 75_000 }
+					{ year: incomeData[0].year, value: BASE_INCOME_TARGET },
+					{ year: incomeData[incomeData.length - 1].year, value: BASE_INCOME_TARGET }
 				]
 			: []
 	);
@@ -111,10 +112,11 @@
 	// Comparison: monthly savings needed starting at age 22 to reach same value at 30
 	let monthlySavingsComparison = $derived.by(() => {
 		if (!outcome || outcome.valueAt30 <= 0) return 0;
-		const r = 0.08;
-		const n = 8;
-		const fvFactor = (Math.pow(1 + r, n) - 1) / r;
-		return fvFactor > 0 ? outcome.valueAt30 / fvFactor / 12 : 0;
+		const annualRate = 0.08;
+		const months = 8 * 12;
+		const monthlyRate = annualRate / 12;
+		const fvFactorMonthly = (Math.pow(1 + monthlyRate, months) - 1) / monthlyRate;
+		return fvFactorMonthly > 0 ? outcome.valueAt30 / fvFactorMonthly : 0;
 	});
 
 	let costReductionAtUnlockPct = $derived(
@@ -181,7 +183,7 @@
 						<span class="text-xs text-text-muted">cost-adjusted</span>
 					</div>
 					<p class="text-xs text-text-muted mt-1">
-						Costs drop ~{costReductionAtUnlockPct}% by age 21 — $75k lifestyle only costs {formatCompact(75_000 * outcome.costFractionAtUnlock)}
+						Costs drop ~{costReductionAtUnlockPct}% by age 21 — $75k lifestyle only costs {formatCompact(BASE_INCOME_TARGET * outcome.costFractionAtUnlock)}
 					</p>
 				</div>
 			</div>

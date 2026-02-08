@@ -2,8 +2,8 @@ import type { ScenarioParams } from './types';
 import { PORTFOLIO_COMPANIES } from './companies';
 import { buildEqualWeightPortfolio, runPortfolioScenario } from './portfolio-engine';
 
-const WITHDRAWAL_RATE = 0.04;
-const BASE_INCOME_TARGET = 75_000;
+export const WITHDRAWAL_RATE = 0.04;
+export const BASE_INCOME_TARGET = 75_000;
 
 /** Smoothstep S-curve (same as scenario-engine) */
 function smoothstep(t: number): number {
@@ -27,7 +27,7 @@ export interface CostOfLivingPoint {
 	age: number;
 	/** Cost as fraction of today's cost (1.0 = no change, 0.6 = 40% cheaper) */
 	costFraction: number;
-	/** What $75k buys at reduced cost (effective purchasing power) */
+	/** Nominal income needed for today's $75k lifestyle at this cost level */
 	adjustedIncomeNeeded: number;
 }
 
@@ -87,40 +87,14 @@ export function computeBabyOutcome(
 		? costOfLivingPath[inputs.unlockAge].costFraction
 		: costOfLivingPath[costOfLivingPath.length - 1].costFraction;
 
-	if (inputs.giftAmount <= 0) {
-		const emptyPath: BabyGrowthPoint[] = [];
-		for (let yearIdx = 0; yearIdx <= params.yearsForward; yearIdx++) {
-			emptyPath.push({
-				year: birthYear + yearIdx,
-				age: yearIdx,
-				value: 0,
-				income: 0
-			});
-		}
-		return {
-			birthYear,
-			unlockYear,
-			giftAmount: inputs.giftAmount,
-			growthPath: emptyPath,
-			costOfLivingPath,
-			valueAtUnlock: 0,
-			annualIncomeAtUnlock: 0,
-			valueAt30: 0,
-			annualIncomeAt30: 0,
-			requiredFor75k: BASE_INCOME_TARGET / WITHDRAWAL_RATE,
-			giftNeededFor75k: 0,
-			giftNeededFor75kAdjusted: 0,
-			costFractionAtUnlock
-		};
-	}
-
 	// Get portfolio growth rates from the model
 	const allocations = buildEqualWeightPortfolio(PORTFOLIO_COMPANIES, 1_000_000);
 	const portfolioResult = runPortfolioScenario(params, scenarioName, allocations);
 
 	// Compound the gift amount using portfolio growth rates
 	const growthPath: BabyGrowthPoint[] = [];
-	let currentValue = inputs.giftAmount;
+	const effectiveGift = inputs.giftAmount > 0 ? inputs.giftAmount : 0;
+	let currentValue = effectiveGift;
 
 	// Also track compound multiplier to reverse-engineer required gift
 	let compoundMultiplier = 1.0;

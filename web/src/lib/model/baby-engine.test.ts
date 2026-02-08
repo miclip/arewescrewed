@@ -21,7 +21,7 @@ describe('baby-engine', () => {
 		expect(result.annualIncomeAtUnlock).toBeGreaterThan(0);
 	});
 
-	it('zero grant = zero outcome', () => {
+	it('zero grant = zero growth but valid giftNeeded values', () => {
 		const result = computeBabyOutcome(
 			{ giftAmount: 0, unlockAge: 21 },
 			PRESETS.moderate.params,
@@ -31,6 +31,9 @@ describe('baby-engine', () => {
 		expect(result.annualIncomeAtUnlock).toBe(0);
 		expect(result.valueAt30).toBe(0);
 		expect(result.growthPath.every((p) => p.value === 0)).toBe(true);
+		// giftNeeded should still be computed from growth rates, not zero
+		expect(result.giftNeededFor75k).toBeGreaterThan(0);
+		expect(result.giftNeededFor75kAdjusted).toBeGreaterThan(0);
 	});
 
 	it('all 4 presets produce valid results', () => {
