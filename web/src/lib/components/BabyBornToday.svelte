@@ -274,7 +274,7 @@
 				</Chart>
 				{/key}
 			</div>
-			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
+			<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 				<span class="flex items-center gap-1">
 					<span class="w-3 h-0.5 bg-accent inline-block"></span> Portfolio value
 				</span>
@@ -343,7 +343,7 @@
 				</Chart>
 				{/key}
 			</div>
-			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
+			<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 				<span class="flex items-center gap-1">
 					<span class="w-3 h-0.5 bg-green inline-block"></span> Annual income (4% SWR)
 				</span>
@@ -401,7 +401,7 @@
 				</Chart>
 				{/key}
 			</div>
-			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
+			<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 				<span class="flex items-center gap-1">
 					<span class="w-3 h-0.5 bg-orange inline-block"></span> Cost of living
 				</span>

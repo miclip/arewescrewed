@@ -72,7 +72,7 @@
 				</Svg>
 			</Chart>
 		</div>
-		<div class="flex gap-4 text-xs text-text-muted justify-center">
+		<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 			<span class="flex items-center gap-1">
 				<span class="w-3 h-0.5 bg-green inline-block"></span> Workers invest ({params ? Math.round(params.investorModelAdoption * 100) : 70}% adoption)
 			</span>

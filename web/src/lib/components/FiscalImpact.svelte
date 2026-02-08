@@ -419,7 +419,7 @@
 					</Chart>
 				{/key}
 			</div>
-			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
+			<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 				<span class="flex items-center gap-1">
 					<span class="w-3 h-0.5 bg-yellow inline-block"></span> Total revenue
 				</span>
@@ -478,7 +478,7 @@
 					</Chart>
 				{/key}
 			</div>
-			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
+			<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 				<span class="flex items-center gap-1">
 					<span class="w-3 h-0.5 bg-red inline-block"></span> Annual deficit (AI displacement)
 				</span>
@@ -525,7 +525,7 @@
 					</Chart>
 				{/key}
 			</div>
-			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
+			<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 				<span class="flex items-center gap-1">
 					<span class="w-3 h-0.5 bg-yellow inline-block"></span> National debt (AI displacement)
 				</span>
@@ -581,7 +581,7 @@
 					</Chart>
 				{/key}
 			</div>
-			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
+			<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 				<span class="flex items-center gap-1">
 					<span class="w-3 h-0.5 bg-orange inline-block"></span> Debt-to-GDP
 				</span>

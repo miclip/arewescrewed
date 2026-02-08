@@ -44,6 +44,13 @@ svg text {
 	fill: var(--color-text-muted) !important;
 }
 
+/* Shrink axis tick labels on small screens to prevent overlap */
+@media (max-width: 640px) {
+	svg text {
+		font-size: 10px !important;
+	}
+}
+
 svg .tick line,
 svg .domain {
 	stroke: var(--color-bg-input) !important;

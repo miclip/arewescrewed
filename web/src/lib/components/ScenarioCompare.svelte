@@ -66,7 +66,7 @@
 				</Svg>
 			</Chart>
 		</div>
-		<div class="flex flex-wrap gap-3 text-xs text-text-muted justify-center">
+		<div class="flex flex-wrap gap-2 sm:gap-3 text-xs text-text-muted justify-center">
 			{#each PRESET_ORDER as name, i}
 				{@const outcome = outcomes[i]}
 				<span class="flex items-center gap-1">

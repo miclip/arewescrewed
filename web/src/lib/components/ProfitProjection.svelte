@@ -69,7 +69,7 @@
 				</Svg>
 			</Chart>
 		</div>
-		<div class="flex gap-4 text-xs text-text-muted justify-center">
+		<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 			<span class="flex items-center gap-1">
 				<span class="w-3 h-0.5 bg-accent inline-block"></span> With AI savings
 			</span>
