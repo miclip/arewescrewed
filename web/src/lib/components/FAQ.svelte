@@ -90,11 +90,11 @@
 			items: [
 				{
 					q: 'What should I actually do?',
-					a: 'First, understand your timeline: check the "Your Outlook" tab with your actual numbers. Second, start or increase investing now — time in the market matters more than timing. Third, diversify across sectors that benefit from AI (the 10-company portfolio is a starting point). Fourth, build skills that complement AI rather than compete with it. Fifth, stay informed — the timeline is uncertain, but the direction is clear.'
+					a: 'This isn\'t financial advice — we\'re not qualified to give any. But the model does highlight a few things worth thinking about: understanding your displacement timeline (try the "Your Outlook" tab with your numbers), thinking about how your skills relate to AI, and generally being aware that the economic landscape is shifting. What you do with that information is up to you and probably a conversation worth having with an actual financial advisor.'
 				},
 				{
 					q: 'What investments should I consider?',
-					a: 'This model is not financial advice. But the logic suggests diversified exposure to companies that benefit from AI automation across multiple sectors — tech, healthcare, consumer goods, finance, energy. Index funds that track the S&P 500 or total market are a simple way to get broad exposure. The 10-company portfolio in this model (NVDA, MSFT, AAPL, GOOGL, AMZN, META, JPM, JNJ, PG, XOM) is illustrative, not a recommendation.'
+					a: 'Talk to a financial advisor — seriously. This model explores an economic thesis, it doesn\'t recommend specific investments. The 10-company portfolio (NVDA, MSFT, AAPL, GOOGL, AMZN, META, JPM, JNJ, PG, XOM) is used to illustrate the model\'s mechanics, not as a recommendation. Your actual investment strategy should account for your full financial picture, risk tolerance, and tax situation — none of which this website knows anything about.'
 				},
 				{
 					q: 'How much time do I have?',
