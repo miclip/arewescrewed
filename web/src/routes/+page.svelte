@@ -72,20 +72,20 @@
 				Explore Companies
 			</button>
 			<button
-				onclick={() => (activeTab = 'faq')}
-				class="px-5 py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'faq'
-					? 'border-accent text-accent'
-					: 'border-transparent text-text-muted hover:text-text'}"
-			>
-				FAQ
-			</button>
-			<button
 				onclick={() => (activeTab = 'assumptions')}
 				class="px-5 py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'assumptions'
 					? 'border-accent text-accent'
 					: 'border-transparent text-text-muted hover:text-text'}"
 			>
 				Assumptions
+			</button>
+			<button
+				onclick={() => (activeTab = 'faq')}
+				class="px-5 py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'faq'
+					? 'border-accent text-accent'
+					: 'border-transparent text-text-muted hover:text-text'}"
+			>
+				FAQ
 			</button>
 		</div>
 	</div>
