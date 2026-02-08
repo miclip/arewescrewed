@@ -78,4 +78,55 @@ describe('scenario-engine', () => {
 			}
 		}
 	});
+
+	it('dystopia (investorModelAdoption=0) causes revenue to collapse', () => {
+		const dystopiaParams = { ...PRESETS.moderate.params, investorModelAdoption: 0 };
+		const dystopia = runScenario(dystopiaParams, amazon);
+		const normal = runScenario(PRESETS.moderate.params, amazon);
+		// By year 20, dystopia revenue should be significantly lower
+		expect(dystopia[20].adjustedRevenue).toBeLessThan(normal[20].adjustedRevenue * 0.7);
+		// Revenue growth should be severely dampened vs normal
+		expect(dystopia[30].adjustedRevenue).toBeLessThan(normal[30].adjustedRevenue * 0.6);
+	});
+
+	it('essentialsFloor=0 allows complete demand collapse in dystopia', () => {
+		const params = { ...PRESETS.extreme.params, investorModelAdoption: 0, essentialsFloor: 0 };
+		const result = runScenario(params, amazon);
+		// With no floor and no investor model, demand should approach zero
+		const lastAdj = result[30].adjustedRevenue;
+		const firstAdj = result[0].adjustedRevenue;
+		expect(lastAdj).toBeLessThan(firstAdj * 0.2);
+	});
+
+	it('wageShareOfSpending=1.0 causes maximum demand impact', () => {
+		const highWage = { ...PRESETS.moderate.params, wageShareOfSpending: 1.0, investorModelAdoption: 0 };
+		const lowWage = { ...PRESETS.moderate.params, wageShareOfSpending: 0.5, investorModelAdoption: 0 };
+		const highResult = runScenario(highWage, amazon);
+		const lowResult = runScenario(lowWage, amazon);
+		// Higher wage share = bigger demand hit when workers are displaced
+		expect(highResult[20].adjustedRevenue).toBeLessThan(lowResult[20].adjustedRevenue);
+	});
+
+	it('supply chain savings grow with displacement ramp', () => {
+		const result = runScenario(PRESETS.moderate.params, amazon);
+		// Year 0: no supply chain savings yet
+		expect(result[0].supplyChainSavings).toBe(0);
+		// Year 15: substantial savings
+		expect(result[15].supplyChainSavings).toBeGreaterThan(0);
+		// Savings increase as ramp progresses
+		expect(result[15].supplyChainSavings).toBeGreaterThan(result[5].supplyChainSavings);
+	});
+
+	it('conservative scenario has less displacement than extreme', () => {
+		const conservative = runScenario(PRESETS.conservative.params, amazon);
+		const extreme = runScenario(PRESETS.extreme.params, amazon);
+		expect(conservative[15].replacedWorkers).toBeLessThan(extreme[15].replacedWorkers);
+		expect(conservative[30].replacedWorkers).toBeLessThan(extreme[30].replacedWorkers);
+	});
+
+	it('profit margin improves with AI adoption', () => {
+		const result = runScenario(PRESETS.moderate.params, amazon);
+		// By year 20, new profit margin should exceed original
+		expect(result[20].profitMarginNew).toBeGreaterThan(result[0].profitMarginNew);
+	});
 });

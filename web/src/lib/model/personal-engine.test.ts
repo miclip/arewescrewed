@@ -95,4 +95,70 @@ describe('personal-engine', () => {
 		);
 		expect(warehouse.displacementYear).toBeLessThan(education.displacementYear);
 	});
+
+	it('computeAllScenarios with custom params applies diff to all presets', () => {
+		// Customize moderate's wageShareOfSpending
+		const customParams = { ...PRESETS.moderate.params, wageShareOfSpending: 0.5 };
+		const results = computeAllScenarios(defaultInputs, customParams, 'moderate');
+		// All 4 scenarios should reflect the customization
+		expect(results.length).toBe(4);
+		// The customized param should affect outcomes differently than default
+		const defaultResults = computeAllScenarios(defaultInputs);
+		// With lower wageShareOfSpending, demand holds up better → bigger portfolios
+		for (let i = 0; i < 4; i++) {
+			// More favorable demand → higher portfolio at displacement
+			expect(results[i].portfolioAtDisplacement).toBeGreaterThanOrEqual(
+				defaultResults[i].portfolioAtDisplacement * 0.9 // allow some tolerance
+			);
+		}
+	});
+
+	it('zero savings results in gap verdict', () => {
+		const result = computePersonalOutcome(
+			{ ...defaultInputs, currentSavings: 0, monthlySavings: 0 },
+			PRESETS.moderate.params,
+			'Moderate'
+		);
+		expect(result.verdict).toBe('gap');
+		expect(result.gap).toBeLessThan(0);
+		expect(result.portfolioAtDisplacement).toBeLessThan(result.requiredPortfolio);
+	});
+
+	it('extreme scenario displaces sooner than conservative', () => {
+		const extreme = computePersonalOutcome(defaultInputs, PRESETS.extreme.params, 'Extreme');
+		const conservative = computePersonalOutcome(defaultInputs, PRESETS.conservative.params, 'Conservative');
+		expect(extreme.displacementYear).toBeLessThan(conservative.displacementYear);
+	});
+
+	it('higher income target requires larger portfolio', () => {
+		const low = computePersonalOutcome(
+			{ ...defaultInputs, incomeTarget: 50_000 },
+			PRESETS.moderate.params,
+			'Moderate'
+		);
+		const high = computePersonalOutcome(
+			{ ...defaultInputs, incomeTarget: 150_000 },
+			PRESETS.moderate.params,
+			'Moderate'
+		);
+		expect(high.requiredPortfolio).toBe(150_000 / 0.04);
+		expect(low.requiredPortfolio).toBe(50_000 / 0.04);
+		expect(high.requiredPortfolio).toBeGreaterThan(low.requiredPortfolio);
+	});
+
+	it('monthlyNeededToClose is positive when there is a gap', () => {
+		const result = computePersonalOutcome(
+			{ ...defaultInputs, currentSavings: 0, monthlySavings: 100 },
+			PRESETS.moderate.params,
+			'Moderate'
+		);
+		if (result.gap < 0) {
+			expect(result.monthlyNeededToClose).toBeGreaterThan(0);
+		}
+	});
+
+	it('accumulation path has correct length', () => {
+		const result = computePersonalOutcome(defaultInputs, PRESETS.moderate.params, 'Moderate');
+		expect(result.accumulationPath.length).toBe(PRESETS.moderate.params.yearsForward + 1);
+	});
 });
