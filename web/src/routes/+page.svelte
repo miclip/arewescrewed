@@ -12,6 +12,7 @@
 	import KeyMetrics from '$lib/components/KeyMetrics.svelte';
 	import CorporateView from '$lib/components/CorporateView.svelte';
 	import CompanyExplorer from '$lib/components/CompanyExplorer.svelte';
+	import BabyBornToday from '$lib/components/BabyBornToday.svelte';
 	import FAQ from '$lib/components/FAQ.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import { personalInputs } from '$lib/stores/personal';
@@ -21,7 +22,7 @@
 	import { PRESETS, type PresetName } from '$lib/model/presets';
 	import { browser } from '$app/environment';
 
-	let activeTab = $state<'corporate' | 'personal' | 'explore' | 'assumptions' | 'faq'>('corporate');
+	let activeTab = $state<'corporate' | 'personal' | 'explore' | 'baby' | 'assumptions' | 'faq'>('corporate');
 
 	onMount(() => {
 		if (!browser) return;
@@ -72,6 +73,14 @@
 				Explore Companies
 			</button>
 			<button
+				onclick={() => (activeTab = 'baby')}
+				class="px-5 py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'baby'
+					? 'border-accent text-accent'
+					: 'border-transparent text-text-muted hover:text-text'}"
+			>
+				Baby Born Today
+			</button>
+			<button
 				onclick={() => (activeTab = 'assumptions')}
 				class="px-5 py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'assumptions'
 					? 'border-accent text-accent'
@@ -116,6 +125,11 @@
 			<!-- Company explorer -->
 			<div class="max-w-5xl mx-auto">
 				<CompanyExplorer />
+			</div>
+		{:else if activeTab === 'baby'}
+			<!-- Baby Born Today -->
+			<div class="max-w-5xl mx-auto">
+				<BabyBornToday />
 			</div>
 		{:else if activeTab === 'faq'}
 			<!-- FAQ -->

@@ -1,9 +1,5 @@
 import type { ScenarioParams, YearProjection, CompanyProfile } from './types';
-
-/** Smoothstep S-curve: slow start, fast middle, slow end */
-function smoothstep(t: number): number {
-	return t * t * (3 - 2 * t);
-}
+import { smoothstep } from './math';
 
 /**
  * Run a scenario projection for a company.

@@ -1,7 +1,9 @@
 import { derived } from 'svelte/store';
 import { personalInputs } from './personal';
+import { babyInputs } from './baby';
 import { scenarioParams, activePreset } from './scenario';
 import { computePersonalOutcome, computeAllScenarios } from '$lib/model/personal-engine';
+import { computeBabyOutcome } from '$lib/model/baby-engine';
 import { buildEqualWeightPortfolio, runPortfolioScenario } from '$lib/model/portfolio-engine';
 import { runScenario } from '$lib/model/scenario-engine';
 import { PORTFOLIO_COMPANIES } from '$lib/model/companies';
@@ -59,5 +61,13 @@ export const amazonDystopiaProjections = derived(
 		const amazon = PORTFOLIO_COMPANIES.find((c) => c.ticker === 'AMZN')!;
 		const dystopiaParams = { ...$params, investorModelAdoption: 0 };
 		return runScenario(dystopiaParams, amazon);
+	}
+);
+
+/** Baby investment outcome for current scenario — reuses portfolioResult to avoid redundant computation */
+export const babyOutcome = derived(
+	[babyInputs, scenarioParams, portfolioResult],
+	([$baby, $params, $portfolio]) => {
+		return computeBabyOutcome($baby, $params, $portfolio);
 	}
 );
