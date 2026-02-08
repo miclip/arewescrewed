@@ -5,7 +5,6 @@ import {
 	type FiscalParams
 } from './fiscal-engine';
 import { runScenario } from './scenario-engine';
-import { buildEqualWeightPortfolio, runPortfolioScenario } from './portfolio-engine';
 import { PORTFOLIO_COMPANIES } from './companies';
 import { PRESETS, PRESET_ORDER } from './presets';
 import type { ScenarioParams } from './types';
@@ -15,10 +14,8 @@ function runFiscalForPreset(presetName: keyof typeof PRESETS, overrides?: Partia
 	const params = PRESETS[presetName].params;
 	const companies = PORTFOLIO_COMPANIES;
 	const companyProjections = companies.map((c) => runScenario(params, c));
-	const allocations = buildEqualWeightPortfolio(companies, 1_000_000);
-	const portfolioResult = runPortfolioScenario(params, PRESETS[presetName].label, allocations);
 	const fiscalParams = { ...DEFAULT_FISCAL_PARAMS, ...overrides };
-	return computeFiscalProjection(companyProjections, companies, params, portfolioResult, fiscalParams);
+	return computeFiscalProjection(companyProjections, companies, params, fiscalParams);
 }
 
 describe('fiscal-engine', () => {
@@ -98,13 +95,10 @@ describe('fiscal-engine', () => {
 		const params: ScenarioParams = { ...PRESETS.moderate.params, investorModelAdoption: 1.0 };
 		const companies = PORTFOLIO_COMPANIES;
 		const companyProjections = companies.map((c) => runScenario(params, c));
-		const allocations = buildEqualWeightPortfolio(companies, 1_000_000);
-		const portfolioResult = runPortfolioScenario(params, 'Full Adoption', allocations);
 		const result = computeFiscalProjection(
 			companyProjections,
 			companies,
 			params,
-			portfolioResult,
 			DEFAULT_FISCAL_PARAMS
 		);
 		// With 100% adoption, all displaced workers become investors — zero unemployed

@@ -74,14 +74,20 @@ export const babyOutcome = derived(
 	}
 );
 
-/** Fiscal impact projection for current scenario */
-export const fiscalResult = derived(
-	[scenarioParams, activePreset, fiscalParams],
-	([$params, $preset, $fiscal]) => {
+/** Fiscal base data — company projections cached by scenario (not recomputed on tax slider changes) */
+const fiscalBaseData = derived(
+	[scenarioParams, activePreset],
+	([$params, $preset]) => {
 		const companies = PORTFOLIO_COMPANIES;
 		const companyProjections = companies.map((c) => runScenario($params, c));
-		const allocations = buildEqualWeightPortfolio(companies, 1_000_000);
-		const portfolio = runPortfolioScenario($params, PRESETS[$preset].label, allocations);
-		return computeFiscalProjection(companyProjections, companies, $params, portfolio, $fiscal);
+		return { companyProjections, companies, params: $params };
+	}
+);
+
+/** Fiscal impact projection — only reruns fiscal math when tax params change */
+export const fiscalResult = derived(
+	[fiscalBaseData, fiscalParams],
+	([$base, $fiscal]) => {
+		return computeFiscalProjection($base.companyProjections, $base.companies, $base.params, $fiscal);
 	}
 );

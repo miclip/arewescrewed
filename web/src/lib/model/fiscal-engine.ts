@@ -1,5 +1,4 @@
 import type { ScenarioParams, YearProjection, CompanyProfile } from './types';
-import type { PortfolioResult } from './types';
 
 /** Smoothstep S-curve (same as scenario-engine) */
 function smoothstep(t: number): number {
@@ -84,7 +83,6 @@ export function computeFiscalProjection(
 	companyProjections: YearProjection[][],
 	companies: CompanyProfile[],
 	scenarioParams: ScenarioParams,
-	portfolioResult: PortfolioResult,
 	fiscalParams: FiscalParams
 ): FiscalResult {
 	const numYears = scenarioParams.yearsForward + 1;
