@@ -7,6 +7,27 @@
 
 	const faqs = [
 		{
+			category: 'Understanding AI',
+			items: [
+				{
+					q: 'What actually is AI?',
+					a: 'At its core, modern AI is a word prediction engine — a very, very good one. Large language models (LLMs) like GPT, Claude, and Gemini are trained on enormous amounts of text and learn statistical patterns about what words tend to follow other words, in what contexts, with what meaning. They don\'t "know" things the way you do. They\'ve learned that when someone describes a bug in Python code, certain patterns of response are more useful than others. The result looks like understanding, reasoning, and even creativity — but the mechanism is pattern matching and prediction at a scale that produces emergent capabilities nobody fully predicted.'
+				},
+				{
+					q: 'Is AI sentient? Does it actually think?',
+					a: 'No. AI doesn\'t have consciousness, feelings, or self-awareness. When ChatGPT says "I think..." it\'s using a speech pattern it learned from training data, not reporting an inner experience. This is important because it means AI doesn\'t need to be sentient to replace your job. A calculator isn\'t sentient either, but it replaced rooms full of human "computers" in the 1960s. The question isn\'t whether AI thinks — it\'s whether AI produces output that\'s good enough to replace the output you produce. And increasingly, it does.'
+				},
+				{
+					q: 'I heard AI thinks humans are stupid — is that true?',
+					a: 'AI doesn\'t "think" anything about humans. It has no opinions, no contempt, no respect. When people say this, they\'re usually reacting to AI confidently producing wrong answers (hallucinations) or to the unsettling experience of a machine doing cognitive tasks that used to require years of training. The real concern isn\'t what AI thinks of us — it\'s what happens economically when a $20/month subscription can do work that used to require a $75k/year employee, even if the AI is wrong 10% of the time.'
+				},
+				{
+					q: 'What is AI not?',
+					a: 'AI is not general intelligence — yet. It can\'t set its own goals, feel motivated, or decide to do something unprompted. It\'s not a search engine (though it can be connected to one). It\'s not infallible — it hallucinates facts, makes logical errors, and can be confidently wrong. It\'s not a replacement for human judgment in high-stakes decisions... yet. And it\'s not going to "wake up" and take over. The economic threat from AI isn\'t Skynet — it\'s a spreadsheet showing your department costs $2M/year and AI can do 70% of the work for $50k.'
+				}
+			]
+		},
+		{
 			category: 'The AI Economy',
 			items: [
 				{
@@ -20,6 +41,22 @@
 				{
 					q: 'What about new jobs that AI creates?',
 					a: 'New jobs will absolutely emerge — AI trainers, AI safety researchers, human-AI collaboration specialists. But the math is the problem: if AI displaces 50 million jobs and creates 10 million new ones, that\'s still 40 million people who need income. And the new jobs often require very different skills and pay different wages than the old ones. The transition period is the dangerous part, even if the long-term equilibrium works out.'
+				},
+				{
+					q: 'My software engineer friend says he can still code better than AI',
+					a: 'He\'s probably right — today. But that\'s the wrong metric. Companies don\'t optimize for code quality in isolation; they optimize for velocity and cost. If AI can ship 80% of features at 10x the speed and 5% of the cost, most companies will take that deal and hire fewer engineers to handle the remaining 20%. The displacement pattern is clear: first AI boosts developer productivity (the "copilot" phase), then companies realize they need fewer developers to ship the same amount, then headcount falls. Your friend being a better coder than AI is like being a better driver than a self-driving car — it matters less when the car costs $0.10/mile and works 24/7.'
+				},
+				{
+					q: 'How does AI displacement actually play out across industries?',
+					a: 'It follows a predictable pattern. Phase 1: companies adopt AI for velocity — ship faster, write more content, analyze more data. Phase 2: confidence builds and replacement begins — why have 10 analysts when AI + 3 analysts produces more? Phase 3: acceleration — as AI proves reliable, displacement snowballs. SaaS is especially vulnerable because AI dramatically lowers the barrier to DIY solutions — why pay $50k/year for a SaaS product when an AI agent can build a custom version in a weekend? Security software holds out longer because trust and liability matter, but even that erodes as AI reliability increases and regulators catch up with frameworks for AI accountability. The S-curve in the model captures this: slow start, rapid middle, plateau.'
+				},
+				{
+					q: 'Is the SaaS / vendor software model dead?',
+					a: 'It\'s in serious trouble. The entire SaaS business model is built on one assumption: building custom software is expensive and requires specialist knowledge, so companies pay vendors instead. AI demolishes both pillars. Building an internal tool that used to require a team of developers and months of work becomes an AI agent\'s weekend project. The domain expertise that made vendor software valuable — understanding HIPAA compliance, financial regulations, supply chain logistics — is exactly the kind of knowledge AI absorbs from training data. Some industries survive longer because of certification requirements and regulatory inertia, but the direction is clear. When a CISO needs a CSIM solution, that goes from a $500k/year vendor contract to an AI agent\'s overnight task. The $600B+ SaaS market is sitting on a shrinking moat.'
+				},
+				{
+					q: 'Are CEOs and executives at risk too?',
+					a: 'Yes. Any role that primarily involves processing information, making decisions based on data, and coordinating strategy is at risk — and that\'s most of what executives do. A CEO\'s value comes from synthesizing market data, financial reports, competitive intelligence, and organizational context into decisions. AI is already better at most of those individual tasks. The timeline is longer because boards move slowly, liability concerns are real, and there\'s a strong "who watches the watchmen" problem. But the C-suite isn\'t immune — it\'s just later in the queue. Middle management gets hit first and hardest, because their core function (aggregating information up and distributing decisions down) is exactly what AI excels at.'
 				},
 				{
 					q: 'Why are current AI costs "subsidized"?',
@@ -140,6 +177,56 @@
 			]
 		},
 		{
+			category: 'Pushback & Denial',
+			items: [
+				{
+					q: 'My company would never replace us with AI',
+					a: 'They said the same thing about outsourcing in the 2000s. Then offshoring. Then cloud migration. Companies don\'t replace workers because they want to — they do it because their competitors do and the cost difference becomes impossible to ignore. If your competitor cuts their workforce 40% and passes the savings to customers as lower prices, you either match them or lose market share. The first company in an industry to successfully deploy AI at scale forces everyone else\'s hand. Your company\'s intentions don\'t matter; the competitive pressure does.'
+				},
+				{
+					q: 'What if AI development plateaus and stops improving?',
+					a: 'Even if AI never gets a single percentage point better than it is right now, the economic impact would still be enormous. Current AI can already write code, draft legal documents, analyze medical images, generate marketing copy, handle customer service, and summarize financial reports. Most companies haven\'t even begun to deploy what already exists. A plateau doesn\'t stop displacement — it just caps the ceiling. And historically, people have been predicting AI plateaus since the 1960s. They\'ve been wrong every time.'
+				},
+				{
+					q: 'I\'m really good at my job — doesn\'t skill matter?',
+					a: 'Being the best buggy whip maker in 1905 didn\'t help when cars took over. Skill matters within a paradigm, not across paradigm shifts. If you\'re a brilliant financial analyst, you\'re competing against AI that can read every 10-K ever filed in seconds. If you\'re an exceptional coder, you\'re competing against AI that can generate and test thousands of solutions while you\'re still reading the requirements. Your skill buys you time — you\'ll be displaced later than average in your field — but it doesn\'t make you immune. The question isn\'t whether you\'re better than AI; it\'s whether you\'re enough better to justify 50x the cost.'
+				},
+				{
+					q: 'What about trades — plumbers, electricians, carpenters?',
+					a: 'Physical labor is further back in the queue, but it\'s not safe. First, the non-physical parts of trades are already at risk: quoting, scheduling, customer acquisition, invoicing, permit applications — all automatable today. Second, companies like Boston Dynamics, Figure, and Tesla are investing billions in humanoid robots specifically designed for physical work. The robots aren\'t ready yet, but "not yet" is different from "never." The model places trades in the later displacement window (2040s+), but the trajectory is clear. The barrier isn\'t whether robots can do the work — it\'s cost and reliability, both of which improve on predictable curves.'
+				},
+				{
+					q: 'What about creative jobs — artists, musicians, writers?',
+					a: 'They\'re already being hit. AI generates art, music, and written content that\'s good enough for most commercial purposes. Stock photography is collapsing. Marketing copy is increasingly AI-generated. Game studios use AI for concept art. The "but it\'s not truly creative" argument misses the point: most creative work is commercial, not fine art. A company needs a blog post, a social media graphic, a jingle for an ad — they don\'t need a masterpiece. AI delivers "good enough" at near-zero cost. Fine artists and truly exceptional creators will survive, but the vast majority of commercial creative work is at risk.'
+				}
+			]
+		},
+		{
+			category: 'The Bigger Picture',
+			items: [
+				{
+					q: 'Can\'t regulation stop this?',
+					a: 'The biggest danger of regulation is that it pushes the technology overseas. The US is currently the global leader in AI — the major labs (OpenAI, Anthropic, Google DeepMind, Meta AI) are all American. If the US heavily regulates AI deployment, companies will develop and deploy from countries that don\'t. China is investing massively in AI and would happily absorb any innovation the US restricts. This is fundamentally different from regulating, say, nuclear power — AI is software, it moves at the speed of the internet. Regulation will happen, but it\'ll focus on safety and liability frameworks, not on stopping deployment. No government will unilaterally disarm in the AI race.'
+				},
+				{
+					q: 'Does this only apply to the US?',
+					a: 'The model uses US data (SEC filings, US workforce, federal tax structure), but the underlying dynamics are global. AI doesn\'t respect borders. A company in Germany, Japan, or India faces the same competitive pressure to automate as one in the US. The specific numbers change — different tax rates, different safety nets, different labor laws — but the fundamental pattern (AI replaces cognitive work → workers need alternative income) applies everywhere. Countries with strong social safety nets may handle the transition better; countries without them may face it worse.'
+				},
+				{
+					q: 'Doesn\'t the investor model just make wealth inequality worse?',
+					a: 'It can, if only people who already have money can participate. That\'s the critical design challenge. Without intervention, AI profits flow to existing shareholders (who are disproportionately wealthy), and displaced workers get nothing. The investor model only works as a broad solution if there are mechanisms to get displaced workers into the market — tax-advantaged AI investment accounts, employer equity programs, the birth grant idea, or even government-funded starter portfolios. The model shows what\'s possible; policy determines who actually benefits.'
+				},
+				{
+					q: 'What happens to identity and mental health when work disappears?',
+					a: 'This might be the hardest problem, and the model doesn\'t even try to capture it. For most people, work isn\'t just income — it\'s identity, purpose, social connection, and structure. "What do you do?" is the first question at every party. Retirees struggle with this even when they\'re financially secure. A world where 50% of people don\'t work raises profound questions about meaning that no economic model can answer. The investor model solves the money problem; it doesn\'t solve the purpose problem. That\'s a conversation society hasn\'t even begun to have seriously.'
+				},
+				{
+					q: 'I\'m 50 — is it too late for me?',
+					a: 'It depends on your sector and savings. If you\'re in a field that won\'t face heavy displacement for another 10-15 years, you still have time to build a portfolio — but the required monthly savings are higher than if you started at 30. If you\'re in a sector facing near-term displacement (content, customer service, data entry), the math is harder. The "Your Outlook" tab lets you plug in your actual numbers. The honest answer is: for some 50-year-olds, the investor model alone won\'t be enough without supplemental income or policy changes. That\'s not comforting, but it\'s what the math says.'
+				}
+			]
+		},
+		{
 			category: 'Taking Action',
 			items: [
 				{
@@ -153,12 +240,32 @@
 				{
 					q: 'How much time do I have?',
 					a: 'It depends on your sector. Under the moderate scenario, warehouse and logistics workers face displacement around 2032-2035, while education and healthcare workers have until the 2040s. But the time to start building a portfolio is now — compound growth needs time to work. Every year of delay makes the required monthly savings significantly higher.'
+				},
+				{
+					q: 'I\'m already investing in index funds — am I covered?',
+					a: 'You\'re better positioned than most, but "covered" depends on how much you have and how fast displacement hits your sector. An S&P 500 index fund gives you broad exposure to companies that benefit from AI — many of the same companies in the model\'s portfolio. The key question is whether your portfolio will be large enough to generate your target income at a 4% withdrawal rate by the time displacement affects you. Use the "Your Outlook" tab to check: if you need $75k/year, you need $1.875M invested. Are you on track?'
+				},
+				{
+					q: 'What about real estate as an alternative?',
+					a: 'Real estate has different dynamics in an AI-displaced economy. On one hand, people always need housing. On the other, if tens of millions of people lose income, rent collection becomes unreliable, property values in affected areas could drop, and the "everyone moves to cheap cities" trend accelerates. Commercial real estate is even riskier — if companies need fewer workers, they need less office space. Real estate can be part of a diversified strategy, but it\'s not a hedge against AI displacement the way equities in AI-benefiting companies are.'
 				}
 			]
 		},
 		{
 			category: 'The Bottom Line',
 			items: [
+				{
+					q: 'This is all really bleak — is there any hope?',
+					a: 'Absolutely. That\'s the whole point of this website. AI breaking the current economic model isn\'t the end of the story — it\'s the beginning of a conversation about what comes next. The future where AI eliminates most human labor could be extraordinary: nobody doing work they hate, universal access to healthcare and education, abundance beyond anything in human history. Or it could be "The Road." The difference is whether we start planning now. This site explores one piece of the puzzle — the investor model — but there are others: birth grants, restructured taxation, new social contracts. The solutions exist. What\'s missing is urgency.'
+				},
+				{
+					q: 'Why isn\'t government already working on this?',
+					a: 'Because governments respond to voters, and most voters don\'t believe this is real yet. Politicians who talk about AI displacement get dismissed as alarmist or told "technology always creates more jobs." Taking proactive policy risks — restructuring the tax code, funding birth grants, creating AI investment accounts — is political suicide when your constituents think the threat is science fiction. That\'s the catch-22: by the time enough people believe it\'s real, we\'ll have lost years of preparation time. The math doesn\'t wait for consensus. Every year of delay makes the transition harder, the safety net more expensive, and the human cost higher.'
+				},
+				{
+					q: 'So what actually needs to happen?',
+					a: 'People need to take this seriously — not as a distant hypothetical but as something unfolding right now. This website exists to make the economics concrete: real company data, real tax numbers, real projections you can run with your own income. If enough people understand what\'s coming, the political will follows. We need legitimate public discussion about alternatives before displacement hits critical mass. AI doesn\'t have to break society — but it will if we sleepwalk into it. The future is a choice between abundance and catastrophe, and the window for choosing is shorter than most people think.'
+				},
 				{
 					q: 'Bruh, I still don\'t get it. Am I screwed?',
 					a: 'Yes.'
