@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { Chart, Svg, Area, Axis, Spline } from 'layerchart';
 	import { scaleLinear } from 'd3-scale';
-	import { portfolioResult } from '$lib/stores/results';
+	import { personalOutcome } from '$lib/stores/results';
 	import { personalInputs } from '$lib/stores/personal';
 	import { formatCompact } from '$lib/model/format';
-	import type { PortfolioResult } from '$lib/model/types';
+	import type { PersonalOutcome } from '$lib/model/types';
 
-	let result = $state<PortfolioResult | null>(null);
+	let outcome = $state<PersonalOutcome | null>(null);
 	let income = $state(75_000);
 
 	$effect(() => {
-		const unsub = portfolioResult.subscribe((v) => { result = v; });
+		const unsub = personalOutcome.subscribe((v) => { outcome = v; });
 		return unsub;
 	});
 	$effect(() => {
@@ -18,14 +18,11 @@
 		return unsub;
 	});
 
-	// Scale portfolio income proportional to user's required portfolio vs $1M base
-	let requiredPortfolio = $derived(income / 0.04);
-	let scaleFactor = $derived(requiredPortfolio / 1_000_000);
-
+	// Portfolio income = accumulated portfolio value × 4% SWR each year
 	let incomeData = $derived(
-		result?.yearlyResults.map((yr) => ({
-			year: yr.year,
-			value: yr.totalIncome * scaleFactor
+		outcome?.accumulationPath.map((pt) => ({
+			year: pt.year,
+			value: pt.value * 0.04
 		})) ?? []
 	);
 
@@ -99,7 +96,7 @@
 		</div>
 		<div class="flex gap-4 text-xs text-text-muted justify-center">
 			<span class="flex items-center gap-1">
-				<span class="w-3 h-0.5 bg-green inline-block"></span> Portfolio income
+				<span class="w-3 h-0.5 bg-green inline-block"></span> Portfolio income (4% SWR)
 			</span>
 			<span class="flex items-center gap-1">
 				<span class="w-3 h-0.5 bg-red inline-block"></span> Target: {formatCompact(income)}/yr

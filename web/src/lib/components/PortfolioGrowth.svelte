@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { Chart, Svg, Area, Axis, Spline } from 'layerchart';
 	import { scaleLinear } from 'd3-scale';
-	import { portfolioResult } from '$lib/stores/results';
+	import { personalOutcome } from '$lib/stores/results';
 	import { personalInputs } from '$lib/stores/personal';
 	import { formatCompact } from '$lib/model/format';
-	import type { PortfolioResult } from '$lib/model/types';
+	import type { PersonalOutcome } from '$lib/model/types';
 
-	let result = $state<PortfolioResult | null>(null);
+	let outcome = $state<PersonalOutcome | null>(null);
 	let income = $state(75_000);
 
 	$effect(() => {
-		const unsub = portfolioResult.subscribe((v) => { result = v; });
+		const unsub = personalOutcome.subscribe((v) => { outcome = v; });
 		return unsub;
 	});
 	$effect(() => {
@@ -19,12 +19,12 @@
 	});
 
 	let requiredPortfolio = $derived(income / 0.04);
-	let scaleFactor = $derived(requiredPortfolio / 1_000_000);
 
+	// Use the actual accumulation path from personal engine
 	let valueData = $derived(
-		result?.yearlyResults.map((yr) => ({
-			year: yr.year,
-			value: yr.portfolioValue * scaleFactor
+		outcome?.accumulationPath.map((pt) => ({
+			year: pt.year,
+			value: pt.value
 		})) ?? []
 	);
 
@@ -42,6 +42,14 @@
 			? Math.max(requiredPortfolio, ...valueData.map((d) => d.value)) * 1.1
 			: 1
 	);
+
+	// Find year when portfolio crosses required threshold
+	let crossoverYear = $derived.by(() => {
+		for (const d of valueData) {
+			if (d.value >= requiredPortfolio) return d.year;
+		}
+		return null;
+	});
 </script>
 
 {#if valueData.length > 0}
@@ -50,7 +58,12 @@
 			Portfolio Value Growth
 		</h3>
 		<p class="text-xs text-text-muted">
-			How your portfolio appreciates as AI-driven companies grow earnings. Target: {formatCompact(requiredPortfolio)} for {formatCompact(income)}/yr at 4% SWR.
+			Your savings accumulation vs the {formatCompact(requiredPortfolio)} needed for {formatCompact(income)}/yr at 4% SWR.
+			{#if crossoverYear}
+				<span class="text-green font-semibold">Reaches target in {crossoverYear}.</span>
+			{:else}
+				<span class="text-red font-semibold">Doesn't reach target in this timeframe.</span>
+			{/if}
 		</p>
 		<div class="h-56" style="--chart-area-fill: rgba(56, 189, 248, 0.15);">
 			<Chart
@@ -85,7 +98,7 @@
 		</div>
 		<div class="flex gap-4 text-xs text-text-muted justify-center">
 			<span class="flex items-center gap-1">
-				<span class="w-3 h-0.5 bg-accent inline-block"></span> Portfolio value
+				<span class="w-3 h-0.5 bg-accent inline-block"></span> Your portfolio
 			</span>
 			<span class="flex items-center gap-1">
 				<span class="w-3 h-0.5 bg-red inline-block"></span> Required: {formatCompact(requiredPortfolio)}
