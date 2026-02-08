@@ -115,6 +115,31 @@
 			]
 		},
 		{
+			category: 'Taxation & Government',
+			items: [
+				{
+					q: 'Why does the deficit explode even when corporate tax revenue rises?',
+					a: 'Because the math is lopsided. Workers pay ~37% in combined income tax (~22%) and payroll tax (~15.3%). Investors pay ~15% capital gains. So when a worker earning $60k becomes an investor earning $60k, the government goes from collecting ~$22k/year to ~$9k/year — a 60% drop per person. Corporate tax revenue does rise as AI-boosted profits grow, but it can\'t offset losing income and payroll tax from tens of millions of workers simultaneously.'
+				},
+				{
+					q: 'Why can\'t we just tax capital gains at income rates to fix it?',
+					a: 'It helps, but it doesn\'t solve the problem. Even if you equalize capital gains to income tax rates (22%), you still lose the entire payroll tax (15.3% — funding Social Security and Medicare). There\'s no payroll tax equivalent for investment income. A worker paying 37% total becomes an investor paying 22% — still a 40% revenue drop per person. The payroll tax hole alone runs into hundreds of billions per year at moderate displacement levels.'
+				},
+				{
+					q: 'What about a "robot tax" or automation tax?',
+					a: 'It\'s one of many policy ideas being discussed. A robot tax would charge companies for displacing workers, essentially making them fund the safety net for displaced workers. The challenge is implementation: what counts as "automation"? Does upgrading software count? Does a self-checkout lane count? And if you make automation expensive, you slow down the productivity gains that make the investor model work. It\'s a real tension with no easy answer.'
+				},
+				{
+					q: 'Why does debt-to-GDP get so extreme in some scenarios?',
+					a: 'It\'s a double squeeze. The numerator (debt) grows because deficits compound — you\'re borrowing more each year AND paying interest on all previous borrowing. The denominator (GDP) shrinks because displaced workers without income stop spending, which drags down economic output. When debt grows while GDP shrinks, the ratio explodes. This is why the demand model matters so much: without the investor model propping up consumer spending, you get a fiscal death spiral on top of the economic one.'
+				},
+				{
+					q: 'How does the safety net cost work?',
+					a: 'Displaced workers who don\'t become investors (the "unemployed" in the model) cost the government roughly $25k/year per person in safety net spending — unemployment insurance, food assistance, Medicaid, housing vouchers, etc. This is a conservative estimate; actual per-person costs vary widely. In the extreme scenario with 30% investor adoption, that\'s ~106 million unemployed people × $25k = $2.7 trillion/year in additional spending on top of the existing budget.'
+				}
+			]
+		},
+		{
 			category: 'Taking Action',
 			items: [
 				{
