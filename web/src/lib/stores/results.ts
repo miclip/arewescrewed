@@ -1,9 +1,11 @@
 import { derived } from 'svelte/store';
 import { personalInputs } from './personal';
 import { babyInputs } from './baby';
+import { fiscalParams } from './fiscal';
 import { scenarioParams, activePreset } from './scenario';
 import { computePersonalOutcome, computeAllScenarios } from '$lib/model/personal-engine';
 import { computeBabyOutcome } from '$lib/model/baby-engine';
+import { computeFiscalProjection } from '$lib/model/fiscal-engine';
 import { buildEqualWeightPortfolio, runPortfolioScenario } from '$lib/model/portfolio-engine';
 import { runScenario } from '$lib/model/scenario-engine';
 import { PORTFOLIO_COMPANIES } from '$lib/model/companies';
@@ -69,5 +71,23 @@ export const babyOutcome = derived(
 	[babyInputs, scenarioParams, portfolioResult],
 	([$baby, $params, $portfolio]) => {
 		return computeBabyOutcome($baby, $params, $portfolio);
+	}
+);
+
+/** Fiscal base data — company projections cached by scenario (not recomputed on tax slider changes) */
+const fiscalBaseData = derived(
+	[scenarioParams, activePreset],
+	([$params, $preset]) => {
+		const companies = PORTFOLIO_COMPANIES;
+		const companyProjections = companies.map((c) => runScenario($params, c));
+		return { companyProjections, companies, params: $params };
+	}
+);
+
+/** Fiscal impact projection — only reruns fiscal math when tax params change */
+export const fiscalResult = derived(
+	[fiscalBaseData, fiscalParams],
+	([$base, $fiscal]) => {
+		return computeFiscalProjection($base.companyProjections, $base.companies, $base.params, $fiscal);
 	}
 );
