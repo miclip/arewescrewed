@@ -18,6 +18,8 @@ This model calculates whether that's actually viable.
 - **Supply chain cascade** — as the whole economy automates, non-labor costs drop too
 - **10-company portfolio** — NVDA, MSFT, AAPL, GOOGL, AMZN, META, JPM, JNJ, PG, XOM
 - **Personal financial calculator** — given your income, savings, and sector, can you accumulate enough before displacement hits?
+- **Baby Born Today** — what if the state gave every newborn a lump-sum investment grant? Models compound growth over 21 years plus cost-of-living decline from supply chain automation
+- **Taxation & National Debt** — models the fiscal time bomb: workers taxed at ~37% become investors taxed at ~15%, payroll tax disappears, safety net costs explode. Interactive tax rate sliders
 - **4% safe withdrawal rate** — dividends first, then capital gains (Trinity Study)
 
 ## Project Structure
@@ -35,7 +37,7 @@ This model calculates whether that's actually viable.
 │       ├── stores/       # Reactive state management
 │       └── utils/        # URL state encoding
 ├── scripts/              # Data validation and scenario runners
-└── wearenotscrewed.ipynb # Jupyter notebook (analytical deep-dive)
+└── arewescrewed.ipynb    # Jupyter notebook (analytical deep-dive)
 ```
 
 ## Running Locally
