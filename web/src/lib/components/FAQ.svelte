@@ -24,6 +24,10 @@
 				{
 					q: 'What is AI not?',
 					a: 'AI is not general intelligence — yet. It can\'t set its own goals, feel motivated, or decide to do something unprompted. It\'s not a search engine (though it can be connected to one). It\'s not infallible — it hallucinates facts, makes logical errors, and can be confidently wrong. It\'s not a replacement for human judgment in high-stakes decisions... yet. And it\'s not going to "wake up" and take over. The economic threat from AI isn\'t Skynet — it\'s a spreadsheet showing your department costs $2M/year and AI can do 70% of the work for $50k.'
+				},
+				{
+					q: 'What does "not general intelligence — yet" mean?',
+					a: 'Today\'s AI is "narrow" — it\'s extraordinarily good at specific tasks (writing, coding, analysis) but can\'t genuinely reason across all domains the way a human can. AGI — Artificial General Intelligence — is the goal every major lab is racing toward: an AI that can learn, reason, and solve problems as well as or better than a human in any domain, without being specifically trained for each one. OpenAI, Anthropic, Google DeepMind, and Meta are all explicitly working toward this. Nobody knows when it arrives — estimates range from 3 years to 30 years to "maybe never." But progress has been far faster than most experts predicted even two years ago, and a single breakthrough in reasoning or architecture could compress that timeline dramatically. For this model, AGI isn\'t required — current narrow AI is already enough to displace most cognitive work. But if AGI does arrive mid-displacement, the S-curve doesn\'t just steepen — it becomes a cliff. Every scenario in this model would shift toward the extreme case overnight.'
 				}
 			]
 		},

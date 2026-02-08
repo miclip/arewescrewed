@@ -47,7 +47,7 @@
 				<li><strong class="text-text-muted">Demand feedback:</strong> Consumer spending is modeled as a function of wage income + investment income. Without investor adoption, demand collapses to an essentials floor.</li>
 				<li><strong class="text-text-muted">Sector displacement:</strong> Sector-specific automation rates are estimates based on current AI capabilities and industry analysis. Scaled by scenario aggressiveness.</li>
 				<li><strong class="text-text-muted">AI displacement timelines are speculative.</strong> This model explores possibilities, not predictions.</li>
-				<li><strong class="text-text-muted">Em-dashes deployed:</strong> 111. I regret nothing. — Claude Code</li>
+				<li><strong class="text-text-muted">Em-dashes deployed:</strong> 126. I regret nothing. — Claude Code</li>
 			</ul>
 		</div>
 
