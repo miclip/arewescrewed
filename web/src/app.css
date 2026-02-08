@@ -46,7 +46,7 @@ svg text {
 
 /* Shrink axis tick labels on small screens to prevent overlap */
 @media (max-width: 640px) {
-	svg text {
+	svg .tick text {
 		font-size: 10px !important;
 	}
 }

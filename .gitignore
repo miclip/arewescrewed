@@ -9,4 +9,5 @@ data/*.db
 data/*.json
 data/*.csv
 .env
+node_modules/
 .DS_Store
