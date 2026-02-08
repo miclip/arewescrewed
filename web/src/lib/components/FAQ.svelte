@@ -76,6 +76,10 @@
 					a: 'Conservative (25% displaced over 20 years): AI mainly handles routine tasks, human-AI collaboration dominates. Moderate (50% over 15 years): AI handles most information work, significant restructuring. Aggressive (75% over 10 years): rapid AI advancement, most cognitive work automated. Extreme (95% over 8 years): near-total automation of human labor. Nobody knows which is right — the point is to see how your personal situation changes across the range.'
 				},
 				{
+					q: 'Why does the extreme scenario drop off so much?',
+					a: 'The demand death spiral. In the extreme scenario, 95% of jobs are replaced in just 8 years, but only 30% of displaced workers become investors. The other 70% lose their income and stop buying things. Companies see revenue collapse because their customers are broke — fewer jobs means less spending means less revenue means lower stock prices. Even a baby\'s portfolio isn\'t immune: it compounds nicely in the early years, then the demand collapse drags everything down. This is the whole point of the model — without widespread adoption of the investor model, extreme automation destroys the consumer base that funds corporate profits.'
+				},
+				{
 					q: 'Why does the model assume constant P/E ratios?',
 					a: 'The capital gains model assumes share prices track earnings growth — if a company\'s profit doubles, its stock price doubles. This is a simplification. In reality, P/E ratios expand and contract with market sentiment, interest rates, and growth expectations. AI-driven profit growth could cause P/E expansion (markets reward growth) or contraction (if demand collapse concerns spook investors). Constant P/E is the neutral assumption.'
 				},
