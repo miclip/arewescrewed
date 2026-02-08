@@ -64,10 +64,10 @@ export const amazonDystopiaProjections = derived(
 	}
 );
 
-/** Baby investment outcome for current scenario */
+/** Baby investment outcome for current scenario — reuses portfolioResult to avoid redundant computation */
 export const babyOutcome = derived(
-	[babyInputs, scenarioParams, activePreset],
-	([$baby, $params, $preset]) => {
-		return computeBabyOutcome($baby, $params, PRESETS[$preset].label);
+	[babyInputs, scenarioParams, portfolioResult],
+	([$baby, $params, $portfolio]) => {
+		return computeBabyOutcome($baby, $params, $portfolio);
 	}
 );

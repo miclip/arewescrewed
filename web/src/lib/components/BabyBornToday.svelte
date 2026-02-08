@@ -122,6 +122,14 @@
 	let costReductionAtUnlockPct = $derived(
 		outcome ? Math.round((1 - outcome.costFractionAtUnlock) * 100) : 0
 	);
+
+	// Key for forcing chart re-renders when data changes
+	let chartKey = $derived(JSON.stringify([
+		outcome?.valueAtUnlock,
+		outcome?.valueAt30,
+		outcome?.giftAmount,
+		outcome?.giftNeededFor75k
+	]));
 </script>
 
 {#if outcome}
@@ -225,6 +233,7 @@
 				Portfolio Value Over Time
 			</h3>
 			<div class="h-72" style="--chart-area-fill: rgba(56, 189, 248, 0.15);">
+				{#key chartKey}
 				<Chart
 					data={valueData}
 					x="year"
@@ -263,6 +272,7 @@
 						<Spline stroke="#38bdf8" strokeWidth={2} />
 					</Svg>
 				</Chart>
+				{/key}
 			</div>
 			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
 				<span class="flex items-center gap-1">
@@ -283,6 +293,7 @@
 				Annual Income at 4% SWR
 			</h3>
 			<div class="h-64" style="--chart-area-fill: rgba(74, 222, 128, 0.15);">
+				{#key chartKey}
 				<Chart
 					data={incomeData}
 					x="year"
@@ -330,6 +341,7 @@
 						<Spline stroke="#4ade80" strokeWidth={2} />
 					</Svg>
 				</Chart>
+				{/key}
 			</div>
 			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
 				<span class="flex items-center gap-1">
@@ -357,6 +369,7 @@
 				This is what $75k of today's lifestyle costs over time.
 			</p>
 			<div class="h-56" style="--chart-area-fill: rgba(251, 146, 60, 0.15);">
+				{#key chartKey}
 				<Chart
 					data={costData}
 					x="year"
@@ -386,6 +399,7 @@
 						<Spline stroke="#fb923c" strokeWidth={2} />
 					</Svg>
 				</Chart>
+				{/key}
 			</div>
 			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
 				<span class="flex items-center gap-1">

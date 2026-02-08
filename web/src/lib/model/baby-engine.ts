@@ -1,14 +1,8 @@
-import type { ScenarioParams } from './types';
-import { PORTFOLIO_COMPANIES } from './companies';
-import { buildEqualWeightPortfolio, runPortfolioScenario } from './portfolio-engine';
+import type { ScenarioParams, PortfolioResult } from './types';
+import { smoothstep } from './math';
 
 export const WITHDRAWAL_RATE = 0.04;
 export const BASE_INCOME_TARGET = 75_000;
-
-/** Smoothstep S-curve (same as scenario-engine) */
-function smoothstep(t: number): number {
-	return t * t * (3 - 2 * t);
-}
 
 export interface BabyInputs {
 	giftAmount: number; // default: $50,000
@@ -62,7 +56,7 @@ export interface BabyOutcome {
 export function computeBabyOutcome(
 	inputs: BabyInputs,
 	params: ScenarioParams,
-	scenarioName: string
+	portfolioResult: PortfolioResult
 ): BabyOutcome {
 	const birthYear = params.baseYear;
 	const unlockYear = birthYear + inputs.unlockAge;
@@ -86,10 +80,6 @@ export function computeBabyOutcome(
 	const costFractionAtUnlock = inputs.unlockAge < costOfLivingPath.length
 		? costOfLivingPath[inputs.unlockAge].costFraction
 		: costOfLivingPath[costOfLivingPath.length - 1].costFraction;
-
-	// Get portfolio growth rates from the model
-	const allocations = buildEqualWeightPortfolio(PORTFOLIO_COMPANIES, 1_000_000);
-	const portfolioResult = runPortfolioScenario(params, scenarioName, allocations);
 
 	// Compound the gift amount using portfolio growth rates
 	const growthPath: BabyGrowthPoint[] = [];
