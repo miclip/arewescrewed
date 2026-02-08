@@ -26,8 +26,12 @@
 		AI is replacing jobs. Can you survive as an investor in AI-run companies in an AI-driven economy?
 	</p>
 
+	<p class="text-sm text-text-muted animate-bounce mb-8">
+		&#8595; Find out below
+	</p>
+
 	<!-- Share buttons -->
-	<div class="flex flex-wrap justify-center items-center gap-3 mb-8">
+	<div class="flex flex-wrap justify-center items-center gap-3">
 		<span class="text-xs text-text-muted uppercase tracking-wide">Share the Gloom</span>
 		<a
 			href="https://twitter.com/intent/tweet?text={encodeURIComponent(shareText)}&url={encodeURIComponent(siteUrl)}"
@@ -77,8 +81,4 @@
 			{/if}
 		</button>
 	</div>
-
-	<p class="text-sm text-text-muted animate-bounce">
-		&#8595; Find out below
-	</p>
 </section>
