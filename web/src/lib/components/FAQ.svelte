@@ -86,6 +86,15 @@
 			]
 		},
 		{
+			category: 'The Bottom Line',
+			items: [
+				{
+					q: 'Bruh, I still don\'t get it. Am I screwed?',
+					a: 'Yes.'
+				}
+			]
+		},
+		{
 			category: 'Taking Action',
 			items: [
 				{
