@@ -33,19 +33,24 @@
 		fiscalParams.update((p) => ({ ...p, [key]: value }));
 	}
 
-	// Chart data
+	// Chart data — all pre-computed as $derived for reactivity
 	let projections = $derived(result?.yearlyProjections ?? []);
 
-	// Revenue breakdown chart data
-	let revenueData = $derived(
-		projections.map((yr) => ({
-			year: yr.year,
-			corporate: yr.corporateTaxRevenue / 1e12,
-			income: yr.incomeTaxRevenue / 1e12,
-			payroll: yr.payrollTaxRevenue / 1e12,
-			capGains: yr.capitalGainsTaxRevenue / 1e12,
-			total: yr.totalFederalRevenue / 1e12
-		}))
+	// Revenue series (pre-computed, not inline in template)
+	let revTotalData = $derived(
+		projections.map((yr) => ({ year: yr.year, value: yr.totalFederalRevenue / 1e12 }))
+	);
+	let revCorporateData = $derived(
+		projections.map((yr) => ({ year: yr.year, value: yr.corporateTaxRevenue / 1e12 }))
+	);
+	let revIncomeData = $derived(
+		projections.map((yr) => ({ year: yr.year, value: yr.incomeTaxRevenue / 1e12 }))
+	);
+	let revPayrollData = $derived(
+		projections.map((yr) => ({ year: yr.year, value: yr.payrollTaxRevenue / 1e12 }))
+	);
+	let revCapGainsData = $derived(
+		projections.map((yr) => ({ year: yr.year, value: yr.capitalGainsTaxRevenue / 1e12 }))
 	);
 
 	let baselineRevenue = $derived(
@@ -59,25 +64,21 @@
 	);
 
 	let maxRevenue = $derived(
-		Math.max(baselineRevenue * 1.1, ...revenueData.map((d) => d.total)) * 1.1
+		Math.max(baselineRevenue * 1.1, ...revTotalData.map((d) => d.value)) * 1.1
 	);
 
-	// Baseline revenue reference line
 	let baselineRevenueLineData = $derived(
-		revenueData.length > 0
+		revTotalData.length > 0
 			? [
-					{ year: revenueData[0].year, value: baselineRevenue },
-					{ year: revenueData[revenueData.length - 1].year, value: baselineRevenue }
+					{ year: revTotalData[0].year, value: baselineRevenue },
+					{ year: revTotalData[revTotalData.length - 1].year, value: baselineRevenue }
 				]
 			: []
 	);
 
 	// Deficit chart data
 	let deficitData = $derived(
-		projections.map((yr) => ({
-			year: yr.year,
-			value: yr.annualDeficit / 1e12
-		}))
+		projections.map((yr) => ({ year: yr.year, value: yr.annualDeficit / 1e12 }))
 	);
 
 	let baselineDeficit = $derived(
@@ -105,10 +106,7 @@
 
 	// Debt chart data
 	let debtData = $derived(
-		projections.map((yr) => ({
-			year: yr.year,
-			value: yr.totalNationalDebt / 1e12
-		}))
+		projections.map((yr) => ({ year: yr.year, value: yr.totalNationalDebt / 1e12 }))
 	);
 
 	let baselineDebtPath = $derived.by(() => {
@@ -138,15 +136,11 @@
 
 	// Debt-to-GDP chart data
 	let debtToGDPData = $derived(
-		projections.map((yr) => ({
-			year: yr.year,
-			value: yr.debtToGDP * 100
-		}))
+		projections.map((yr) => ({ year: yr.year, value: yr.debtToGDP * 100 }))
 	);
 
 	let maxDebtToGDP = $derived(Math.max(200, ...debtToGDPData.map((d) => d.value)) * 1.1);
 
-	// Reference lines at 100% and 150%
 	let gdpRef100Data = $derived(
 		debtToGDPData.length > 0
 			? [
@@ -185,6 +179,16 @@
 		if (!yr15) return 0;
 		return params.baselinePayrollTaxRevenue - yr15.payrollTaxRevenue;
 	});
+
+	// Key for forcing chart re-renders
+	let chartKey = $derived(JSON.stringify([
+		result?.peakDeficitYear,
+		result?.debtToGDPAtYear30,
+		params?.corporateTaxRate,
+		params?.capitalGainsTaxRate,
+		params?.safetyNetCostPerPerson,
+		params?.equalizeCapGainsTax
+	]));
 </script>
 
 {#if result && params && projections.length > 0}
@@ -342,12 +346,12 @@
 				Tax Revenue Breakdown
 			</h3>
 			<div class="h-72" style="--chart-area-fill: transparent;">
-				{#if revenueData.length > 0}
+				{#key chartKey}
 					<Chart
-						data={revenueData.map((d) => ({ year: d.year, value: d.total }))}
+						data={revTotalData}
 						x="year"
 						xScale={scaleLinear()}
-						xDomain={[revenueData[0].year, revenueData[revenueData.length - 1].year]}
+						xDomain={[revTotalData[0].year, revTotalData[revTotalData.length - 1].year]}
 						y="value"
 						yScale={scaleLinear()}
 						yDomain={[0, maxRevenue]}
@@ -369,7 +373,7 @@
 
 							<!-- Corporate tax (green, rising) -->
 							<Spline
-								data={revenueData.map((d) => ({ year: d.year, value: d.corporate }))}
+								data={revCorporateData}
 								x="year"
 								y="value"
 								stroke="#4ade80"
@@ -378,7 +382,7 @@
 
 							<!-- Income tax (red, falling) -->
 							<Spline
-								data={revenueData.map((d) => ({ year: d.year, value: d.income }))}
+								data={revIncomeData}
 								x="year"
 								y="value"
 								stroke="#f87171"
@@ -387,7 +391,7 @@
 
 							<!-- Payroll tax (orange, falling) -->
 							<Spline
-								data={revenueData.map((d) => ({ year: d.year, value: d.payroll }))}
+								data={revPayrollData}
 								x="year"
 								y="value"
 								stroke="#fb923c"
@@ -396,7 +400,7 @@
 
 							<!-- Capital gains tax (accent, rising) -->
 							<Spline
-								data={revenueData.map((d) => ({ year: d.year, value: d.capGains }))}
+								data={revCapGainsData}
 								x="year"
 								y="value"
 								stroke="#38bdf8"
@@ -405,7 +409,7 @@
 
 							<!-- Total revenue (yellow) -->
 							<Spline
-								data={revenueData.map((d) => ({ year: d.year, value: d.total }))}
+								data={revTotalData}
 								x="year"
 								y="value"
 								stroke="#fbbf24"
@@ -413,7 +417,7 @@
 							/>
 						</Svg>
 					</Chart>
-				{/if}
+				{/key}
 			</div>
 			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
 				<span class="flex items-center gap-1">
@@ -443,7 +447,7 @@
 				Annual Deficit
 			</h3>
 			<div class="h-64" style="--chart-area-fill: rgba(248, 113, 113, 0.15);">
-				{#if deficitData.length > 0}
+				{#key chartKey}
 					<Chart
 						data={deficitData}
 						x="year"
@@ -472,7 +476,7 @@
 							<Spline stroke="#f87171" strokeWidth={2} />
 						</Svg>
 					</Chart>
-				{/if}
+				{/key}
 			</div>
 			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
 				<span class="flex items-center gap-1">
@@ -490,7 +494,7 @@
 				National Debt
 			</h3>
 			<div class="h-64" style="--chart-area-fill: rgba(251, 191, 36, 0.15);">
-				{#if debtData.length > 0}
+				{#key chartKey}
 					<Chart
 						data={debtData}
 						x="year"
@@ -519,7 +523,7 @@
 							<Spline stroke="#fbbf24" strokeWidth={2} />
 						</Svg>
 					</Chart>
-				{/if}
+				{/key}
 			</div>
 			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
 				<span class="flex items-center gap-1">
@@ -537,7 +541,7 @@
 				Debt-to-GDP Ratio
 			</h3>
 			<div class="h-64" style="--chart-area-fill: rgba(251, 146, 60, 0.15);">
-				{#if debtToGDPData.length > 0}
+				{#key chartKey}
 					<Chart
 						data={debtToGDPData}
 						x="year"
@@ -575,7 +579,7 @@
 							<Spline stroke="#fb923c" strokeWidth={2} />
 						</Svg>
 					</Chart>
-				{/if}
+				{/key}
 			</div>
 			<div class="flex gap-4 text-xs text-text-muted justify-center flex-wrap">
 				<span class="flex items-center gap-1">
