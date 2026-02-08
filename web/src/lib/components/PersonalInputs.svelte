@@ -63,7 +63,7 @@
 			step="5000"
 			bind:value={currentSavings}
 			oninput={update}
-			class="w-full bg-bg-input text-text rounded px-3 py-2 text-sm font-mono border border-bg-input focus:border-accent focus:outline-none"
+			class="w-full bg-bg-input text-text rounded px-3 py-3 md:py-2 text-sm font-mono border border-bg-input focus:border-accent focus:outline-none"
 		/>
 	</div>
 
@@ -94,7 +94,7 @@
 			id="sector-select"
 			bind:value={selectedSector}
 			onchange={update}
-			class="w-full bg-bg-input text-text rounded px-3 py-2 text-sm border border-bg-input focus:border-accent focus:outline-none"
+			class="w-full bg-bg-input text-text rounded px-3 py-3 md:py-2 text-sm border border-bg-input focus:border-accent focus:outline-none"
 		>
 			{#each SECTORS as sector}
 				<option value={sector.name}>

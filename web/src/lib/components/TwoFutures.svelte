@@ -41,7 +41,7 @@
 		<p class="text-xs text-text-muted">
 			If displaced workers invest (green), consumer spending holds up. Without the investor model (red), demand collapses — even profitable companies shrink.
 		</p>
-		<div class="h-56" style="--chart-area-fill: rgba(74, 222, 128, 0.1);">
+		<div class="h-48 md:h-56" style="--chart-area-fill: rgba(74, 222, 128, 0.1);">
 			<Chart
 				data={investorData}
 				x="year"
@@ -51,7 +51,7 @@
 				yScale={scaleLinear()}
 				yDomain={[0, maxRev]}
 				yNice
-				padding={{ left: 56, bottom: 28, top: 8, right: 8 }}
+				padding={{ left: 48, bottom: 24, top: 8, right: 4 }}
 			>
 				<Svg>
 					<Axis placement="left" format={(v) => `$${v.toFixed(0)}B`} />

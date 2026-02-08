@@ -65,7 +65,7 @@
 				<span class="text-red font-semibold">Doesn't reach target in this timeframe.</span>
 			{/if}
 		</p>
-		<div class="h-56" style="--chart-area-fill: rgba(56, 189, 248, 0.15);">
+		<div class="h-48 md:h-56" style="--chart-area-fill: rgba(56, 189, 248, 0.15);">
 			<Chart
 				data={valueData}
 				x="year"
@@ -75,7 +75,7 @@
 				yScale={scaleLinear()}
 				yDomain={[0, maxVal]}
 				yNice
-				padding={{ left: 56, bottom: 28, top: 8, right: 8 }}
+				padding={{ left: 48, bottom: 24, top: 8, right: 4 }}
 			>
 				<Svg>
 					<Axis placement="left" format={(v) => formatCompact(v)} />

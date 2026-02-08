@@ -28,7 +28,7 @@
 
 <div class="space-y-3">
 	<h2 class="text-lg font-semibold text-text">AI Scenario</h2>
-	<div class="grid grid-cols-4 gap-2">
+	<div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
 		{#each PRESET_ORDER as name}
 			{@const preset = PRESETS[name]}
 			<button

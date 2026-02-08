@@ -48,10 +48,10 @@
 
 	<!-- Tab navigation -->
 	<div class="max-w-7xl mx-auto px-4">
-		<div class="flex gap-1 border-b border-bg-input mb-6">
+		<div class="flex gap-1 border-b border-bg-input mb-6 overflow-x-auto scrollbar-hide">
 			<button
 				onclick={() => (activeTab = 'corporate')}
-				class="px-5 py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'corporate'
+				class="whitespace-nowrap flex-shrink-0 px-3 py-2.5 md:px-5 md:py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'corporate'
 					? 'border-accent text-accent'
 					: 'border-transparent text-text-muted hover:text-text'}"
 			>
@@ -59,7 +59,7 @@
 			</button>
 			<button
 				onclick={() => (activeTab = 'personal')}
-				class="px-5 py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'personal'
+				class="whitespace-nowrap flex-shrink-0 px-3 py-2.5 md:px-5 md:py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'personal'
 					? 'border-accent text-accent'
 					: 'border-transparent text-text-muted hover:text-text'}"
 			>
@@ -67,7 +67,7 @@
 			</button>
 			<button
 				onclick={() => (activeTab = 'explore')}
-				class="px-5 py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'explore'
+				class="whitespace-nowrap flex-shrink-0 px-3 py-2.5 md:px-5 md:py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'explore'
 					? 'border-accent text-accent'
 					: 'border-transparent text-text-muted hover:text-text'}"
 			>
@@ -75,7 +75,7 @@
 			</button>
 			<button
 				onclick={() => (activeTab = 'fiscal')}
-				class="px-5 py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'fiscal'
+				class="whitespace-nowrap flex-shrink-0 px-3 py-2.5 md:px-5 md:py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'fiscal'
 					? 'border-accent text-accent'
 					: 'border-transparent text-text-muted hover:text-text'}"
 			>
@@ -83,7 +83,7 @@
 			</button>
 			<button
 				onclick={() => (activeTab = 'baby')}
-				class="px-5 py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'baby'
+				class="whitespace-nowrap flex-shrink-0 px-3 py-2.5 md:px-5 md:py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'baby'
 					? 'border-accent text-accent'
 					: 'border-transparent text-text-muted hover:text-text'}"
 			>
@@ -91,7 +91,7 @@
 			</button>
 			<button
 				onclick={() => (activeTab = 'assumptions')}
-				class="px-5 py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'assumptions'
+				class="whitespace-nowrap flex-shrink-0 px-3 py-2.5 md:px-5 md:py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'assumptions'
 					? 'border-accent text-accent'
 					: 'border-transparent text-text-muted hover:text-text'}"
 			>
@@ -99,7 +99,7 @@
 			</button>
 			<button
 				onclick={() => (activeTab = 'faq')}
-				class="px-5 py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'faq'
+				class="whitespace-nowrap flex-shrink-0 px-3 py-2.5 md:px-5 md:py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'faq'
 					? 'border-accent text-accent'
 					: 'border-transparent text-text-muted hover:text-text'}"
 			>

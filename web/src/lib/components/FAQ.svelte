@@ -294,7 +294,7 @@
 					<div class="bg-bg-card rounded-lg border border-bg-input overflow-hidden">
 						<button
 							onclick={() => toggle(idx)}
-							class="w-full text-left px-5 py-4 flex items-center justify-between gap-4 hover:bg-bg-input/30 transition-colors"
+							class="w-full text-left px-4 sm:px-5 py-4 flex items-center justify-between gap-3 sm:gap-4 hover:bg-bg-input/30 transition-colors"
 						>
 							<span class="text-sm font-medium text-text">{item.q}</span>
 							<span class="text-text-muted text-xs flex-shrink-0 transition-transform {openIndex === idx ? 'rotate-180' : ''}">

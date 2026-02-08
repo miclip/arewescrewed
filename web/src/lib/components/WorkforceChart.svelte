@@ -31,7 +31,7 @@
 		<p class="text-xs text-text-muted">
 			The S-curve ramp: displacement starts slowly, accelerates in the middle years, then plateaus. 1.56M employees today.
 		</p>
-		<div class="h-56" style="--chart-area-fill: rgba(251, 146, 60, 0.15);">
+		<div class="h-48 md:h-56" style="--chart-area-fill: rgba(251, 146, 60, 0.15);">
 			<Chart
 				data={remainingData}
 				x="year"
@@ -41,7 +41,7 @@
 				yScale={scaleLinear()}
 				yDomain={[0, maxCount]}
 				yNice
-				padding={{ left: 52, bottom: 28, top: 8, right: 8 }}
+				padding={{ left: 44, bottom: 24, top: 8, right: 4 }}
 			>
 				<Svg>
 					<Axis placement="left" format={(v) => formatCompactNum(v)} />

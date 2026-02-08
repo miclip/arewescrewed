@@ -65,7 +65,7 @@
 									{slider.label}
 									<button
 										onclick={() => toggleTooltip(slider.key)}
-										class="inline-flex items-center justify-center w-4 h-4 rounded-full border border-text-muted/40 text-text-muted/60 hover:border-accent hover:text-accent transition-colors text-[10px] leading-none"
+										class="inline-flex items-center justify-center w-6 h-6 md:w-4 md:h-4 rounded-full border border-text-muted/40 text-text-muted/60 hover:border-accent hover:text-accent transition-colors text-[10px] leading-none"
 										aria-label="Explain {slider.label}"
 									>?</button>
 								</span>

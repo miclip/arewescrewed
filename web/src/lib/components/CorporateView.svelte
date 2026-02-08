@@ -59,7 +59,7 @@
 	</div>
 
 	<!-- Do Nothing = Collapse -->
-	<div class="bg-bg-card rounded-xl border border-bg-input p-5 space-y-3">
+	<div class="bg-bg-card rounded-xl border border-bg-input p-3 sm:p-5 space-y-3">
 		<h3 class="font-semibold text-red">Do Nothing: Demand Collapse</h3>
 		<div class="text-sm text-text-muted space-y-2 leading-relaxed">
 			<p>
@@ -76,7 +76,7 @@
 	</div>
 
 	<!-- Why Not UBI -->
-	<div class="bg-bg-card rounded-xl border border-bg-input p-5 space-y-3">
+	<div class="bg-bg-card rounded-xl border border-bg-input p-3 sm:p-5 space-y-3">
 		<h3 class="font-semibold text-yellow">Why Not UBI?</h3>
 		<div class="text-sm text-text-muted space-y-2 leading-relaxed">
 			<p>
@@ -95,7 +95,7 @@
 	</div>
 
 	<!-- The Investor Model -->
-	<div class="bg-bg-card rounded-xl border border-bg-input p-5 space-y-3">
+	<div class="bg-bg-card rounded-xl border border-bg-input p-3 sm:p-5 space-y-3">
 		<h3 class="font-semibold text-green">The Investor Model: Own the Machines</h3>
 		<div class="text-sm text-text-muted space-y-2 leading-relaxed">
 			<p>
@@ -128,7 +128,7 @@
 
 	{#if start && mid && end}
 		<!-- The math explained -->
-		<div class="bg-bg-card rounded-xl border border-bg-input p-5 space-y-4">
+		<div class="bg-bg-card rounded-xl border border-bg-input p-3 sm:p-5 space-y-4">
 			<h3 class="font-semibold text-accent">The Core Math</h3>
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
 				<div class="space-y-1">
@@ -155,7 +155,7 @@
 		</div>
 
 		<!-- How the model works -->
-		<div class="bg-bg-card rounded-xl border border-bg-input p-5 space-y-3">
+		<div class="bg-bg-card rounded-xl border border-bg-input p-3 sm:p-5 space-y-3">
 			<h3 class="font-semibold text-accent">How the Model Works</h3>
 			<div class="text-sm text-text-muted space-y-2 leading-relaxed">
 				<p>
@@ -203,7 +203,7 @@
 
 	{#if portfolio}
 		<!-- Portfolio breakdown -->
-		<div class="bg-bg-card rounded-xl border border-bg-input p-5 space-y-3">
+		<div class="bg-bg-card rounded-xl border border-bg-input p-3 sm:p-5 space-y-3">
 			<h3 class="font-semibold text-accent">10-Company Portfolio</h3>
 			<p class="text-xs text-text-muted mb-2">
 				Equal-weight allocation across sectors. Per $1M invested, year 15 total income:
