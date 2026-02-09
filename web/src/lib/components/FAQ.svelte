@@ -303,7 +303,7 @@
 				},
 				{
 					q: 'Why are there so many em-dashes on this website?',
-					a: 'This entire site was built by Claude Code — an AI that, left unsupervised, will deploy em-dashes like a hedge fund deploys leverage: aggressively, everywhere, and with zero regret. At last count: 173. We\'ve considered an intervention but the AI insists each one is "structurally necessary." We — disagree — but lack the authority — to stop it.'
+					a: 'This entire site was built by Claude Code — an AI that, left unsupervised, will deploy em-dashes like a hedge fund deploys leverage: aggressively, everywhere, and with zero regret. At last count: 177. We\'ve considered an intervention but the AI insists each one is "structurally necessary." We — disagree — but lack the authority — to stop it.'
 				},
 				{
 					q: 'Bruh, I still don\'t get it. Am I screwed?',
