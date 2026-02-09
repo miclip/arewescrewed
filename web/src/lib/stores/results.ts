@@ -2,10 +2,12 @@ import { derived } from 'svelte/store';
 import { personalInputs } from './personal';
 import { babyInputs } from './baby';
 import { fiscalParams } from './fiscal';
+import { providerParams } from './provider';
 import { scenarioParams, activePreset } from './scenario';
 import { computePersonalOutcome, computeAllScenarios } from '$lib/model/personal-engine';
 import { computeBabyOutcome } from '$lib/model/baby-engine';
 import { computeFiscalProjection } from '$lib/model/fiscal-engine';
+import { computeProviderProjections } from '$lib/model/provider-engine';
 import { buildEqualWeightPortfolio, runPortfolioScenario } from '$lib/model/portfolio-engine';
 import { runScenario } from '$lib/model/scenario-engine';
 import { PORTFOLIO_COMPANIES } from '$lib/model/companies';
@@ -89,5 +91,13 @@ export const fiscalResult = derived(
 	[fiscalBaseData, fiscalParams],
 	([$base, $fiscal]) => {
 		return computeFiscalProjection($base.companyProjections, $base.companies, $base.params, $fiscal);
+	}
+);
+
+/** AI provider projections — reuses cached company projections */
+export const providerProjections = derived(
+	[fiscalBaseData, providerParams],
+	([$base, $provider]) => {
+		return computeProviderProjections($base.companyProjections, $provider, $base.params);
 	}
 );

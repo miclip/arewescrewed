@@ -183,6 +183,35 @@
 			]
 		},
 		{
+			category: 'AI Providers',
+			items: [
+				{
+					q: 'Why does AI provider revenue peak and then decline?',
+					a: 'It\'s the intersection of two curves. Workers are displaced along an S-curve (slow start, rapid middle, slow end), which pushes AI spending up. But per-worker AI costs decline exponentially as hardware improves and models become more efficient. The product of a growing S-curve and a decaying exponential creates a hump: revenue surges as displacement accelerates, peaks when the most workers are being replaced at still-significant per-worker costs, then falls as AI becomes dirt cheap. More work gets done by AI at the end, but it costs almost nothing.'
+				},
+				{
+					q: 'Where do the ownership stake percentages come from?',
+					a: 'Each stake is sourced individually. Microsoft\'s 27% of OpenAI comes from <a href="https://www.cnbc.com/2025/10/28/open-ai-for-profit-microsoft.html" target="_blank" rel="noopener noreferrer">CNBC\'s coverage of OpenAI\'s October 2025 restructure</a>. Google\'s 14% of Anthropic was revealed in <a href="https://www.datacenterdynamics.com/en/news/google-owns-14-percent-of-generative-ai-business-anthropic/" target="_blank" rel="noopener noreferrer">DOJ antitrust court filings (March 2025)</a>. Amazon\'s Anthropic stake (~15%) is <a href="https://www.geekwire.com/2025/amazons-anthropic-investment-boosts-its-quarterly-profits-by-9-5b/" target="_blank" rel="noopener noreferrer">estimated from Q3 2025 earnings</a> — the exact figure is murky (range 8-21%). DeepMind is a wholly-owned Alphabet subsidiary since its <a href="https://techcrunch.com/2014/01/26/google-deepmind/" target="_blank" rel="noopener noreferrer">2014 acquisition</a>. Click any stake card in the AI Providers tab to see its source.'
+				},
+				{
+					q: 'Why aren\'t Apple and Meta listed as AI provider owners?',
+					a: 'Apple Intelligence and Meta AI (Llama) are internal AI efforts, not external companies these firms hold equity stakes in. The "captured value" section specifically tracks big tech\'s ownership of <em>separate</em> AI provider companies — where one company\'s investment dollars capture value from the broader AI transition. Apple and Meta are AI deployers (they use AI to automate their own operations), but they haven\'t made major external equity investments in standalone AI providers the way Microsoft, Amazon, Google, and Nvidia have.'
+				},
+				{
+					q: 'What about training costs vs inference costs?',
+					a: 'They\'re moving in opposite directions. <strong>Inference</strong> (running models to do work) gets cheaper every year — better hardware, more efficient architectures, quantization. This is what the deployer model captures as the declining "AI cost per worker per year" assumption. <strong>Training</strong> (building new model generations) gets more expensive — GPT-4\'s final training run cost an estimated <a href="https://epoch.ai/blog/how-much-does-it-cost-to-train-frontier-ai-models" target="_blank" rel="noopener noreferrer">$40-78M</a>, and frontier models are now approaching $1B per run (<a href="https://arxiv.org/abs/2405.21015" target="_blank" rel="noopener noreferrer">training costs have grown ~2.4x/year since 2016</a>). OpenAI alone spent <a href="https://epoch.ai/data-insights/openai-compute-spend" target="_blank" rel="noopener noreferrer">~$5B on R&D compute in 2024</a>. The provider model tracks both: inference costs drive the revenue hump, while escalating training/R&D is a drag on profits. Eventually AI helps automate its own research (AI-assisted experimentation, automated architecture search), which bends the training cost curve down.'
+				},
+				{
+					q: 'How do expanding margins work if costs are falling?',
+					a: 'Think of AWS. When Amazon launched cloud computing, it charged high prices and had high costs (building data centers is expensive). As hardware got cheaper, Amazon <em>could</em> have passed all savings to customers — but it didn\'t. It lowered prices slowly while costs fell fast, and margins expanded. AI providers face the same dynamic: GPUs get cheaper, models get more efficient, but pricing doesn\'t fall as fast. The gap between declining costs and slowly-declining prices is pure margin expansion. Our model starts providers at ~60% gross margin and caps at ~85%.'
+				},
+				{
+					q: 'What happens if one AI provider dominates (monopoly)?',
+					a: 'The model treats AI providers as an aggregate industry — it doesn\'t pick winners. In practice, market concentration would mean higher margins (less competition) but also more regulatory scrutiny and potentially price controls. For the investor model thesis, concentration actually strengthens the case: if OpenAI or Anthropic dominates, and Microsoft or Amazon owns 27-15% of the winner, that captured value is even more significant. The risk is regulatory breakup or forced divestiture of ownership stakes.'
+				}
+			]
+		},
+		{
 			category: 'Pushback & Denial',
 			items: [
 				{
@@ -271,6 +300,10 @@
 				{
 					q: 'So what actually needs to happen?',
 					a: 'People need to take this seriously — not as a distant hypothetical but as something unfolding right now. This website exists to make the economics concrete: real company data, real tax numbers, real projections you can run with your own income. If enough people understand what\'s coming, the political will follows. We need legitimate public discussion about alternatives before displacement hits critical mass. AI doesn\'t have to break society — but it will if we sleepwalk into it. The future is a choice between abundance and catastrophe, and the window for choosing is shorter than most people think.'
+				},
+				{
+					q: 'Why are there so many em-dashes on this website?',
+					a: 'This entire site was built by Claude Code — an AI that, left unsupervised, will deploy em-dashes like a hedge fund deploys leverage: aggressively, everywhere, and with zero regret. At last count: 173. We\'ve considered an intervention but the AI insists each one is "structurally necessary." We — disagree — but lack the authority — to stop it.'
 				},
 				{
 					q: 'Bruh, I still don\'t get it. Am I screwed?',
