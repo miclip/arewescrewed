@@ -1,4 +1,4 @@
-import type { ScenarioParams, YearProjection, CompanyProfile } from './types';
+import type { ScenarioParams, YearProjection } from './types';
 import { smoothstep } from './math';
 
 export interface ProviderParams {
@@ -210,12 +210,14 @@ export function computeCapturedValues(
 		{ totalPct: number; stakes: { provider: string; pct: number }[] }
 	>();
 
+	// Assume each unique provider accounts for an equal share of total provider market cap
+	const uniqueProviders = new Set(CAPTURED_STAKES.map((s) => s.provider));
+	const providerShare = uniqueProviders.size > 0 ? 1 / uniqueProviders.size : 0;
+
 	for (const stake of CAPTURED_STAKES) {
 		const existing = ownerMap.get(stake.owner);
-		// Each stake captures that % of the total provider market cap
-		// This is a simplification — assumes providers share market cap equally
-		// In reality, OpenAI and Anthropic dominate, but this gives directional view
-		const providerShare = 1 / CAPTURED_STAKES.length; // equal share assumption
+		// Each stake captures stakePct of that provider's equal share
+		// This is a simplification — in reality, OpenAI and Anthropic dominate
 		if (existing) {
 			existing.totalPct += stake.stakePct * providerShare;
 			existing.stakes.push({ provider: stake.provider, pct: stake.stakePct });

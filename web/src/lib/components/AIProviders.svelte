@@ -4,7 +4,7 @@
 	import { Chart, Svg, Axis, Spline } from 'layerchart';
 	import { scaleLinear } from 'd3-scale';
 	import { providerProjections } from '$lib/stores/results';
-	import { formatCompact, formatCompactNum } from '$lib/model/format';
+	import { formatCompact } from '$lib/model/format';
 	import type { ProviderYearProjection } from '$lib/model/provider-engine';
 
 	let projections = $state<ProviderYearProjection[]>([]);
