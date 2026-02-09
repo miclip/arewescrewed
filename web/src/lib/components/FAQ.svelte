@@ -11,7 +11,7 @@
 			items: [
 				{
 					q: 'What actually is AI?',
-					a: 'At its core, modern AI is a word prediction engine — a very, very good one. Large language models (LLMs) like GPT, Claude, and Gemini are trained on enormous amounts of text and learn statistical patterns about what words tend to follow other words, in what contexts, with what meaning. They don\'t "know" things the way you do. They\'ve learned that when someone describes a bug in Python code, certain patterns of response are more useful than others. The result looks like understanding, reasoning, and even creativity — but the mechanism is pattern matching and prediction at a scale that produces emergent capabilities nobody fully predicted.'
+					a: 'At its core, modern AI is a word prediction engine — a very, very good one. <a href="https://en.wikipedia.org/wiki/Large_language_model" target="_blank" rel="noopener">Large language models (LLMs)</a> like GPT, Claude, and Gemini are trained on enormous amounts of text and learn statistical patterns about what words tend to follow other words, in what contexts, with what meaning. They don\'t "know" things the way you do. They\'ve learned that when someone describes a bug in Python code, certain patterns of response are more useful than others. The result looks like understanding, reasoning, and even creativity — but the mechanism is pattern matching and prediction at a scale that produces emergent capabilities nobody fully predicted.'
 				},
 				{
 					q: 'Is AI sentient? Does it actually think?',
@@ -27,7 +27,7 @@
 				},
 				{
 					q: 'What does "not general intelligence — yet" mean?',
-					a: 'Today\'s AI is "narrow" — it\'s extraordinarily good at specific tasks (writing, coding, analysis) but can\'t genuinely reason across all domains the way a human can. AGI — Artificial General Intelligence — is the goal every major lab is racing toward: an AI that can learn, reason, and solve problems as well as or better than a human in any domain, without being specifically trained for each one. OpenAI, Anthropic, Google DeepMind, xAI, and Meta are all explicitly working toward this. Nobody knows when it arrives — estimates range from 3 years to 30 years to "maybe never." But progress has been far faster than most experts predicted even two years ago, and a single breakthrough in reasoning or architecture could compress that timeline dramatically. For this model, AGI isn\'t required — current narrow AI is already enough to displace most cognitive work. But if AGI does arrive mid-displacement, the S-curve doesn\'t just steepen — it becomes a cliff. Every scenario in this model would shift toward the extreme case overnight.'
+					a: 'Today\'s AI is "narrow" — it\'s extraordinarily good at specific tasks (writing, coding, analysis) but can\'t genuinely reason across all domains the way a human can. <a href="https://en.wikipedia.org/wiki/Artificial_general_intelligence" target="_blank" rel="noopener">AGI — Artificial General Intelligence</a> — is the goal every major lab is racing toward: an AI that can learn, reason, and solve problems as well as or better than a human in any domain, without being specifically trained for each one. OpenAI, Anthropic, Google DeepMind, xAI, and Meta are all explicitly working toward this. Nobody knows when it arrives — estimates range from 3 years to 30 years to "maybe never." But progress has been far faster than most experts predicted even two years ago, and a single breakthrough in reasoning or architecture could compress that timeline dramatically. For this model, AGI isn\'t required — current narrow AI is already enough to displace most cognitive work. But if AGI does arrive mid-displacement, the S-curve doesn\'t just steepen — it becomes a cliff. Every scenario in this model would shift toward the extreme case overnight.'
 				}
 			]
 		},
@@ -56,7 +56,7 @@
 				},
 				{
 					q: 'Is the SaaS / vendor software model dead?',
-					a: 'It\'s in serious trouble. The entire SaaS business model is built on one assumption: building custom software is expensive and requires specialist knowledge, so companies pay vendors instead. AI demolishes both pillars. Building an internal tool that used to require a team of developers and months of work becomes an AI agent\'s weekend project. The domain expertise that made vendor software valuable — understanding HIPAA compliance, financial regulations, supply chain logistics — is exactly the kind of knowledge AI absorbs from training data. Some industries survive longer because of certification requirements and regulatory inertia, but the direction is clear. When a CISO needs a SIEM solution, that goes from a $500k/year vendor contract to an AI agent\'s overnight task. The $600B+ SaaS market is sitting on a shrinking moat.'
+					a: 'It\'s in serious trouble. The entire <a href="https://en.wikipedia.org/wiki/Software_as_a_service" target="_blank" rel="noopener">SaaS</a> business model is built on one assumption: building custom software is expensive and requires specialist knowledge, so companies pay vendors instead. AI demolishes both pillars. Building an internal tool that used to require a team of developers and months of work becomes an AI agent\'s weekend project. The domain expertise that made vendor software valuable — understanding <a href="https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act" target="_blank" rel="noopener">HIPAA</a> compliance, financial regulations, supply chain logistics — is exactly the kind of knowledge AI absorbs from training data. Some industries survive longer because of certification requirements and regulatory inertia, but the direction is clear. When a <a href="https://en.wikipedia.org/wiki/Chief_information_security_officer" target="_blank" rel="noopener">CISO</a> needs a <a href="https://en.wikipedia.org/wiki/Security_information_and_event_management" target="_blank" rel="noopener">SIEM</a> solution, that goes from a $500k/year vendor contract to an AI agent\'s overnight task. The $600B+ SaaS market is sitting on a shrinking moat.'
 				},
 				{
 					q: 'Are CEOs and executives at risk too?',
@@ -77,11 +77,11 @@
 				},
 				{
 					q: 'What is the 4% safe withdrawal rate?',
-					a: 'The 4% rule comes from the Trinity Study (1998) and William Bengen\'s research (1994). It says you can withdraw 4% of a diversified portfolio annually and have a very high probability of not running out of money over 30 years. So if you need $75,000/year, you need $75,000 / 0.04 = $1,875,000 invested. Your income comes from dividends first, then selling appreciated shares for the rest.'
+					a: 'The <a href="https://en.wikipedia.org/wiki/Trinity_study" target="_blank" rel="noopener">4% rule</a> comes from the Trinity Study (1998) and William Bengen\'s research (1994). It says you can withdraw 4% of a diversified portfolio annually and have a very high probability of not running out of money over 30 years. So if you need $75,000/year, you need $75,000 / 0.04 = $1,875,000 invested. Your income comes from dividends first, then selling appreciated shares for the rest.'
 				},
 				{
 					q: 'Why not just Universal Basic Income (UBI)?',
-					a: 'UBI could work economically, but it concentrates enormous power in whoever controls the payments. Your entire livelihood becomes dependent on one institution\'s continued goodwill. History shows this power gets abused: China\'s social credit system docks benefits for dissent, Canada froze bank accounts of protest donors in 2022, and authoritarian regimes routinely cut pensions to political opponents. The investor model distributes income across thousands of companies — no single entity can cut you off.'
+					a: '<a href="https://en.wikipedia.org/wiki/Universal_basic_income" target="_blank" rel="noopener">UBI</a> could work economically, but it concentrates enormous power in whoever controls the payments. Your entire livelihood becomes dependent on one institution\'s continued goodwill. History shows this power gets abused: China\'s social credit system docks benefits for dissent, Canada froze bank accounts of protest donors in 2022, and authoritarian regimes routinely cut pensions to political opponents. The investor model distributes income across thousands of companies — no single entity can cut you off.'
 				},
 				{
 					q: 'How realistic is it that displaced workers can accumulate enough?',
@@ -98,7 +98,7 @@
 			items: [
 				{
 					q: 'Where does the company data come from?',
-					a: 'All financial data comes from SEC EDGAR XBRL filings — the official, structured financial data that public companies are required to file. We use FY2024/2025 10-K filings for 10 companies: NVDA, MSFT, AAPL, GOOGL, AMZN, META, JPM, JNJ, PG, XOM. Labor costs are estimated using Bureau of Labor Statistics data (employer costs including benefits at ~1.4x multiplier). Share prices are approximate market prices as of early 2026.'
+					a: 'All financial data comes from <a href="https://en.wikipedia.org/wiki/U.S._Securities_and_Exchange_Commission" target="_blank" rel="noopener">SEC</a> <a href="https://en.wikipedia.org/wiki/EDGAR" target="_blank" rel="noopener">EDGAR</a> <a href="https://en.wikipedia.org/wiki/XBRL" target="_blank" rel="noopener">XBRL</a> filings — the official, structured financial data that public companies are required to file. We use FY2024/2025 <a href="https://en.wikipedia.org/wiki/Form_10-K" target="_blank" rel="noopener">10-K</a> filings for 10 companies: NVDA, MSFT, AAPL, GOOGL, AMZN, META, JPM, JNJ, PG, XOM. Labor costs are estimated using Bureau of Labor Statistics data (employer costs including benefits at ~1.4x multiplier). Share prices are approximate market prices as of early 2026.'
 				},
 				{
 					q: 'What does the S-curve mean?',
@@ -122,7 +122,7 @@
 				},
 				{
 					q: 'Why does the model assume constant P/E ratios?',
-					a: 'The capital gains model assumes share prices track earnings growth — if a company\'s profit doubles, its stock price doubles. This is a simplification. In reality, P/E ratios expand and contract with market sentiment, interest rates, and growth expectations. AI-driven profit growth could cause P/E expansion (markets reward growth) or contraction (if demand collapse concerns spook investors). Constant P/E is the neutral assumption.'
+					a: 'The capital gains model assumes share prices track earnings growth — if a company\'s profit doubles, its stock price doubles. This is a simplification. In reality, <a href="https://en.wikipedia.org/wiki/Price%E2%80%93earnings_ratio" target="_blank" rel="noopener">P/E</a> ratios expand and contract with market sentiment, interest rates, and growth expectations. AI-driven profit growth could cause P/E expansion (markets reward growth) or contraction (if demand collapse concerns spook investors). Constant P/E is the neutral assumption.'
 				},
 				{
 					q: 'What are the biggest weaknesses of this model?',
@@ -247,7 +247,7 @@
 				},
 				{
 					q: 'I\'m already investing in index funds — am I covered?',
-					a: 'You\'re better positioned than most, but "covered" depends on how much you have and how fast displacement hits your sector. An S&P 500 index fund gives you broad exposure to companies that benefit from AI — many of the same companies in the model\'s portfolio. The key question is whether your portfolio will be large enough to generate your target income at a 4% withdrawal rate by the time displacement affects you. Use the "Your Outlook" tab to check: if you need $75k/year, you need $1.875M invested. Are you on track?'
+					a: 'You\'re better positioned than most, but "covered" depends on how much you have and how fast displacement hits your sector. An <a href="https://en.wikipedia.org/wiki/S%26P_500" target="_blank" rel="noopener">S&amp;P 500</a> index fund gives you broad exposure to companies that benefit from AI — many of the same companies in the model\'s portfolio. The key question is whether your portfolio will be large enough to generate your target income at a 4% withdrawal rate by the time displacement affects you. Use the "Your Outlook" tab to check: if you need $75k/year, you need $1.875M invested. Are you on track?'
 				},
 				{
 					q: 'What about real estate as an alternative?',
@@ -306,8 +306,8 @@
 							</span>
 						</button>
 						{#if openIndex === idx}
-							<div class="px-5 pb-4 text-sm text-text-muted leading-relaxed border-t border-bg-input/50 pt-3">
-								{item.a}
+							<div class="px-5 pb-4 text-sm text-text-muted leading-relaxed border-t border-bg-input/50 pt-3 [&_a]:text-accent [&_a]:underline [&_a:hover]:text-accent-hover">
+								{@html item.a}
 							</div>
 						{/if}
 					</div>

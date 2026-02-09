@@ -77,7 +77,7 @@
 
 	<!-- Why Not UBI -->
 	<div class="bg-bg-card rounded-xl border border-bg-input p-3 sm:p-5 space-y-3">
-		<h3 class="font-semibold text-yellow">Why Not UBI?</h3>
+		<h3 class="font-semibold text-yellow">Why Not <a href="https://en.wikipedia.org/wiki/Universal_basic_income" target="_blank" rel="noopener" class="underline hover:text-yellow/80">UBI</a>?</h3>
 		<div class="text-sm text-text-muted space-y-2 leading-relaxed">
 			<p>
 				The obvious answer is Universal Basic Income — government pays everyone a living wage. But UBI
@@ -185,9 +185,9 @@
 					This compounds the profit effect.
 				</p>
 				<p>
-					<strong class="text-text">4% Safe Withdrawal Rate:</strong> Your income comes from the Trinity Study's
+					<strong class="text-text">4% Safe Withdrawal Rate:</strong> Your income comes from the <a href="https://en.wikipedia.org/wiki/Trinity_study" target="_blank" rel="noopener" class="text-accent underline hover:text-accent-hover">Trinity Study's</a>
 					4% rule — dividends count first, then sell appreciated shares for the rest. Share prices track
-					earnings growth (constant P/E assumption).
+					earnings growth (constant <a href="https://en.wikipedia.org/wiki/Price%E2%80%93earnings_ratio" target="_blank" rel="noopener" class="text-accent underline hover:text-accent-hover">P/E</a> assumption).
 				</p>
 			</div>
 		</div>
