@@ -538,7 +538,7 @@
 		<!-- Chart 4: Debt-to-GDP -->
 		<div class="space-y-2">
 			<h3 class="text-sm font-semibold text-text-muted uppercase tracking-wide">
-				Debt-to-GDP Ratio
+				Debt-to-<a href="https://en.wikipedia.org/wiki/Gross_domestic_product" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-accent-hover">GDP</a> Ratio
 			</h3>
 			<div class="h-48 md:h-64" style="--chart-area-fill: rgba(251, 146, 60, 0.15);">
 				{#key chartKey}
