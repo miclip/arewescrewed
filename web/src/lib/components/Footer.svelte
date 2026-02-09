@@ -9,14 +9,13 @@
 			<ul class="space-y-1 text-xs">
 				<li>
 					<strong class="text-text-muted">Company financials:</strong>
-					<a href="https://en.wikipedia.org/wiki/U.S._Securities_and_Exchange_Commission" target="_blank" rel="noopener" class="text-accent hover:text-accent-hover">SEC</a>
-					<a href="https://en.wikipedia.org/wiki/EDGAR" target="_blank" rel="noopener" class="text-accent hover:text-accent-hover">EDGAR</a>
-					<a href="https://en.wikipedia.org/wiki/XBRL" target="_blank" rel="noopener" class="text-accent hover:text-accent-hover">XBRL</a> API
-					 — FY2024/2025 <a href="https://en.wikipedia.org/wiki/Form_10-K" target="_blank" rel="noopener" class="text-accent hover:text-accent-hover">10-K</a> filings for all 10 portfolio companies (NVDA, MSFT, AAPL, GOOGL, AMZN, META, JPM, JNJ, PG, XOM)
+					<a href="https://efts.sec.gov/LATEST/search-index?q=%22XBRL%22" class="text-accent hover:text-accent-hover"><abbr title="Securities and Exchange Commission">SEC</abbr> <abbr title="Electronic Data Gathering, Analysis, and Retrieval">EDGAR</abbr> <abbr title="eXtensible Business Reporting Language">XBRL</abbr> API</a>
+					(<a href="https://en.wikipedia.org/wiki/EDGAR" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-accent-hover">wiki</a>)
+					 — FY2024/2025 <a href="https://en.wikipedia.org/wiki/Form_10-K" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-accent-hover">10-K</a> filings for all 10 portfolio companies (NVDA, MSFT, AAPL, GOOGL, AMZN, META, JPM, JNJ, PG, XOM)
 				</li>
 				<li>
 					<strong class="text-text-muted">Amazon headcount:</strong>
-					Amazon Annual Reports, SEC <a href="https://en.wikipedia.org/wiki/Form_10-K" target="_blank" rel="noopener" class="text-accent hover:text-accent-hover">10-K</a> filings "Employees" section (not available in structured <a href="https://en.wikipedia.org/wiki/XBRL" target="_blank" rel="noopener" class="text-accent hover:text-accent-hover">XBRL</a> data)
+					Amazon Annual Reports, SEC <a href="https://en.wikipedia.org/wiki/Form_10-K" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-accent-hover">10-K</a> filings "Employees" section (not available in structured <a href="https://en.wikipedia.org/wiki/XBRL" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-accent-hover">XBRL</a> data)
 				</li>
 				<li>
 					<strong class="text-text-muted">Labor cost estimates:</strong>
@@ -36,7 +35,7 @@
 				</li>
 				<li>
 					<strong class="text-text-muted">Share prices:</strong>
-					Approximate market prices as of early 2026. Capital gains model assumes constant <a href="https://en.wikipedia.org/wiki/Price%E2%80%93earnings_ratio" target="_blank" rel="noopener" class="text-accent hover:text-accent-hover">P/E</a> ratio (price tracks earnings growth).
+					Approximate market prices as of early 2026. Capital gains model assumes constant <a href="https://en.wikipedia.org/wiki/Price%E2%80%93earnings_ratio" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-accent-hover">P/E</a> ratio (price tracks earnings growth).
 				</li>
 			</ul>
 		</div>
