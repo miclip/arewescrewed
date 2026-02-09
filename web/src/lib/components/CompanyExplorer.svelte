@@ -110,11 +110,13 @@
 					<div class="text-text-muted text-xs">{PRESETS[selectedPreset].label} — Year 15</div>
 					<div>Profit: <span class="font-mono text-accent">{formatCompact(mid.newProfit)}</span> <span class="text-text-muted">(was {formatCompact(mid.originalProfit)})</span></div>
 					<div>Workers: <span class="font-mono">{formatNumber(mid.remainingHeadcount)}</span> <span class="text-text-muted">(of {formatNumber(mid.originalHeadcount)})</span></div>
+					<div>AI Spend: <span class="font-mono" style="color: #8b5cf6;">{formatCompact(mid.aiComputeCost)}</span> <span class="text-text-muted/70 text-[10px]">→ AI providers</span></div>
 				</div>
 				<div class="space-y-1">
 					<div class="text-text-muted text-xs">{PRESETS[selectedPreset].label} — Year 30</div>
 					<div>Profit: <span class="font-mono text-accent">{formatCompact(end.newProfit)}</span></div>
 					<div>Margin: <span class="font-mono">{formatPct(end.profitMarginNew)}</span> <span class="text-text-muted">(was {formatPct(end.profitMarginOriginal)})</span></div>
+					<div>AI Spend: <span class="font-mono" style="color: #8b5cf6;">{formatCompact(end.aiComputeCost)}</span> <span class="text-text-muted/70 text-[10px]">→ AI providers</span></div>
 				</div>
 				<div class="space-y-1">
 					<div class="text-text-muted text-xs">Profit Multiplier</div>

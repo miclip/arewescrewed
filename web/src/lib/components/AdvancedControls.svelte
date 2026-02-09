@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { scenarioParams } from '$lib/stores/scenario';
+	import { providerParams } from '$lib/stores/provider';
 	import type { ScenarioParams } from '$lib/model/types';
+	import type { ProviderParams } from '$lib/model/provider-engine';
 
 	let params = $state<ScenarioParams | null>(null);
+	let provParams = $state<ProviderParams | null>(null);
 	let tooltipKey = $state<string | null>(null);
 
 	$effect(() => {
@@ -12,8 +15,19 @@
 		return unsub;
 	});
 
+	$effect(() => {
+		const unsub = providerParams.subscribe((v) => {
+			provParams = { ...v };
+		});
+		return unsub;
+	});
+
 	function update() {
 		if (params) scenarioParams.set({ ...params });
+	}
+
+	function updateProvider() {
+		if (provParams) providerParams.set({ ...provParams });
 	}
 
 	function toggleTooltip(key: string) {
@@ -48,6 +62,25 @@
 	];
 
 	let groups = $derived([...new Set(sliders.map((s) => s.group))]);
+
+	interface ProviderSliderDef {
+		key: keyof ProviderParams;
+		label: string;
+		min: number;
+		max: number;
+		step: number;
+		format: (v: number) => string;
+		explanation: string;
+	}
+
+	const providerSliders: ProviderSliderDef[] = [
+		{ key: 'providerMargin', label: 'Starting gross margin', min: 0.3, max: 0.8, step: 0.05, format: (v) => `${Math.round(v * 100)}%`, explanation: 'AI providers\' current gross margin. GPU infrastructure is expensive but pricing is high. Similar to cloud computing margins.' },
+		{ key: 'providerMarginCap', label: 'Margin ceiling', min: 0.6, max: 0.95, step: 0.05, format: (v) => `${Math.round(v * 100)}%`, explanation: 'Maximum gross margin as hardware costs plummet. Providers don\'t pass all savings to customers — think AWS pricing history.' },
+		{ key: 'marginExpansionRate', label: 'Margin expansion rate', min: 0.005, max: 0.05, step: 0.005, format: (v) => `+${(v * 100).toFixed(1)}pp/yr`, explanation: 'How fast margins expand each year as hardware costs fall faster than pricing. At 2pp/year, margins grow from 60% to 85% over ~12 years.' },
+		{ key: 'baseAnnualTrainingCost', label: 'Training/R&D spend (yr 0)', min: 5e9, max: 80e9, step: 5e9, format: (v) => `$${(v / 1e9).toFixed(0)}B/yr`, explanation: 'Industry-wide annual spending on training new AI models and R&D. Each generation costs more — GPT-4\'s final training run was ~$40-78M (Epoch AI / SemiAnalysis estimates), frontier models are now approaching $1B per run. OpenAI alone spent ~$5B on R&D compute in 2024.' },
+		{ key: 'trainingCostGrowthRate', label: 'Training cost growth', min: 0.0, max: 0.30, step: 0.05, format: (v) => `${Math.round(v * 100)}%/yr`, explanation: 'How fast training/R&D costs grow each year. Bigger models need more compute, more data, more experimentation. At 15%/yr, costs double every ~5 years.' },
+		{ key: 'peMultiple', label: 'P/E multiple', min: 15, max: 80, step: 5, format: (v) => `${v}x`, explanation: 'Price-to-earnings ratio for AI provider industry. High-growth tech typically commands 40-60x. Determines market cap from profits.' },
+	];
 </script>
 
 {#if params}
@@ -95,5 +128,48 @@
 				</div>
 			</div>
 		{/each}
+
+		<!-- AI Provider Assumptions -->
+		{#if provParams}
+			<div>
+				<h4 class="text-xs font-semibold text-text-muted uppercase tracking-wide mb-2">AI Provider Assumptions</h4>
+				<div class="space-y-3">
+					{#each providerSliders as slider}
+						<div>
+							<div class="flex justify-between text-xs mb-1">
+								<span class="text-text-muted flex items-center gap-1">
+									{slider.label}
+									<button
+										onclick={() => toggleTooltip(slider.key)}
+										class="inline-flex items-center justify-center w-6 h-6 md:w-4 md:h-4 rounded-full border border-text-muted/40 text-text-muted/60 hover:border-accent hover:text-accent transition-colors text-[10px] leading-none"
+										aria-label="Explain {slider.label}"
+									>?</button>
+								</span>
+								<span class="text-accent font-mono">
+									{slider.format(provParams[slider.key] as number)}
+								</span>
+							</div>
+							{#if tooltipKey === slider.key}
+								<div class="text-xs text-text-muted bg-bg/80 border border-bg-input rounded p-2 mb-1">
+									{slider.explanation}
+								</div>
+							{/if}
+							<input
+								type="range"
+								min={slider.min}
+								max={slider.max}
+								step={slider.step}
+								value={provParams[slider.key]}
+								oninput={(e) => {
+									(provParams as any)[slider.key] = Number((e.target as HTMLInputElement).value);
+									updateProvider();
+								}}
+								class="w-full accent-accent"
+							/>
+						</div>
+					{/each}
+				</div>
+			</div>
+		{/if}
 	</div>
 {/if}

@@ -14,6 +14,7 @@
 	import CompanyExplorer from '$lib/components/CompanyExplorer.svelte';
 	import BabyBornToday from '$lib/components/BabyBornToday.svelte';
 	import FiscalImpact from '$lib/components/FiscalImpact.svelte';
+	import AIProviders from '$lib/components/AIProviders.svelte';
 	import FAQ from '$lib/components/FAQ.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import { personalInputs } from '$lib/stores/personal';
@@ -23,7 +24,7 @@
 	import { PRESETS, type PresetName } from '$lib/model/presets';
 	import { browser } from '$app/environment';
 
-	let activeTab = $state<'corporate' | 'personal' | 'explore' | 'baby' | 'fiscal' | 'assumptions' | 'faq'>('corporate');
+	let activeTab = $state<'corporate' | 'personal' | 'explore' | 'baby' | 'fiscal' | 'providers' | 'assumptions' | 'faq'>('corporate');
 
 	onMount(() => {
 		if (!browser) return;
@@ -92,6 +93,17 @@
 					: 'border-transparent text-text-muted hover:text-text'}"
 			>
 				Taxation & Debt
+			</button>
+			<button
+				role="tab"
+				aria-selected={activeTab === 'providers'}
+				aria-controls="panel-providers"
+				onclick={() => (activeTab = 'providers')}
+				class="whitespace-nowrap flex-shrink-0 px-3 py-2.5 md:px-5 md:py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'providers'
+					? 'border-accent text-accent'
+					: 'border-transparent text-text-muted hover:text-text'}"
+			>
+				AI Providers
 			</button>
 			<button
 				role="tab"
@@ -169,6 +181,12 @@
 			<div id="panel-fiscal" role="tabpanel">
 				<div class="max-w-5xl mx-auto">
 					<FiscalImpact />
+				</div>
+			</div>
+		{:else if activeTab === 'providers'}
+			<div id="panel-providers" role="tabpanel">
+				<div class="max-w-5xl mx-auto">
+					<AIProviders />
 				</div>
 			</div>
 		{:else if activeTab === 'faq'}
