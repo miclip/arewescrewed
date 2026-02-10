@@ -17,7 +17,7 @@
 	<meta property="og:title" content="Are We Screwed? — AI Displacement Financial Calculator" />
 	<meta property="og:description" content="AI is replacing jobs. Can you survive as an investor? Calculate your personal outlook under different AI automation scenarios." />
 	<meta property="og:url" content="https://arewescrewed.ai" />
-	<meta property="og:image" content="https://arewescrewed.ai/og-image.png" />
+	<meta property="og:image" content="https://arewescrewed.ai/og-image.jpg" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
 
@@ -25,7 +25,7 @@
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content="Are We Screwed? — AI Displacement Financial Calculator" />
 	<meta name="twitter:description" content="AI is replacing jobs. Can you survive as an investor? Calculate your personal outlook under different AI automation scenarios." />
-	<meta name="twitter:image" content="https://arewescrewed.ai/og-image.png" />
+	<meta name="twitter:image" content="https://arewescrewed.ai/og-image.jpg" />
 
 	<!-- Structured Data -->
 	{@html `<script type="application/ld+json">${JSON.stringify({
