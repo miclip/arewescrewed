@@ -137,31 +137,6 @@
 			]
 		},
 		{
-			category: 'Baby Born Today',
-			items: [
-				{
-					q: 'Why a birth grant instead of monthly contributions?',
-					a: 'Compound growth is exponential — the earlier money enters the market, the more it multiplies. A $50k lump sum at birth has 21 years to compound before the child turns 21. Monthly contributions starting later miss the most powerful compounding years. The model shows this clearly: a birth grant of $50k can grow to several hundred thousand by age 21, while reaching the same amount through monthly savings starting at age 22 requires dramatically higher contributions.'
-				},
-				{
-					q: 'Where does the cost-of-living reduction come from?',
-					a: 'The supply chain cascade. As AI automates not just individual companies but their entire supply chains — shipping, manufacturing, agriculture, energy — the cost of producing everything drops. A baby born today will enter adulthood in a world where $75k of purchasing power might only cost $45k-$55k in nominal terms. The model tracks this using the same S-curve as workforce displacement, applied to non-labor costs across the economy.'
-				},
-				{
-					q: 'Is $50k per baby realistic as government policy?',
-					a: 'About 3.6 million babies are born in the US each year. At $50k each, that\'s $180 billion/year — roughly 3% of the federal budget. For context, the US spends ~$900B/year on defense. Whether it\'s politically feasible is a different question, but the math isn\'t absurd. And if the alternative is supporting those same people with $25k/year safety net spending for decades, the birth grant is dramatically cheaper.'
-				},
-				{
-					q: 'What happens if the market crashes during those 21 years?',
-					a: 'The model uses portfolio growth rates derived from the scenario engine, which includes demand feedback effects. In moderate scenarios, growth is strong because AI-boosted profits drive returns. In extreme scenarios with low investor adoption, demand collapse drags down returns. Real markets would also have volatility the model doesn\'t capture. But over 21-year horizons, equities have historically recovered from every crash. The 4% SWR rule already accounts for sequence-of-returns risk.'
-				},
-				{
-					q: 'Why age 21 as the unlock age?',
-					a: 'It\'s a balance. Younger unlock ages (18) risk the money being spent before the person understands its purpose. Older ages (25, 30) mean the person has years without access during peak displacement. Age 21 gives 21 years of compounding and unlocks right around when most people are establishing financial independence. The model could work with other unlock ages — the compound math just shifts.'
-				}
-			]
-		},
-		{
 			category: 'Taxation & Government',
 			items: [
 				{

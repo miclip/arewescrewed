@@ -65,6 +65,13 @@ svg .domain {
 	scrollbar-width: none;
 }
 
+/* Assumptions slide-out panel: push content left on large screens */
+@media (min-width: 1024px) {
+	.assumptions-open {
+		margin-right: 380px;
+	}
+}
+
 /* Area fill controlled via --chart-area-fill CSS variable on parent container */
 svg .path-area {
 	fill: var(--chart-area-fill, transparent) !important;

@@ -9,22 +9,45 @@
 	import IncomeReplacement from '$lib/components/IncomeReplacement.svelte';
 	import PortfolioGrowth from '$lib/components/PortfolioGrowth.svelte';
 	import GapAnalysis from '$lib/components/GapAnalysis.svelte';
+	import PortfolioIncome from '$lib/components/PortfolioIncome.svelte';
 	import KeyMetrics from '$lib/components/KeyMetrics.svelte';
 	import CorporateView from '$lib/components/CorporateView.svelte';
 	import CompanyExplorer from '$lib/components/CompanyExplorer.svelte';
-	import BabyBornToday from '$lib/components/BabyBornToday.svelte';
 	import FiscalImpact from '$lib/components/FiscalImpact.svelte';
 	import AIProviders from '$lib/components/AIProviders.svelte';
-	import FAQ from '$lib/components/FAQ.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import { personalInputs } from '$lib/stores/personal';
 	import { scenarioParams, activePreset } from '$lib/stores/scenario';
+	import { portfolioResult } from '$lib/stores/results';
+	import { formatCompact } from '$lib/model/format';
+	import type { PortfolioResult as PortfolioResultType } from '$lib/model/types';
 	import { decodeUrlState } from '$lib/utils/url-state';
 	import { onMount } from 'svelte';
 	import { PRESETS, type PresetName } from '$lib/model/presets';
 	import { browser } from '$app/environment';
+	import { fly } from 'svelte/transition';
 
-	let activeTab = $state<'corporate' | 'personal' | 'explore' | 'baby' | 'fiscal' | 'providers' | 'assumptions' | 'faq'>('corporate');
+	let activeTab = $state<'corporate' | 'personal' | 'explore' | 'fiscal' | 'providers'>('corporate');
+	let showAssumptions = $state(false);
+	let portfolio = $state<PortfolioResultType | null>(null);
+
+	$effect(() => {
+		const unsub = portfolioResult.subscribe((v) => { portfolio = v; });
+		return unsub;
+	});
+
+	// Lock body scroll below lg breakpoint when assumptions panel is open
+	$effect(() => {
+		if (!browser) return;
+		if (showAssumptions && window.innerWidth < 1024) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = '';
+		}
+		return () => {
+			document.body.style.overflow = '';
+		};
+	});
 
 	onMount(() => {
 		if (!browser) return;
@@ -39,6 +62,8 @@
 	});
 </script>
 
+<svelte:window onkeydown={(e) => e.key === 'Escape' && showAssumptions && (showAssumptions = false)} />
+
 <div class="min-h-screen bg-bg">
 	<Hero />
 
@@ -48,7 +73,7 @@
 	</div>
 
 	<!-- Tab navigation -->
-	<div class="max-w-7xl mx-auto px-4">
+	<div class="max-w-7xl mx-auto px-4 transition-all duration-300 {showAssumptions ? 'assumptions-open' : ''}">
 		<div role="tablist" class="flex gap-1 border-b border-bg-input mb-6 overflow-x-auto scrollbar-hide">
 			<button
 				role="tab"
@@ -106,42 +131,22 @@
 				AI Providers
 			</button>
 			<button
-				role="tab"
-				aria-selected={activeTab === 'baby'}
-				aria-controls="panel-baby"
-				onclick={() => (activeTab = 'baby')}
-				class="whitespace-nowrap flex-shrink-0 px-3 py-2.5 md:px-5 md:py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'baby'
+				aria-label="Toggle assumptions panel"
+				aria-expanded={showAssumptions}
+				onclick={() => (showAssumptions = !showAssumptions)}
+				class="ml-auto flex-shrink-0 px-3 py-2.5 md:px-4 md:py-3 transition-colors border-b-2 {showAssumptions
 					? 'border-accent text-accent'
 					: 'border-transparent text-text-muted hover:text-text'}"
 			>
-				Baby Born Today
-			</button>
-			<button
-				role="tab"
-				aria-selected={activeTab === 'assumptions'}
-				aria-controls="panel-assumptions"
-				onclick={() => (activeTab = 'assumptions')}
-				class="whitespace-nowrap flex-shrink-0 px-3 py-2.5 md:px-5 md:py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'assumptions'
-					? 'border-accent text-accent'
-					: 'border-transparent text-text-muted hover:text-text'}"
-			>
-				Assumptions
-			</button>
-			<button
-				role="tab"
-				aria-selected={activeTab === 'faq'}
-				aria-controls="panel-faq"
-				onclick={() => (activeTab = 'faq')}
-				class="whitespace-nowrap flex-shrink-0 px-3 py-2.5 md:px-5 md:py-3 text-sm font-medium transition-colors border-b-2 {activeTab === 'faq'
-					? 'border-accent text-accent'
-					: 'border-transparent text-text-muted hover:text-text'}"
-			>
-				FAQ
+				<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<circle cx="12" cy="12" r="3"></circle>
+					<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+				</svg>
 			</button>
 		</div>
 	</div>
 
-	<main class="max-w-7xl mx-auto px-4 pb-12">
+	<main class="max-w-7xl mx-auto px-4 pb-12 transition-all duration-300 {showAssumptions ? 'assumptions-open' : ''}">
 		{#if activeTab === 'personal'}
 			<div id="panel-personal" role="tabpanel">
 				<!-- Key metrics bar -->
@@ -160,6 +165,26 @@
 						<PersonalTimeline />
 						<IncomeReplacement />
 						<PortfolioGrowth />
+						<PortfolioIncome />
+						{#if portfolio}
+							<div class="bg-bg-card rounded-xl border border-bg-input p-3 sm:p-5 space-y-3">
+								<h3 class="font-semibold text-accent">10-Company Portfolio</h3>
+								<p class="text-xs text-text-muted mb-2">
+									Equal-weight allocation across sectors. Per $1M invested, year 15 total income:
+								</p>
+								<div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-xs">
+									{#each portfolio.allocations as alloc}
+										{@const yr15 = portfolio.yearlyResults[15]}
+										{@const div = yr15?.companyDividends[alloc.company.ticker] ?? 0}
+										<div class="bg-bg/50 rounded p-2">
+											<div class="font-semibold text-text">{alloc.company.ticker}</div>
+											<div class="text-text-muted">{alloc.company.name}</div>
+											<div class="font-mono text-accent">{formatCompact(div)}/yr</div>
+										</div>
+									{/each}
+								</div>
+							</div>
+						{/if}
 						<ScenarioCompare />
 						<GapAnalysis />
 					</div>
@@ -169,12 +194,6 @@
 			<div id="panel-explore" role="tabpanel">
 				<div class="max-w-5xl mx-auto">
 					<CompanyExplorer />
-				</div>
-			</div>
-		{:else if activeTab === 'baby'}
-			<div id="panel-baby" role="tabpanel">
-				<div class="max-w-5xl mx-auto">
-					<BabyBornToday />
 				</div>
 			</div>
 		{:else if activeTab === 'fiscal'}
@@ -189,18 +208,6 @@
 					<AIProviders />
 				</div>
 			</div>
-		{:else if activeTab === 'faq'}
-			<div id="panel-faq" role="tabpanel">
-				<div class="max-w-3xl mx-auto">
-					<FAQ />
-				</div>
-			</div>
-		{:else if activeTab === 'assumptions'}
-			<div id="panel-assumptions" role="tabpanel">
-				<div class="max-w-3xl mx-auto space-y-6">
-					<AdvancedControls />
-				</div>
-			</div>
 		{:else}
 			<div id="panel-corporate" role="tabpanel">
 				<div class="max-w-5xl mx-auto">
@@ -209,6 +216,42 @@
 			</div>
 		{/if}
 	</main>
+
+	<!-- Assumptions slide-out panel -->
+	{#if showAssumptions}
+		<!-- Mobile backdrop -->
+		<button
+			class="fixed inset-0 bg-black/50 z-30 sm:hidden"
+			onclick={() => (showAssumptions = false)}
+			aria-label="Close assumptions panel"
+			tabindex="-1"
+		></button>
+
+		<aside
+			class="fixed top-0 right-0 h-full w-full sm:w-[380px] bg-bg border-l border-bg-input z-40 flex flex-col shadow-2xl"
+			transition:fly={{ x: 380, duration: 250 }}
+		>
+			<!-- Header -->
+			<div class="flex items-center justify-between px-4 py-3 border-b border-bg-input">
+				<h2 class="text-lg font-semibold text-text">Assumptions</h2>
+				<button
+					onclick={() => (showAssumptions = false)}
+					aria-label="Close assumptions panel"
+					class="p-1.5 rounded-md text-text-muted hover:text-text hover:bg-bg-input transition-colors"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<line x1="18" y1="6" x2="6" y2="18"></line>
+						<line x1="6" y1="6" x2="18" y2="18"></line>
+					</svg>
+				</button>
+			</div>
+
+			<!-- Scrollable body -->
+			<div class="flex-1 overflow-y-auto px-4 py-4">
+				<AdvancedControls />
+			</div>
+		</aside>
+	{/if}
 
 	<Footer />
 </div>

@@ -82,4 +82,8 @@
 		</button>
 		<span class="text-xs text-text-muted uppercase tracking-wide">...or the hope.</span>
 	</div>
+
+	<p class="text-sm text-text-muted mt-4">
+		Curious to learn more? Check out our <a href="{base}/faq" class="text-accent hover:text-accent-hover underline underline-offset-2">FAQ</a>.
+	</p>
 </section>

@@ -1,14 +1,13 @@
 <script lang="ts">
-	import { amazonProjections, amazonDystopiaProjections, portfolioResult } from '$lib/stores/results';
+	import { amazonProjections, amazonDystopiaProjections } from '$lib/stores/results';
 	import { scenarioParams, activePreset } from '$lib/stores/scenario';
 	import { PRESETS, type PresetName } from '$lib/model/presets';
 	import { formatCompact, formatPct, formatNumber, formatCurrency } from '$lib/model/format';
 	import { PORTFOLIO_COMPANIES } from '$lib/model/companies';
 	import ProfitProjection from './ProfitProjection.svelte';
 	import TwoFutures from './TwoFutures.svelte';
-	import PortfolioIncome from './PortfolioIncome.svelte';
 	import WorkforceChart from './WorkforceChart.svelte';
-	import type { YearProjection, ScenarioParams, PortfolioResult as PortfolioResultType } from '$lib/model/types';
+	import type { YearProjection, ScenarioParams } from '$lib/model/types';
 
 	const amazon = PORTFOLIO_COMPANIES.find((c) => c.ticker === 'AMZN')!;
 	let currentParams = $state<ScenarioParams | null>(null);
@@ -18,15 +17,10 @@
 	});
 
 	let projections = $state<YearProjection[]>([]);
-	let portfolio = $state<PortfolioResultType | null>(null);
 	let preset = $state<PresetName>('moderate');
 
 	$effect(() => {
 		const unsub = amazonProjections.subscribe((v) => { projections = v; });
-		return unsub;
-	});
-	$effect(() => {
-		const unsub = portfolioResult.subscribe((v) => { portfolio = v; });
 		return unsub;
 	});
 	$effect(() => {
@@ -198,27 +192,6 @@
 		<WorkforceChart />
 		<ProfitProjection />
 		<TwoFutures />
-		<PortfolioIncome />
 	</div>
 
-	{#if portfolio}
-		<!-- Portfolio breakdown -->
-		<div class="bg-bg-card rounded-xl border border-bg-input p-3 sm:p-5 space-y-3">
-			<h3 class="font-semibold text-accent">10-Company Portfolio</h3>
-			<p class="text-xs text-text-muted mb-2">
-				Equal-weight allocation across sectors. Per $1M invested, year 15 total income:
-			</p>
-			<div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-xs">
-				{#each portfolio.allocations as alloc}
-					{@const yr15 = portfolio.yearlyResults[15]}
-					{@const div = yr15?.companyDividends[alloc.company.ticker] ?? 0}
-					<div class="bg-bg/50 rounded p-2">
-						<div class="font-semibold text-text">{alloc.company.ticker}</div>
-						<div class="text-text-muted">{alloc.company.name}</div>
-						<div class="font-mono text-accent">{formatCompact(div)}/yr</div>
-					</div>
-				{/each}
-			</div>
-		</div>
-	{/if}
 </div>
