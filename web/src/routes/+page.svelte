@@ -36,10 +36,10 @@
 		return unsub;
 	});
 
-	// Lock body scroll on mobile when assumptions panel is open
+	// Lock body scroll below lg breakpoint when assumptions panel is open
 	$effect(() => {
 		if (!browser) return;
-		if (showAssumptions && window.innerWidth < 640) {
+		if (showAssumptions && window.innerWidth < 1024) {
 			document.body.style.overflow = 'hidden';
 		} else {
 			document.body.style.overflow = '';
@@ -61,6 +61,8 @@
 		}
 	});
 </script>
+
+<svelte:window onkeydown={(e) => e.key === 'Escape' && showAssumptions && (showAssumptions = false)} />
 
 <div class="min-h-screen bg-bg">
 	<Hero />
