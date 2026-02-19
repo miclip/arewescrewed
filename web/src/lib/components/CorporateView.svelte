@@ -7,6 +7,7 @@
 	import ProfitProjection from './ProfitProjection.svelte';
 	import TwoFutures from './TwoFutures.svelte';
 	import WorkforceChart from './WorkforceChart.svelte';
+	import RifTimeline from './RifTimeline.svelte';
 	import type { YearProjection, ScenarioParams } from '$lib/model/types';
 
 	const amazon = PORTFOLIO_COMPANIES.find((c) => c.ticker === 'AMZN')!;
@@ -189,6 +190,7 @@
 
 	<!-- Charts -->
 	<div class="grid grid-cols-1 gap-8">
+		<RifTimeline />
 		<WorkforceChart />
 		<ProfitProjection />
 		<TwoFutures />
