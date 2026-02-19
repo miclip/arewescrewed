@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Chart, Svg, Area, Axis, Spline } from 'layerchart';
+	import { Chart, Svg, Area, Axis, Spline, Points } from 'layerchart';
 	import { scaleLinear } from 'd3-scale';
 	import { amazonProjections } from '$lib/stores/results';
 	import { formatCompactNum } from '$lib/model/format';
@@ -21,6 +21,11 @@
 	);
 
 	let maxCount = $derived(originalData.length > 0 ? originalData[0].value * 1.1 : 1);
+
+	// "You are here" — first projection point is actual FY2024 headcount
+	let currentDot = $derived(
+		remainingData.length > 0 ? [remainingData[0]] : []
+	);
 </script>
 
 {#if remainingData.length > 0}
@@ -29,7 +34,7 @@
 			Amazon: Workforce Displacement
 		</h3>
 		<p class="text-xs text-text-muted">
-			The S-curve ramp: displacement starts slowly, accelerates in the middle years, then plateaus. 1.56M employees today.
+			The S-curve ramp: displacement starts slowly, accelerates in the middle years, then plateaus. 1.58M employees today.
 		</p>
 		<div class="h-48 md:h-56" style="--chart-area-fill: rgba(251, 146, 60, 0.15);">
 			<Chart
@@ -59,12 +64,26 @@
 					<!-- Remaining workforce (fill + line) -->
 					<Area />
 					<Spline stroke="#fb923c" strokeWidth={2} />
+
+					<!-- Current headcount marker -->
+					<Points
+						data={currentDot}
+						x="year"
+						y="value"
+						r={4}
+						fill="#4ade80"
+						stroke="#1a1a2e"
+						strokeWidth={1.5}
+					/>
 				</Svg>
 			</Chart>
 		</div>
 		<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 			<span class="flex items-center gap-1">
-				<span class="w-3 h-0.5 bg-orange inline-block"></span> Remaining workers
+				<span class="w-2 h-2 rounded-full bg-green inline-block"></span> Actual (FY2025)
+			</span>
+			<span class="flex items-center gap-1">
+				<span class="w-3 h-0.5 bg-orange inline-block"></span> Projected remaining
 			</span>
 			<span class="flex items-center gap-1">
 				<span class="w-3 h-0.5 bg-accent/40 inline-block"></span> Original headcount

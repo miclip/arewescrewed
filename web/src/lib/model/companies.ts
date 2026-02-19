@@ -68,9 +68,9 @@ export const PORTFOLIO_COMPANIES: CompanyProfile[] = [
 		sharesOutstanding: 10.8e9,
 		currentDividendPerShare: 0.0,
 		sharePrice: 230.0,
-		headcount: 1_556_000,
-		estimatedLaborCost: 185.0e9,
-		laborPctOfRevenue: 25.8
+		headcount: 1_576_000,
+		estimatedLaborCost: 187.4e9,
+		laborPctOfRevenue: 26.1
 	},
 	{
 		ticker: 'META',
