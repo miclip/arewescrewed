@@ -43,6 +43,13 @@ export const AMAZON_RIFS: RifRound[] = [
 		aiDriven: false
 	},
 	{
+		label: "Jan '24",
+		date: '2024-01',
+		jobsCut: 1500,
+		divisions: 'Prime Video, MGM, Twitch, Audible',
+		aiDriven: false
+	},
+	{
 		label: "Apr '24",
 		date: '2024-04',
 		jobsCut: 400,
@@ -54,13 +61,6 @@ export const AMAZON_RIFS: RifRound[] = [
 		date: '2024-06',
 		jobsCut: 200,
 		divisions: 'Buy With Prime, Alexa',
-		aiDriven: false
-	},
-	{
-		label: "Jan '24",
-		date: '2024-01',
-		jobsCut: 1500,
-		divisions: 'Prime Video, MGM, Twitch, Audible',
 		aiDriven: false
 	},
 	{

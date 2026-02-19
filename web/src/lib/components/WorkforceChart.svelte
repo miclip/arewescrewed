@@ -22,7 +22,7 @@
 
 	let maxCount = $derived(originalData.length > 0 ? originalData[0].value * 1.1 : 1);
 
-	// "You are here" — first projection point is actual FY2024 headcount
+	// "You are here" — first projection point is actual FY2025 headcount
 	let currentDot = $derived(
 		remainingData.length > 0 ? [remainingData[0]] : []
 	);
