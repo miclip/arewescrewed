@@ -1,7 +1,13 @@
 <script lang="ts">
 	import '../app.css';
+	import { page } from '$app/state';
 
 	let { children } = $props();
+
+	const SITE = 'https://arewescrewed.ai';
+	// Per-page canonical/og:url so each route (e.g. /faq) is indexed on its own,
+	// not collapsed into the homepage. pathname is '/' at root, '/faq' on the FAQ page.
+	let pageUrl = $derived(SITE + page.url.pathname);
 </script>
 
 <svelte:head>
@@ -9,14 +15,14 @@
 	<meta name="description" content="AI is replacing jobs. Can you survive as an investor? Calculate your personal outlook under different AI automation scenarios." />
 
 	<!-- Canonical -->
-	<link rel="canonical" href="https://arewescrewed.ai" />
+	<link rel="canonical" href={pageUrl} />
 
 	<!-- Open Graph -->
 	<meta property="og:type" content="website" />
 	<meta property="og:site_name" content="Are We Screwed?" />
 	<meta property="og:title" content="Are We Screwed? — AI Displacement Financial Calculator" />
 	<meta property="og:description" content="AI is replacing jobs. Can you survive as an investor? Calculate your personal outlook under different AI automation scenarios." />
-	<meta property="og:url" content="https://arewescrewed.ai" />
+	<meta property="og:url" content={pageUrl} />
 	<meta property="og:image" content="https://arewescrewed.ai/og-image.jpg?v=2" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
