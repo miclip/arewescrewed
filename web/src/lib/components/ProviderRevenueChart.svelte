@@ -37,7 +37,7 @@
 	);
 
 	// Find peak year
-	let peakIdx = $derived(() => {
+	let peakIdx = $derived.by(() => {
 		let idx = 0;
 		let max = 0;
 		for (let i = 0; i < revenueData.length; i++) {
@@ -49,8 +49,8 @@
 		return idx;
 	});
 
-	let peakYear = $derived(revenueData.length > 0 ? revenueData[peakIdx()].year : 0);
-	let peakValue = $derived(revenueData.length > 0 ? revenueData[peakIdx()].value : 0);
+	let peakYear = $derived(revenueData.length > 0 ? revenueData[peakIdx].year : 0);
+	let peakValue = $derived(revenueData.length > 0 ? revenueData[peakIdx].value : 0);
 </script>
 
 {#if revenueData.length > 0}

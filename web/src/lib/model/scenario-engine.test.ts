@@ -15,7 +15,7 @@ describe('scenario-engine', () => {
 		const result = runScenario(PRESETS.moderate.params, amazon);
 		expect(result[0].year).toBe(2025);
 		expect(result[0].replacedWorkers).toBe(0);
-		expect(result[0].originalRevenue).toBeCloseTo(716.9e9, -7);
+		expect(result[0].originalRevenue).toBeCloseTo(amazon.revenue, -7);
 	});
 
 	it('smoothstep S-curve ramp produces expected displacement at midpoint', () => {
@@ -48,10 +48,10 @@ describe('scenario-engine', () => {
 		const result = runScenario(PRESETS.moderate.params, amazon);
 		expect(result[10].originalRevenue).toBeGreaterThan(result[0].originalRevenue);
 		// Growth is dampened by demand factor — should be less than pure 4% compounding
-		const pureGrowth = 716.9e9 * Math.pow(1.04, 10);
+		const pureGrowth = amazon.revenue * Math.pow(1.04, 10);
 		expect(result[10].originalRevenue).toBeLessThan(pureGrowth);
 		// But still substantial growth (investor model keeps demand high)
-		expect(result[10].originalRevenue).toBeGreaterThan(716.9e9 * 1.2);
+		expect(result[10].originalRevenue).toBeGreaterThan(amazon.revenue * 1.2);
 	});
 
 	it('new profit exceeds original by year 15 under moderate', () => {
@@ -71,7 +71,7 @@ describe('scenario-engine', () => {
 		for (const [name, preset] of Object.entries(PRESETS)) {
 			const result = runScenario(preset.params, amazon);
 			expect(result.length).toBe(31);
-			expect(result[0].originalRevenue).toBeCloseTo(716.9e9, -7);
+			expect(result[0].originalRevenue).toBeCloseTo(amazon.revenue, -7);
 			// Profit should stay positive (demand floor prevents collapse)
 			for (const proj of result) {
 				expect(proj.newProfit).toBeDefined();
@@ -128,5 +128,25 @@ describe('scenario-engine', () => {
 		const result = runScenario(PRESETS.moderate.params, amazon);
 		// By year 20, new profit margin should exceed original
 		expect(result[20].profitMarginNew).toBeGreaterThan(result[0].profitMarginNew);
+	});
+
+	it('margin stays bounded when demand collapses', () => {
+		// Savings used to be banked on the full cost base while profit sat on
+		// collapsed revenue, pushing margin above 100% and making total demand
+		// collapse read as the most profitable outcome on screen.
+		const params = { ...PRESETS.extreme.params, investorModelAdoption: 0 };
+		const result = runScenario(params, amazon);
+		for (const proj of result) {
+			expect(proj.profitMarginNew).toBeLessThanOrEqual(100);
+			expect(proj.newProfit).toBeLessThanOrEqual(proj.adjustedRevenue + 1);
+		}
+	});
+
+	it('demand collapse reduces absolute profit versus a healthy demand scenario', () => {
+		const healthy = { ...PRESETS.extreme.params, investorModelAdoption: 1 };
+		const collapsed = { ...PRESETS.extreme.params, investorModelAdoption: 0 };
+		const h = runScenario(healthy, amazon);
+		const c = runScenario(collapsed, amazon);
+		expect(c[30].newProfit).toBeLessThan(h[30].newProfit);
 	});
 });

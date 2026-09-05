@@ -31,8 +31,10 @@
 		Math.max(outcome?.requiredPortfolio ?? 0, ...data.map((d) => d.value)) * 1.1
 	);
 
+	// Only draw the marker when displacement falls inside the plotted horizon —
+	// aggressive slider combinations can push it past the last modelled year.
 	let displacementLineData = $derived(
-		outcome
+		outcome && data.length > 0 && !outcome.displacementBeyondHorizon
 			? [
 					{ year: outcome.displacementYear, value: 0 },
 					{ year: outcome.displacementYear, value: maxValue }

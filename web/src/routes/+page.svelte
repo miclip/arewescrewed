@@ -36,15 +36,20 @@
 		return unsub;
 	});
 
-	// Lock body scroll below lg breakpoint when assumptions panel is open
+	// Lock body scroll below lg breakpoint when assumptions panel is open.
+	// Tracked with matchMedia rather than a one-shot window.innerWidth read, so
+	// resizing or rotating past the breakpoint releases a lock that is no longer
+	// wanted instead of leaving the page unscrollable.
 	$effect(() => {
 		if (!browser) return;
-		if (showAssumptions && window.innerWidth < 1024) {
-			document.body.style.overflow = 'hidden';
-		} else {
-			document.body.style.overflow = '';
-		}
+		const mq = window.matchMedia('(max-width: 1023px)');
+		const apply = () => {
+			document.body.style.overflow = showAssumptions && mq.matches ? 'hidden' : '';
+		};
+		apply();
+		mq.addEventListener('change', apply);
 		return () => {
+			mq.removeEventListener('change', apply);
 			document.body.style.overflow = '';
 		};
 	});

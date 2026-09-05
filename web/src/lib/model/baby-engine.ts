@@ -98,19 +98,12 @@ export function computeBabyOutcome(
 			income: currentValue * WITHDRAWAL_RATE
 		});
 
-		// Growth rate from portfolio model
-		let growthRate: number;
-		if (yearIdx === 0) {
-			const yr0 = portfolioResult.yearlyResults[0]?.portfolioValue;
-			const yr1 = portfolioResult.yearlyResults[1]?.portfolioValue;
-			growthRate = yr0 && yr0 > 0 && yr1 ? (yr1 / yr0) - 1 : 0;
-		} else if (yearIdx < portfolioResult.yearlyResults.length) {
-			const prevValue = portfolioResult.yearlyResults[yearIdx - 1].portfolioValue;
-			const currValue = portfolioResult.yearlyResults[yearIdx].portfolioValue;
-			growthRate = prevValue > 0 ? (currValue / prevValue) - 1 : 0;
-		} else {
-			growthRate = 0;
-		}
+		// Growth rate for the step out of this year: portfolio's yearIdx → yearIdx+1 return.
+		// Indexing on yearIdx (not yearIdx-1) keeps each year's return applied exactly once.
+		const fromValue = portfolioResult.yearlyResults[yearIdx]?.portfolioValue;
+		const toValue = portfolioResult.yearlyResults[yearIdx + 1]?.portfolioValue;
+		const growthRate =
+			fromValue && fromValue > 0 && toValue ? toValue / fromValue - 1 : 0;
 
 		// Compound growth only — no additional contributions
 		currentValue = currentValue * (1 + growthRate);

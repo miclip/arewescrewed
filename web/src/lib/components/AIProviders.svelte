@@ -34,7 +34,7 @@
 	let peakRevenue = $derived(
 		projections.length > 0 ? Math.max(...projections.map((p) => p.providerRevenue)) : 0
 	);
-	let peakRevenueYear = $derived(() => {
+	let peakRevenueYear = $derived.by(() => {
 		if (projections.length === 0) return 0;
 		let year = projections[0].year;
 		let max = 0;
@@ -58,6 +58,16 @@
 	let peakTrainingCost = $derived(
 		projections.length > 0 ? Math.max(...projections.map((p) => p.trainingRdCost)) : 0
 	);
+
+	// Derive the margin axis from the data — providerMargin goes as low as 30% and
+	// providerMarginCap as high as 95%, so a hardcoded [50, 90] clips the series.
+	let marginDomain = $derived.by(() => {
+		if (marginData.length === 0) return [50, 90];
+		const values = marginData.map((d) => d.value);
+		const lo = Math.floor((Math.min(...values) - 5) / 5) * 5;
+		const hi = Math.ceil((Math.max(...values) + 5) / 5) * 5;
+		return [Math.max(0, lo), Math.min(100, hi)];
+	});
 </script>
 
 <div class="space-y-8">
@@ -97,7 +107,7 @@
 			<div class="bg-bg-card rounded-xl border border-bg-input p-3 text-center">
 				<div class="text-text-muted text-xs">Peak Revenue</div>
 				<div class="text-lg font-bold font-mono text-accent">{formatCompact(peakRevenue)}</div>
-				<div class="text-text-muted/70 text-[10px]">in {peakRevenueYear()}</div>
+				<div class="text-text-muted/70 text-[10px]">in {peakRevenueYear}</div>
 			</div>
 			<div class="bg-bg-card rounded-xl border border-bg-input p-3 text-center">
 				<div class="text-text-muted text-xs">Cumulative Revenue</div>
@@ -139,7 +149,7 @@
 					xDomain={[marginData[0].year, marginData[marginData.length - 1].year]}
 					y="value"
 					yScale={scaleLinear()}
-					yDomain={[50, 90]}
+					yDomain={marginDomain}
 					yNice
 					padding={{ left: 40, bottom: 24, top: 8, right: 4 }}
 				>

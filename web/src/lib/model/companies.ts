@@ -62,15 +62,20 @@ export const PORTFOLIO_COMPANIES: CompanyProfile[] = [
 		ticker: 'AMZN',
 		name: 'Amazon',
 		sector: 'Technology / Retail',
-		revenue: 716.9e9,
-		operatingIncome: 80.0e9,
-		netIncome: 77.7e9,
-		sharesOutstanding: 10.8e9,
+		// TTM through Q2 FY2026 (10-Q filed 2026-07-31). Revenue and operating income
+		// are trailing-twelve-month; netIncome deliberately EXCLUDES the $53.4B
+		// non-operating Anthropic revaluation gain booked in Q2 2026 — TTM GAAP net
+		// income was $135.3B, but that mark-to-market is not a repeatable earnings
+		// stream and would distort every dividend and portfolio projection.
+		revenue: 775.6e9,
+		operatingIncome: 93.7e9,
+		netIncome: 92.9e9,
+		sharesOutstanding: 10.786e9,
 		currentDividendPerShare: 0.0,
-		sharePrice: 230.0,
-		headcount: 1_576_000,
-		estimatedLaborCost: 187.4e9,
-		laborPctOfRevenue: 26.1
+		sharePrice: 258.3,
+		headcount: 1_595_000,
+		estimatedLaborCost: 189.7e9,
+		laborPctOfRevenue: 24.5
 	},
 	{
 		ticker: 'META',
