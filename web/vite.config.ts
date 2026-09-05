@@ -1,7 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
-import { defineConfig } from 'vite';
-import { execSync } from 'child_process';
+import { defineConfig } from 'vitest/config';
+import { execSync } from 'node:child_process';
 
 function countEmDashes(): number {
 	try {

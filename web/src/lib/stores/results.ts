@@ -4,7 +4,11 @@ import { babyInputs } from './baby';
 import { fiscalParams } from './fiscal';
 import { providerParams } from './provider';
 import { scenarioParams, activePreset } from './scenario';
-import { computePersonalOutcome, computeAllScenarios } from '$lib/model/personal-engine';
+import {
+	computePersonalOutcome,
+	computeAllScenarios,
+	resolvePresetParams
+} from '$lib/model/personal-engine';
 import { computeBabyOutcome } from '$lib/model/baby-engine';
 import { computeFiscalProjection } from '$lib/model/fiscal-engine';
 import { computeProviderProjections } from '$lib/model/provider-engine';
@@ -14,28 +18,19 @@ import { PORTFOLIO_COMPANIES } from '$lib/model/companies';
 import { PRESETS, type PresetName } from '$lib/model/presets';
 import type { PersonalOutcome, PortfolioResult, YearProjection } from '$lib/model/types';
 
-/** Personal outcome for the currently selected scenario */
-export const personalOutcome = derived(
-	[personalInputs, scenarioParams, activePreset],
-	([$personal, $params, $preset]) => {
-		return computePersonalOutcome($personal, $params, PRESETS[$preset].label);
-	}
-);
-
-/** Personal outcomes for ALL 4 preset scenarios (comparison view) */
-export const allScenariosOutcome = derived(
-	[personalInputs, scenarioParams, activePreset],
-	([$personal, $params, $preset]) => {
-		return computeAllScenarios($personal, $params, $preset);
-	}
-);
+/**
+ * Allocations depend only on the (static) company list, so build them once.
+ * Portfolio runs are the expensive part of the model — 10 companies × 31 years —
+ * and nothing in PersonalInputs affects them, so every store below keys them on
+ * the scenario alone. Dragging an income or savings slider must not re-run them.
+ */
+const ALLOCATIONS = buildEqualWeightPortfolio(PORTFOLIO_COMPANIES, 1_000_000);
 
 /** Portfolio result for the current scenario (corporate model for charts) */
 export const portfolioResult = derived(
 	[scenarioParams, activePreset],
 	([$params, $preset]) => {
-		const allocations = buildEqualWeightPortfolio(PORTFOLIO_COMPANIES, 1_000_000);
-		return runPortfolioScenario($params, PRESETS[$preset].label, allocations);
+		return runPortfolioScenario($params, PRESETS[$preset].label, ALLOCATIONS);
 	}
 );
 
@@ -44,8 +39,34 @@ export const dystopiaResult = derived(
 	[scenarioParams, activePreset],
 	([$params, $preset]) => {
 		const dystopiaParams = { ...$params, investorModelAdoption: 0 };
-		const allocations = buildEqualWeightPortfolio(PORTFOLIO_COMPANIES, 1_000_000);
-		return runPortfolioScenario(dystopiaParams, PRESETS[$preset].label + ' (No Investors)', allocations);
+		return runPortfolioScenario(dystopiaParams, PRESETS[$preset].label + ' (No Investors)', ALLOCATIONS);
+	}
+);
+
+/** Personal outcome for the currently selected scenario */
+export const personalOutcome = derived(
+	[personalInputs, scenarioParams, activePreset, portfolioResult],
+	([$personal, $params, $preset, $portfolio]) => {
+		return computePersonalOutcome($personal, $params, PRESETS[$preset].label, $portfolio);
+	}
+);
+
+/** Scenario params for all 4 presets, with the user's customizations applied */
+const allPresetParams = derived(
+	[scenarioParams, activePreset],
+	([$params, $preset]) => resolvePresetParams($params, $preset)
+);
+
+/** One portfolio run per preset — cached on the scenario, not on personal inputs */
+const allPresetPortfolios = derived(allPresetParams, ($presets) =>
+	$presets.map((entry) => runPortfolioScenario(entry.params, entry.label, ALLOCATIONS))
+);
+
+/** Personal outcomes for ALL 4 preset scenarios (comparison view) */
+export const allScenariosOutcome = derived(
+	[personalInputs, allPresetParams, allPresetPortfolios],
+	([$personal, $presets, $portfolios]) => {
+		return computeAllScenarios($personal, $presets, $portfolios);
 	}
 );
 

@@ -111,6 +111,8 @@ export interface PersonalOutcome {
 	displacementYear: number; // Year when >50% likely displaced
 	requiredPortfolio: number; // incomeTarget / 0.04
 	accumulationPath: { year: number; value: number }[];
+	/** True when displacementYear falls past the end of accumulationPath. */
+	displacementBeyondHorizon: boolean;
 	portfolioAtDisplacement: number;
 	gap: number; // negative = shortfall, positive = surplus
 	monthlyNeededToClose: number; // Additional monthly savings needed

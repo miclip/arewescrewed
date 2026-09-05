@@ -1,17 +1,33 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { browser } from '$app/environment';
+	import { personalInputs } from '$lib/stores/personal';
+	import { scenarioParams, activePreset } from '$lib/stores/scenario';
+	import { encodeUrlState } from '$lib/utils/url-state';
 
-	const siteUrl = 'https://arewescrewed.ai';
+	const SITE_URL = 'https://arewescrewed.ai';
 	const shareText = 'AI is replacing jobs. Can you survive as an investor? This model runs the math.';
 
-	let copied = $state(false);
+	// Share the viewer's actual configuration, not the bare domain — otherwise a
+	// tuned scenario arrives at the recipient as the default view.
+	let siteUrl = $derived(
+		SITE_URL + encodeUrlState($personalInputs, $activePreset, $scenarioParams)
+	);
 
-	function copyLink() {
+	let copied = $state(false);
+	let copyFailed = $state(false);
+
+	async function copyLink() {
 		if (!browser) return;
-		navigator.clipboard.writeText(siteUrl);
-		copied = true;
-		setTimeout(() => (copied = false), 2000);
+		try {
+			await navigator.clipboard.writeText(siteUrl);
+			copied = true;
+			setTimeout(() => (copied = false), 2000);
+		} catch {
+			// Non-secure origin, or clipboard permission denied — don't claim success.
+			copyFailed = true;
+			setTimeout(() => (copyFailed = false), 2000);
+		}
 	}
 </script>
 
@@ -72,9 +88,11 @@
 		<button
 			onclick={copyLink}
 			class="inline-flex items-center justify-center w-11 h-11 md:w-9 md:h-9 rounded-full bg-bg-card border border-bg-input hover:border-accent hover:text-accent transition-colors text-text-muted"
-			aria-label="Copy link"
+			aria-label={copyFailed ? 'Copy link failed' : 'Copy link'}
 		>
-			{#if copied}
+			{#if copyFailed}
+				<svg viewBox="0 0 24 24" class="w-5 h-5 md:w-4 md:h-4 fill-none stroke-current text-red-400" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+			{:else if copied}
 				<svg viewBox="0 0 24 24" class="w-5 h-5 md:w-4 md:h-4 fill-none stroke-current" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
 			{:else}
 				<svg viewBox="0 0 24 24" class="w-5 h-5 md:w-4 md:h-4 fill-none stroke-current" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>

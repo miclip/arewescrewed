@@ -101,6 +101,10 @@ export function computeFiscalProjection(
 	let peakDeficitAmount = 0;
 	let totalRevenueLost = 0;
 	let corporateTaxGain = 0;
+	// Signed running total of (baseline - actual) federal revenue. Corporate tax is
+	// already inside totalFederalRevenue, so this is the true net position; subtracting
+	// corporateTaxGain from it again would count the corporate upside twice.
+	let netRevenueChange = 0;
 	let cumulativeGrowth = 1.0;
 
 	// Baseline total revenue at year 0 (for comparison)
@@ -194,6 +198,7 @@ export function computeFiscalProjection(
 		const baselineRevenueThisYear = baselineTotalRevenue;
 		const revenueDiff = baselineRevenueThisYear - totalFederalRevenue;
 		if (revenueDiff > 0) totalRevenueLost += revenueDiff;
+		netRevenueChange += revenueDiff;
 
 		// Corporate tax gains vs year 0
 		const corpGain = corporateTaxRevenue - fiscalParams.baselineCorporateTaxRevenue;
@@ -229,6 +234,6 @@ export function computeFiscalProjection(
 		debtToGDPAtYear30: lastYear.debtToGDP,
 		totalRevenueLost30yr: totalRevenueLost,
 		corporateTaxGain30yr: corporateTaxGain,
-		netFiscalImpact30yr: totalRevenueLost - corporateTaxGain
+		netFiscalImpact30yr: netRevenueChange
 	};
 }

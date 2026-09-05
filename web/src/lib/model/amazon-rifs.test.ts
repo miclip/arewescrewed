@@ -1,5 +1,11 @@
+import { SECTORS } from './sectors';
 import { describe, it, expect } from 'vitest';
-import { AMAZON_RIFS, AMAZON_RIF_TOTAL, AMAZON_HEADCOUNT_SNAPSHOTS } from './amazon-rifs';
+import {
+	AMAZON_RIFS,
+	AMAZON_RIF_TOTAL,
+	AMAZON_HEADCOUNT_SNAPSHOTS,
+	rifJobsBySector
+} from './amazon-rifs';
 import { PORTFOLIO_COMPANIES } from './companies';
 
 describe('amazon-rifs', () => {
@@ -41,5 +47,26 @@ describe('amazon-rifs', () => {
 			expect(rif.divisions).toBeTruthy();
 			expect(typeof rif.aiDriven).toBe('boolean');
 		}
+	});
+
+	it('every round maps onto sectors that exist in the model', () => {
+		const names = new Set(SECTORS.map((s) => s.name));
+		for (const round of AMAZON_RIFS) {
+			expect(round.sectors.length).toBeGreaterThan(0);
+			for (const sector of round.sectors) {
+				expect(names.has(sector)).toBe(true);
+			}
+		}
+	});
+
+	it('no Amazon round has yet hit the physical-layer sectors', () => {
+		const touched = new Set(AMAZON_RIFS.flatMap((r) => r.sectors));
+		expect(touched.has('Warehouse/Logistics')).toBe(false);
+		expect(touched.has('Transportation')).toBe(false);
+	});
+
+	it('rifJobsBySector conserves the total job count', () => {
+		const total = [...rifJobsBySector().values()].reduce((a, b) => a + b, 0);
+		expect(total).toBeCloseTo(AMAZON_RIF_TOTAL, 6);
 	});
 });

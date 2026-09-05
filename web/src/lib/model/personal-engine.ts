@@ -1,6 +1,4 @@
-import type { PersonalInputs, PersonalOutcome, ScenarioParams } from './types';
-import { PORTFOLIO_COMPANIES } from './companies';
-import { buildEqualWeightPortfolio, runPortfolioScenario } from './portfolio-engine';
+import type { PersonalInputs, PersonalOutcome, PortfolioResult, ScenarioParams } from './types';
 import { getSector, computeDisplacementYear } from './sectors';
 import { PRESETS, PRESET_ORDER, type PresetName } from './presets';
 
@@ -18,7 +16,8 @@ const WITHDRAWAL_RATE = 0.04;
 export function computePersonalOutcome(
 	personal: PersonalInputs,
 	params: ScenarioParams,
-	scenarioName: string
+	scenarioName: string,
+	portfolioResult: PortfolioResult
 ): PersonalOutcome {
 	const sector = getSector(personal.selectedSector);
 	const displacementYear = computeDisplacementYear(
@@ -30,10 +29,6 @@ export function computePersonalOutcome(
 
 	const requiredPortfolio = personal.incomeTarget / WITHDRAWAL_RATE;
 
-	// Run portfolio model to get annual returns for growth rate estimation
-	const allocations = buildEqualWeightPortfolio(PORTFOLIO_COMPANIES, 1_000_000);
-	const portfolioResult = runPortfolioScenario(params, scenarioName, allocations);
-
 	// Build accumulation path year by year
 	const accumulationPath: { year: number; value: number }[] = [];
 	let currentValue = personal.currentSavings;
@@ -43,31 +38,27 @@ export function computePersonalOutcome(
 		const year = params.baseYear + yearIdx;
 		accumulationPath.push({ year, value: currentValue });
 
-		// Growth rate: use portfolio's year-over-year value change
-		let growthRate: number;
-		if (yearIdx === 0) {
-			// Use year 0→1 return from portfolio model
-			const yr0 = portfolioResult.yearlyResults[0]?.portfolioValue;
-			const yr1 = portfolioResult.yearlyResults[1]?.portfolioValue;
-			growthRate = yr0 && yr0 > 0 && yr1 ? (yr1 / yr0) - 1 : 0;
-		} else {
-			const prevValue = portfolioResult.yearlyResults[yearIdx - 1].portfolioValue;
-			const currValue = portfolioResult.yearlyResults[yearIdx].portfolioValue;
-			growthRate = prevValue > 0
-				? (currValue / prevValue) - 1
-				: 0;
-		}
+		// Growth rate for the step out of this year: portfolio's yearIdx → yearIdx+1 return.
+		// Indexing on yearIdx (not yearIdx-1) keeps each year's return applied exactly once.
+		const fromValue = portfolioResult.yearlyResults[yearIdx]?.portfolioValue;
+		const toValue = portfolioResult.yearlyResults[yearIdx + 1]?.portfolioValue;
+		const growthRate =
+			fromValue && fromValue > 0 && toValue ? toValue / fromValue - 1 : 0;
 
 		// Compound growth + new savings
 		currentValue = currentValue * (1 + growthRate) + annualSavings;
 	}
 
-	// Find portfolio value at displacement year
-	const displacementIdx = displacementYear - params.baseYear;
-	const portfolioAtDisplacement =
-		displacementIdx >= 0 && displacementIdx < accumulationPath.length
-			? accumulationPath[displacementIdx].value
-			: currentValue;
+	// Find portfolio value at displacement year.
+	// Aggressive slider combinations can push displacement past the projection horizon;
+	// clamp to the last modelled year rather than reporting a value we never modelled.
+	const rawDisplacementIdx = displacementYear - params.baseYear;
+	const displacementBeyondHorizon = rawDisplacementIdx >= accumulationPath.length;
+	const displacementIdx = Math.max(
+		0,
+		Math.min(rawDisplacementIdx, accumulationPath.length - 1)
+	);
+	const portfolioAtDisplacement = accumulationPath[displacementIdx].value;
 
 	const gap = portfolioAtDisplacement - requiredPortfolio;
 
@@ -102,11 +93,17 @@ export function computePersonalOutcome(
 		verdictMessage = `Gap of $${formatCompact(Math.abs(gap))}. You'll need $${formatCompact(requiredPortfolio)} by ${displacementYear} but are projected to have $${formatCompact(portfolioAtDisplacement)}. Need $${formatCompact(monthlyNeededToClose)}/mo additional savings.`;
 	}
 
+	if (displacementBeyondHorizon) {
+		const lastYear = accumulationPath[accumulationPath.length - 1].year;
+		verdictMessage += ` (Displacement lands in ${displacementYear}, past the ${lastYear} projection horizon — figures shown are as of ${lastYear}.)`;
+	}
+
 	return {
 		scenarioName,
 		displacementYear,
 		requiredPortfolio,
 		accumulationPath,
+		displacementBeyondHorizon,
 		portfolioAtDisplacement,
 		gap,
 		monthlyNeededToClose,
@@ -116,31 +113,47 @@ export function computePersonalOutcome(
 }
 
 /**
- * Compute personal outcome for all 4 preset scenarios.
- * If customParams + activePresetName provided, user's customizations
+ * Resolve the ScenarioParams for all 4 presets.
+ * If customParams + activePresetName provided, the user's customizations
  * (the diff from their active preset) are applied to all 4 scenarios.
+ *
+ * Split out from computeAllScenarios so callers can cache the portfolio runs
+ * these params drive — they depend only on the scenario, never on PersonalInputs.
  */
-export function computeAllScenarios(
-	personal: PersonalInputs,
+export function resolvePresetParams(
 	customParams?: ScenarioParams,
 	activePresetName?: PresetName
-): PersonalOutcome[] {
+): { label: string; params: ScenarioParams }[] {
 	return PRESET_ORDER.map((name) => {
 		const preset = PRESETS[name];
-		let params = { ...preset.params };
+		const params = { ...preset.params };
 
 		// Apply user's slider customizations to all scenarios
 		if (customParams && activePresetName) {
 			const activeBase = PRESETS[activePresetName].params;
 			for (const key of Object.keys(activeBase) as (keyof ScenarioParams)[]) {
 				if (customParams[key] !== activeBase[key]) {
-					(params as any)[key] = customParams[key];
+					(params as unknown as Record<string, unknown>)[key] = customParams[key];
 				}
 			}
 		}
 
-		return computePersonalOutcome(personal, params, preset.label);
+		return { label: preset.label, params };
 	});
+}
+
+/**
+ * Compute personal outcome for all 4 preset scenarios.
+ * `portfolioResults` must align with resolvePresetParams() order.
+ */
+export function computeAllScenarios(
+	personal: PersonalInputs,
+	presetParams: { label: string; params: ScenarioParams }[],
+	portfolioResults: PortfolioResult[]
+): PersonalOutcome[] {
+	return presetParams.map((entry, i) =>
+		computePersonalOutcome(personal, entry.params, entry.label, portfolioResults[i])
+	);
 }
 
 function formatCompact(n: number): string {

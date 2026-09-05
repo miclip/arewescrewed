@@ -22,7 +22,7 @@
 
 	let maxCount = $derived(originalData.length > 0 ? originalData[0].value * 1.1 : 1);
 
-	// "You are here" — first projection point is actual FY2025 headcount
+	// "You are here" — first projection point is actual headcount (TTM Q2 FY2026)
 	let currentDot = $derived(
 		remainingData.length > 0 ? [remainingData[0]] : []
 	);
@@ -34,7 +34,7 @@
 			Amazon: Workforce Displacement
 		</h3>
 		<p class="text-xs text-text-muted">
-			The S-curve ramp: displacement starts slowly, accelerates in the middle years, then plateaus. 1.58M employees today.
+			The S-curve ramp: displacement starts slowly, accelerates in the middle years, then plateaus. 1.60M employees today (Q2 FY2026).
 		</p>
 		<div class="h-48 md:h-56" style="--chart-area-fill: rgba(251, 146, 60, 0.15);">
 			<Chart
@@ -80,7 +80,7 @@
 		</div>
 		<div class="flex flex-wrap gap-2 sm:gap-4 text-xs text-text-muted justify-center">
 			<span class="flex items-center gap-1">
-				<span class="w-2 h-2 rounded-full bg-green inline-block"></span> Actual (FY2025)
+				<span class="w-2 h-2 rounded-full bg-green inline-block"></span> Actual (Q2 FY2026)
 			</span>
 			<span class="flex items-center gap-1">
 				<span class="w-3 h-0.5 bg-orange inline-block"></span> Projected remaining

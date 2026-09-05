@@ -44,7 +44,7 @@
 	);
 
 	// Peak captured values for summary cards
-	let peakCaptured = $derived(() => {
+	let peakCaptured = $derived.by(() => {
 		if (projections.length === 0) return [];
 		// Find year with max total market cap
 		let peakIdx = 0;
@@ -133,11 +133,11 @@
 		</div>
 
 		<!-- Peak captured summary -->
-		{#if peakCaptured().length > 0}
+		{#if peakCaptured.length > 0}
 			<div class="bg-bg-card rounded-lg border border-bg-input p-3 mt-2">
 				<div class="text-xs text-text-muted mb-2">Peak captured value (at provider market cap high):</div>
 				<div class="flex flex-wrap gap-3">
-					{#each peakCaptured() as cap}
+					{#each peakCaptured as cap}
 						<div class="text-sm">
 							<span class="text-text-muted">{cap.owner}:</span>
 							<span class="font-mono text-accent">{formatCompact(cap.value)}</span>

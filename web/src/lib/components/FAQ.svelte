@@ -331,11 +331,15 @@
 								&#9660;
 							</span>
 						</button>
-						{#if openIndex === idx}
-							<div class="px-5 pb-4 text-sm text-text-muted leading-relaxed border-t border-bg-input/50 pt-3 [&_a]:text-accent [&_a]:underline [&_a:hover]:text-accent-hover">
-								{@html item.a}
-							</div>
-						{/if}
+						<!-- Rendered unconditionally and hidden via [hidden] rather than mounted
+						     conditionally, so answers are present in the prerendered HTML. The
+						     FAQPage structured data on this route must match crawlable content. -->
+						<div
+							hidden={openIndex !== idx}
+							class="px-5 pb-4 text-sm text-text-muted leading-relaxed border-t border-bg-input/50 pt-3 [&_a]:text-accent [&_a]:underline [&_a:hover]:text-accent-hover"
+						>
+							{@html item.a}
+						</div>
 					</div>
 				{/each}
 			</div>

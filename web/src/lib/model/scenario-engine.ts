@@ -97,10 +97,16 @@ export function runScenario(
 		const baseProfitGrown = baseProfit * cumulativeGrowth;
 		const baseProfitDemandAdjusted = baseProfitGrown * demandFactor;
 		const totalCostSavings = netSavings + scSavings;
-		const retainedSavings = totalCostSavings * params.marginRetentionPct;
+		// Savings are only realised on the business that still exists. Without the
+		// demandFactor here, a collapse scenario banks savings computed on the full
+		// (uncollapsed) cost base while profit sits on collapsed revenue — which drove
+		// margins above 100% and made total demand collapse read as the most profitable
+		// outcome on screen.
+		const retainedSavings = totalCostSavings * params.marginRetentionPct * demandFactor;
 		const newProfit = baseProfitDemandAdjusted + retainedSavings;
 
-		// Profit margins
+		// Profit margins — both measured against their own world's revenue, so the
+		// demandFactor cancels and the two are directly comparable.
 		const marginOrig = revenueThisYear ? (baseProfitGrown / revenueThisYear) * 100 : 0;
 		const marginNew = adjustedRevenue ? (newProfit / adjustedRevenue) * 100 : 0;
 

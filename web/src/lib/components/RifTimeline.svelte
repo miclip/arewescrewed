@@ -26,13 +26,15 @@
 			Amazon has cut ~{(AMAZON_RIF_TOTAL / 1000).toFixed(0)}K corporate jobs across {AMAZON_RIFS.length} rounds
 			since late 2022. Early rounds were post-COVID correction and cost-cutting — not AI-driven.
 			But the pattern is worth watching: the 2025-2026 rounds (~30K jobs) coincide with Amazon's
-			$125B AI CapEx commitment and explicit "AI restructuring" language.
+			2026 AI capex guidance of ~$220B and explicit "AI restructuring" language.
 		</p>
 		<p>
 			This isn't proof that AI is the primary driver yet — but these are exactly the signals
-			the model predicts we'd see at the start of the S-curve. Total headcount barely moved
-			(1.62M → 1.58M) because warehouse hiring offset corporate cuts. The question is how
-			long that offset lasts.
+			the model predicts we'd see at the start of the S-curve. Total headcount actually rose
+			(1.55M → 1.60M in the year to June 2026) because ~1.2M warehouse and logistics roles
+			were untouched and kept hiring into 20% revenue growth. That doesn't undercut the
+			thesis — it dates it. Every Amazon round so far has landed in corporate, technical,
+			media and admin functions; the physical layer hasn't started.
 		</p>
 	</div>
 
